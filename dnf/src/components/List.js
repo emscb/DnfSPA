@@ -1,9 +1,13 @@
 import React from 'react';
+import "./List.scss"
+import ListItem from './ListItem';
 
-const List = () => {
+const List = ({ items }) => {
+    
+    
     return (
-        <div>
-            
+        <div className="List">
+            {items.map(item => (<ListItem item={item} key={item.id}/>))}        
         </div>
     );
 };
