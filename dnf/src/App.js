@@ -38,15 +38,13 @@ function App() {
     );
     nextId.current += 1;
   }
-  
+
   return (
     <div>
-      <BrowserRouter>
-        <Template>
-          <Insert onInsert={onInsert}/>
-          <List items={items}/>
-        </Template>
-      </BrowserRouter>
+      <Template>
+        <Insert onInsert={onInsert}/>
+        <List items={items}/>
+      </Template>
     </div>
   );
 }
