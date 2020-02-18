@@ -1,9 +1,13 @@
 import React from 'react';
+import "./ListItem.scss"
 
-const ListItem = () => {
+const ListItem = ({item}) => {
+    const {id, name} = item;
+    const content = `${id} : ${name}`
+
     return (
-        <div>
-            
+        <div className="ListItem">
+            {content}
         </div>
     );
 };
