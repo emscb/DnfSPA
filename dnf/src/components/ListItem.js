@@ -1,13 +1,14 @@
 import React from 'react';
 import "./ListItem.scss"
+import { Link } from 'react-router-dom';
 
 const ListItem = ({item}) => {
     const {id, name} = item;
-    const content = `${id} : ${name}`
+    const content = `${name}`;
 
     return (
         <div className="ListItem">
-            {content}
+            <Link to={`${name}`}>{content}</Link>
         </div>
     );
 };
