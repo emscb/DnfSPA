@@ -1,0 +1,25 @@
+.ItemDetail {
+    width: 512px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 6rem;
+    border-radius: 4px;
+    
+    .title {
+        background: #6b86ed;
+        color: black;
+        height: 4rem;
+        font-size: 1.5rem;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+
+    .content {
+        img {
+            width: 40px;
+            height: auto;
+            margin: 10px;
+        }
+    }
+}
