@@ -67,7 +67,7 @@ const ItemDetail = ({ location }) => {
     } else {
       let optionList = [];
       optionList.push(
-        <div>
+        <div key="">
           <br />
           {`<신화 전용 옵션>`}
           <br />
