@@ -8,8 +8,7 @@ const ItemDetail = ({ location }) => {
     ignoreQueryPrefix: true
   });
   const id = query.itemId;
-  const [i, setItemData] = useState({}); // TODO: 리듀서로 한번에 잡아보기
-  const [list, setList] = useState([]);
+  const [i, setItemData] = useState({});
   const got = useRef(false);
 
   if (got.current === false) {
@@ -20,20 +19,77 @@ const ItemDetail = ({ location }) => {
       .then(response => {
         setItemData(response.data);
         console.log(response.data);
-        setList(response.data.itemStatus);
-        console.log(response.data.itemStatus);
       });
     got.current = true;
   }
 
-  function Sts ({list}) {
-    return (
-      <div>
-        {list.map(l => <div>{l.name}</div>)}
-      </div>
-    )
+  function Status({ list }) {
+    if (list === undefined) {
+      return <div />;
+    } else {
+      return (
+        <div>
+          {list.map(l => (
+            <div key={l.name}>
+              {l.name}: {l.value}
+            </div>
+          ))}
+        </div>
+      );
+    }
   }
-  
+
+  function Thology({ list }) {
+    if (list === undefined) {
+      return <div />;
+    } else {
+      let optionList = [];
+      for (let a = 0; a < list.options.length; a++) {
+        optionList.push(<div key={a}>{list.options[a].explainDetail}</div>);
+      }
+      for (let a = 0; a < list.options.length; a++) {
+        optionList.push(
+          <div key={a + list.options.length}>
+            {list.options[a].buffExplainDetail}
+          </div>
+        );
+      }
+      return (
+        <div>
+          {optionList}
+          <br />
+        </div>
+      );
+    }
+  }
+
+  function Buff({ list }) {
+    if (list === undefined) {
+      return <div />;
+    } else {
+      let buffList = [];
+      buffList.push(<div key="explainDetail">{list.explainDetail}</div>);
+      if (list.reinforceSkill.length) {
+        buffList.push(<br key="" />);
+        for (let a = 0; a < list.reinforceSkill.length; a++) {
+          for (let b = 0; b < list.reinforceSkill[a].skills.length; b++) {
+            buffList.push(
+              <div key={list.reinforceSkill[a].skills[b].skillId}>
+                {list.reinforceSkill[a].skills[b].name} +
+                {list.reinforceSkill[a].skills[b].value}
+              </div>
+            );
+          }
+        }
+      }
+      return (
+        <div>
+          {buffList}
+          <br />
+        </div>
+      );
+    }
+  }
 
   return (
     <div className="ItemDetail">
@@ -48,15 +104,23 @@ const ItemDetail = ({ location }) => {
           </span>
         </div>
         <div className="body">
+          <div className="changeDetail">
+            <button>자세히 보기</button>
+          </div>
           {i.itemRarity} {i.itemTypeDetail}
           <br />
           {`레벨제한: ${i.itemAvailableLevel}`}
           <br />
           <br />
-          <Sts list={list}></Sts>
-          <div style={{whiteSpace: "pre-line"}} className="obtainInfo">{i.itemObtainInfo}</div>
+          <Status list={i.itemStatus} />
           <br />
-
+          <div style={{ whiteSpace: "pre-line" }}>{i.itemExplainDetail}</div>
+          <br />
+          <Buff list={i.itemBuff} />
+          <Thology list={i.mythologyInfo} />
+          <div style={{ whiteSpace: "pre-line" }}>{i.itemObtainInfo}</div>
+          <br />
+          {i.itemFlavorText}
         </div>
       </div>
     </div>
