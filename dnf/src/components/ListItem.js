@@ -1,7 +1,6 @@
 import React from "react";
 import "./ListItem.scss";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 const ListItem = ({ item }) => {
   const content = `${item.name}`;

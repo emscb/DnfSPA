@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useRef } from "react";
+import React, { useState, useRef } from "react";
 import "./ItemDetail.scss";
 import qs from "qs";
 import axios from "axios";
@@ -8,7 +8,8 @@ const ItemDetail = ({ location }) => {
     ignoreQueryPrefix: true
   });
   const id = query.itemId;
-  const [itemData, setItemData] = useState({});
+  const [i, setItemData] = useState({}); // TODO: 리듀서로 한번에 잡아보기
+  const [list, setList] = useState([]);
   const got = useRef(false);
 
   if (got.current === false) {
@@ -18,9 +19,21 @@ const ItemDetail = ({ location }) => {
       )
       .then(response => {
         setItemData(response.data);
+        console.log(response.data);
+        setList(response.data.itemStatus);
+        console.log(response.data.itemStatus);
       });
-      got.current = true;
+    got.current = true;
   }
+
+  function Sts ({list}) {
+    return (
+      <div>
+        {list.map(l => <div>{l.name}</div>)}
+      </div>
+    )
+  }
+  
 
   return (
     <div className="ItemDetail">
@@ -28,8 +41,22 @@ const ItemDetail = ({ location }) => {
       <div className="content">
         <div className="header">
           <img src={`https://img-api.neople.co.kr/df/items/${id}`} alt="" />
-          {itemData.itemName}
-          {itemData.setItemId && itemData.setItemName}
+          <span className="name">
+            {i.itemName}
+            <br />
+            {i.setItemId && i.setItemName}
+          </span>
+        </div>
+        <div className="body">
+          {i.itemRarity} {i.itemTypeDetail}
+          <br />
+          {`레벨제한: ${i.itemAvailableLevel}`}
+          <br />
+          <br />
+          <Sts list={list}></Sts>
+          <div style={{whiteSpace: "pre-line"}} className="obtainInfo">{i.itemObtainInfo}</div>
+          <br />
+
         </div>
       </div>
     </div>

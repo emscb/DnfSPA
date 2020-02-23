@@ -21,5 +21,17 @@
             height: auto;
             margin: 10px;
         }
+        .header {
+            background: wheat;
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            .name {
+                align-self: center;
+                text-align: center;
+            }
+        }
+        .body {
+            
+        }
     }
 }
