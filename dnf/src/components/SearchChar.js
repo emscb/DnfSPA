@@ -11,7 +11,7 @@ const SearchChar = ({ history }) => {
     try {
       axios
         .get(
-          `https://api.neople.co.kr/df/servers/all/characters?characterName=${name}&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+          `https://api.neople.co.kr/df/servers/all/characters?characterName=${name}&wordType=full&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
         )
         .then(response => {
             setInfo(response.data);
@@ -21,11 +21,11 @@ const SearchChar = ({ history }) => {
           } else if (response.data.rows.length === 1) {
             // 바로 캐릭터 상세 페이지로
             setMessage("");
-            history.push(`/searchChar/${i.charId}`)  // TODO URL 바뀌는지 확인
+            history.push(`/searchChar/${response.data.rows[0].serverId}/${response.data.rows[0].characterId}`)
           } else {
             // 검색 결과 캐릭터 목록 페이지로
             setMessage("");
-            history.push(`/searchChar/result`);
+            history.push(`/searchChar/result/all/${name}`);
           }
         });
     } catch (e) {
