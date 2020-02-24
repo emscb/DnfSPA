@@ -13,7 +13,7 @@ function App() {
     >
       <div style={{ flex: "1" }}>
         <Menu />
-        <Route path="/" component={SearchItem} exact />
+        <Route path="/" component={SearchChar} exact />
         <Route path="/searchItem" exact component={SearchItem} />
         <Route path="/searchItem/:itemId" component={ItemDetail} />
         <Route path="/searchChar" exact component={SearchChar} />
