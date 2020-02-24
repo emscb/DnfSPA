@@ -20,10 +20,11 @@ const ItemDetail = ({ match }) => {
   if (gotData.current === false) {
     axios
       .get(
-        `https://api.neople.co.kr/df/items/${id}?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+        `https://api.neople.co.kr/df/items/${id}?wordType=full&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
       )
       .then(response => {
         setItemData(response.data);
+        console.log(response.data);
       });
     gotData.current = true;
   }
@@ -35,6 +36,7 @@ const ItemDetail = ({ match }) => {
       )
       .then(response => {
         setSetData(response.data);
+        console.log(response.data);
       });
     gotSetData.current = true;
   }
@@ -182,11 +184,16 @@ const ItemDetail = ({ match }) => {
       return <div />;
     } else {
       let stepList = [];
-      stepList.push(<div key="remodelExplain"><br />{list.explain}</div>);
+      stepList.push(
+        <div key="remodelExplain">
+          <br />
+          {list.explain}
+        </div>
+      );
       for (let a = 0; a < list.stepInfo.length; a++) {
         let info = list.stepInfo[a];
         if (a !== list.stepInfo.length) {
-          stepList.push(<br key={`${a}br`}/>)
+          stepList.push(<br key={`${a}br`} />);
         }
         stepList.push(
           <div key={info.step}>
@@ -195,7 +202,6 @@ const ItemDetail = ({ match }) => {
             {info.explain}
           </div>
         );
-
       }
       return <div>{stepList}</div>;
     }
@@ -232,14 +238,18 @@ const ItemDetail = ({ match }) => {
           <div key={list[a].optionNo}>
             {`<${list[a].optionNo}세트 효과>`}
             <br />
-            {viewDetail ? list[a].detailExplain : list[a].explain}
+            {viewDetail
+              ? list[a].detailExplain
+                ? list[a].detailExplain
+                : list[a].explain
+              : list[a].explain}
           </div>
         );
         if (list[a].status) {
           for (let b = 0; b < list[a].status.length; b++) {
             let n = list[a].status[b];
             optionList.push(
-              <div key={n.name}>
+              <div key={`${n.name}${list[a].optionNo}`}>
                 {n.name} +{n.value}
               </div>
             );
