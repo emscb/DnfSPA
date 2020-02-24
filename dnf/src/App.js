@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import SearchItem from './components/SearchItem';
 import { Route } from 'react-router-dom';
 import ItemDetail from './components/ItemDetail';

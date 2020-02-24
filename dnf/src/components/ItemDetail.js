@@ -12,7 +12,7 @@ const ItemDetail = ({ match }) => {
   const [viewDetail, setViewDetail] = useState(false);
   const [viewSet, setViewSet] = useState(true);
   const [width, setWidth] = useState({
-    width: "512px",
+    width: "712px",
     marginRight: "auto",
     marginLeft: "auto"
   });
@@ -24,7 +24,6 @@ const ItemDetail = ({ match }) => {
       )
       .then(response => {
         setItemData(response.data);
-        console.log(response.data);
       });
     gotData.current = true;
   }
@@ -36,7 +35,6 @@ const ItemDetail = ({ match }) => {
       )
       .then(response => {
         setSetData(response.data);
-        console.log(response.data);
       });
     gotSetData.current = true;
   }
@@ -179,6 +177,30 @@ const ItemDetail = ({ match }) => {
     }
   }
 
+  function Remodel({ list }) {
+    if (list === undefined) {
+      return <div />;
+    } else {
+      let stepList = [];
+      stepList.push(<div key="remodelExplain"><br />{list.explain}</div>);
+      for (let a = 0; a < list.stepInfo.length; a++) {
+        let info = list.stepInfo[a];
+        if (a !== list.stepInfo.length) {
+          stepList.push(<br key={`${a}br`}/>)
+        }
+        stepList.push(
+          <div key={info.step}>
+            {`<장비개조 ${info.step}단계>`}
+            <br />
+            {info.explain}
+          </div>
+        );
+
+      }
+      return <div>{stepList}</div>;
+    }
+  }
+
   function SetItemList({ list }) {
     if (list === undefined) {
       return <div />;
@@ -246,13 +268,13 @@ const ItemDetail = ({ match }) => {
     setViewSet(!viewSet);
     if (!viewSet) {
       setWidth({
-        width: "812px",
-        marginRight: (window.innerWidth - 512) / 2 - 300 + "px",
-        marginLeft: "418px"
+        width: "1012px",
+        marginRight: (window.innerWidth - 712) / 2 - 300 + "px",
+        marginLeft: "595.5px"
       });
     } else {
       setWidth({
-        width: "512px",
+        width: "712px",
         marginRight: "auto",
         marginLeft: "auto"
       });
@@ -301,6 +323,7 @@ const ItemDetail = ({ match }) => {
                   </div>
                 )}
               </div>
+              <Remodel list={i.remodelInfo} />
               <ReinforceSkill list={i.itemReinforceSkill} />
               <Buff list={i.itemBuff} />
               <Thology list={i.mythologyInfo} />
