@@ -1,14 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import "./ItemDetail.scss";
-import qs from "qs";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-const ItemDetail = ({ location }) => {
-  const query = qs.parse(location.search, {
-    ignoreQueryPrefix: true
-  });
-  const id = query.itemId;
+const ItemDetail = ({ match }) => {
+  const { itemId } = match.params;
+  const id = itemId;
   const [i, setItemData] = useState({});
   const [s, setSetData] = useState({});
   const gotData = useRef(false);

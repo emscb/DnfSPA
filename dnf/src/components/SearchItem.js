@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "./Template.scss";
+import "./SearchItem.scss";
 import Search from "./Search";
 import List from "./List";
 import axios from "axios";
 
-const Template = ({ children }) => {
+const SearchItem = ({ children }) => {
   // API 호출하여 아이템 검색
   const [items, setItems] = useState([]);
   const onSearch = name => {
@@ -29,12 +29,12 @@ const Template = ({ children }) => {
   };
 
   return (
-    <div className="Template">
-      <div className="app-title">아이템 목록</div>
+    <div className="SearchItem">
+      <div className="app-title">아이템 검색</div>
       <Search onSearch={onSearch} />
       <List items={items} />
     </div>
   );
 };
 
-export default Template;
+export default SearchItem;
