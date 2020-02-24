@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import ItemDetail from "./components/ItemDetail";
 import Menu from "./components/Menu";
 import Footer from "./components/Footer";
+import SearchChar from "./components/SearchChar";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" component={SearchItem} exact />
         <Route path="/searchItem" exact component={SearchItem} />
         <Route path="/searchItem/:itemId" component={ItemDetail} />
+        <Route path="/searchChar" exact component={SearchChar} />
       </div>
       <Footer />
     </div>

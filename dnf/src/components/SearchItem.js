@@ -14,7 +14,7 @@ const SearchItem = ({ children }) => {
           `https://api.neople.co.kr/df/items?itemName=${name}&wordType=front&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
         )
         .then(response => {
-          if (response.data.rows === []) {
+          if (response.data.rows.length === 0) {
           } else {
             var list = [];
             response.data.rows.map(row =>
@@ -31,7 +31,7 @@ const SearchItem = ({ children }) => {
   return (
     <div className="SearchItem">
       <div className="app-title">아이템 검색</div>
-      <Search onSearch={onSearch} />
+      <Search onSearch={onSearch} type="아이템" />
       <List items={items} />
     </div>
   );
