@@ -5,6 +5,8 @@ import ItemDetail from "./components/ItemDetail";
 import Menu from "./components/Menu";
 import Footer from "./components/Footer";
 import SearchChar from "./components/SearchChar";
+import SearchCharResult from "./components/SearchCharResult";
+import CharDetail from "./components/CharDetail";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/searchItem" exact component={SearchItem} />
         <Route path="/searchItem/:itemId" component={ItemDetail} />
         <Route path="/searchChar" exact component={SearchChar} />
+        <Route path="/searchChar/result" component={SearchCharResult} />
+        <Route path="/searchChar/:charId" component={CharDetail} />
       </div>
       <Footer />
     </div>

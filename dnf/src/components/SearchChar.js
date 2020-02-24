@@ -4,8 +4,9 @@ import Search from "./Search";
 import axios from "axios";
 
 // 캐릭터 검색 창 (세부 정보x)
-const SearchChar = () => {
+const SearchChar = ({ history }) => {
   const [message, setMessage] = useState("");
+  const [i, setInfo] = useState({});
   const onSearch = name => {
     try {
       axios
@@ -13,15 +14,18 @@ const SearchChar = () => {
           `https://api.neople.co.kr/df/servers/all/characters?characterName=${name}&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
         )
         .then(response => {
-            console.log(response);
+            setInfo(response.data);
+            console.log(response.data);
           if (response.data.rows.length === 0) {
             setMessage("검색 결과가 없습니다.");
           } else if (response.data.rows.length === 1) {
             // 바로 캐릭터 상세 페이지로
             setMessage("");
+            history.push(`/searchChar/${i.charId}`)  // TODO URL 바뀌는지 확인
           } else {
             // 검색 결과 캐릭터 목록 페이지로
             setMessage("");
+            history.push(`/searchChar/result`);
           }
         });
     } catch (e) {
