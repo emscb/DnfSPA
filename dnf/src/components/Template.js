@@ -30,7 +30,7 @@ const Template = ({ children }) => {
 
   return (
     <div className="Template">
-      <div className="app-title">아이템 목록</div>
+      <div className="app-title">아이템 검색</div>
       <Search onSearch={onSearch} />
       <List items={items} />
     </div>

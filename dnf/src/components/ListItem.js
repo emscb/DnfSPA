@@ -10,7 +10,7 @@ const ListItem = ({ item }) => {
       <img src={`https://img-api.neople.co.kr/df/items/${item.id}`} alt="" />
       <Link
         style={{ color: "black", textDecoration: "none" }}
-        to={`itemDetail?itemId=${item.id}`}
+        to={`searchItem/${item.id}`}
       >
         {content}
       </Link>
