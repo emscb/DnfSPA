@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import "./CharDetail.scss";
+import cheerio from "cheerio";
 
 const CharDetail = ({ match }) => {
   const { server, charId } = match.params;
@@ -21,6 +22,17 @@ const CharDetail = ({ match }) => {
     gotData.current = true;
   }
 
+  function Dundam() {
+    axios.get(`http://dundam.xyz/view.jsp?server=${server}&name=${c.characterName}&image=${id}`)
+    .then(response => {
+      console.log(response);
+      const $ = cheerio.load(response.data);
+      const list = $("div#buffTable");
+      console.log(list);
+    })
+    return <div />;
+  }
+
   return (
     c.characterName !== undefined && (
       <div>
@@ -31,11 +43,11 @@ const CharDetail = ({ match }) => {
               <img
                 src={`https://img-api.neople.co.kr/df/servers/${server}/characters/${id}?zoom=2`}
                 alt={`${c.characterName}`}
-                style={{margin: "0px"}}
               />
             </div>
             <div className="info">
             {/* 직업, 길드, 로젠 1시 딜, 버프력 등 */}
+            {/* <Dundam /> */}
             {c.adventureName}<br />
             {c.jobGrowName}<br />
             {c.guildName}
