@@ -8,6 +8,7 @@ const CharDetail = ({ match }) => {
   const id = charId;
   const [c, setCharData] = useState({});
   const gotData = useRef(false);
+  const [ dundamInfo, setDundamInfo ] = useState([]);
 
   if (gotData.current === false) {
     axios
@@ -18,19 +19,34 @@ const CharDetail = ({ match }) => {
         setCharData(response.data);
         console.log(response.data);
       });
-    // 던담 정보 긁어오기
-    gotData.current = true;
-  }
 
-  function Dundam() {
-    axios.get(`http://dundam.xyz/view.jsp?server=${server}&name=${c.characterName}&image=${id}`)
-    .then(response => {
-      console.log(response);
-      const $ = cheerio.load(response.data);
-      const list = $("div#buffTable");
-      console.log(list);
-    })
-    return <div />;
+    // 던담 정보 긁어오기
+    axios
+      .get(
+        `http://dundam.xyz/view.jsp?server=${server}&name=${c.characterName}&image=${id}`
+      )
+      .then(response => {
+        console.log(response);
+        const $ = cheerio.load(response.data);
+        const isBuffer = $(
+          "#Present > table > tbody > tr:nth-child(5) > td:nth-child(2)"
+        ).length;
+        if (isBuffer === 1) {
+          const list = $(
+            "#Present > table > tbody > tr:nth-child(5) > td:nth-child(2)"
+          );
+          console.log(list[0].childNodes[0].data);
+          setDundamInfo([<div key="dundamBuff">버프 : {list[0].childNodes[0].data}</div>]);
+        } else {
+          const list = $(
+            "#rogen > table > tbody > tr:nth-child(13) > td:nth-child(3)"
+          );
+          console.log(list[0].childNodes[0].data);
+          setDundamInfo([<div key="dundamRogen">로젠 1시 : {list[0].childNodes[0].data}</div>]);
+        }
+      });
+
+    gotData.current = true;
   }
 
   return (
@@ -46,14 +62,19 @@ const CharDetail = ({ match }) => {
               />
             </div>
             <div className="info">
-            {/* 직업, 길드, 로젠 1시 딜, 버프력 등 */}
-            {/* <Dundam /> */}
-            {c.adventureName}<br />
-            {c.jobGrowName}<br />
-            {c.guildName}
+              {/* 직업, 길드, 로젠 1시 딜, 버프력 등 */}
+              {c.adventureName}
+              <br />
+              {c.jobGrowName}
+              <br />
+              {c.guildName}
+              <br />
+              {dundamInfo}
             </div>
           </div>
-          <div className="detailInfo"> {/* 나머지 전부 */}
+          <div className="detailInfo">
+            {" "}
+            {/* 나머지 전부 */}
             <div className="tab">
               {/* 장착 장비, 아바타, 휘장 등 바꿀 수 있게 탭 */}
             </div>
