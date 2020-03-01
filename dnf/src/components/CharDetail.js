@@ -8,7 +8,7 @@ const CharDetail = ({ match }) => {
   const id = charId;
   const [c, setCharData] = useState({});
   const gotData = useRef(false);
-  const [ dundamInfo, setDundamInfo ] = useState([]);
+  const [dundamInfo, setDundamInfo] = useState([]);
 
   if (gotData.current === false) {
     axios
@@ -36,13 +36,17 @@ const CharDetail = ({ match }) => {
             "#Present > table > tbody > tr:nth-child(5) > td:nth-child(2)"
           );
           console.log(list[0].childNodes[0].data);
-          setDundamInfo([<div key="dundamBuff">버프 : {list[0].childNodes[0].data}</div>]);
+          setDundamInfo([
+            <div key="dundamBuff">버프 : {list[0].childNodes[0].data}</div>
+          ]);
         } else {
           const list = $(
             "#rogen > table > tbody > tr:nth-child(13) > td:nth-child(3)"
           );
           console.log(list[0].childNodes[0].data);
-          setDundamInfo([<div key="dundamRogen">로젠 1시 : {list[0].childNodes[0].data}</div>]);
+          setDundamInfo([
+            <div key="dundamRogen">로젠 1시 : {list[0].childNodes[0].data}</div>
+          ]);
         }
       });
 
