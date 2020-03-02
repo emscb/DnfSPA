@@ -96,7 +96,7 @@ const CharDetail = ({ match }) => {
             {/* 나머지 전부 */}
             <div className="tab">
               {/* 장착 장비, 아바타, 휘장 등 바꿀 수 있게 탭 */}
-              <Tabs onClick={onClick} />
+              <Tabs onClick={onClick} activeTab={tab}/>
             </div>
             <div className="table">
               {/* 내용 표시 (테이블 형태) 
