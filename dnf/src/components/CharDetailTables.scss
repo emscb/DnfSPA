@@ -1,0 +1,36 @@
+table {
+    width: 100%
+}
+
+tbody tr, tbody td {
+    text-align: center;
+    background-color: #E6F3FE
+}
+
+thead {
+    background-color: #B1D4F1;
+}
+
+tr {
+    .에픽 {
+        color: #FFB400;
+    }
+    .유니크 {
+        color: #FF00FF;
+    }
+    .레어 {
+        color: #B36BFF;
+    }
+    .언커먼 {
+        color: #68D5ED;
+    }
+    .커먼 {
+        color: #ffffff;
+    }
+    .크로니클 {
+        color: #FF6666;
+    }
+    .레전더리 {
+        color: #FF7800;
+    }
+}
