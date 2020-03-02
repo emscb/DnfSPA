@@ -22,6 +22,7 @@ const CharDetail = ({ match }) => {
       )
       .then(response => {
         setEquipment(response.data);
+        console.log(response.data);
       });
 
     // 장착 아바타 조회

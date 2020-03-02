@@ -33,4 +33,9 @@ tr {
     .레전더리 {
         color: #FF7800;
     }
+    .신화 {
+        background: linear-gradient(180deg, #FFB400 0%, #FF00FF 100%);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 }

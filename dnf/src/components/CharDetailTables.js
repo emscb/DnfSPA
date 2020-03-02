@@ -29,20 +29,26 @@ const Tables = ({ id, info }) => {
     }
 
     function Enchant({ id }) {
-        if (e[id].enchant) {
-            let s = e[id].enchant.status;
-            let content = ``;
-            for (let m = 0; m < s.length; m++) {
-              content += `${s[m].name} +${s[m].value}`;
-              if (m + 1 !== s.length) {
-                content += `, `;
-              }
+      if (e[id].enchant) {
+        if (e[id].enchant.status === undefined && e[id].enchant.reinforceSkill !== undefined) {
+            let s = e[id].enchant.reinforceSkill[0];
+            return <td>{s.skills[0].name} +{s.skills[0].value}</td>;
+        } else if (e[id].enchant.status !== undefined) {
+          let s = e[id].enchant.status;
+          let content = ``;
+          for (let m = 0; m < s.length; m++) {
+            content += `${s[m].name} +${s[m].value}`;
+            if (m + 1 !== s.length) {
+              content += `, `;
             }
-            return <td>{content}</td>;
+          }
+          return <td>{content}</td>;
         } else {
-            return <td />
+            return <td>{e[id].enchant.explain}</td>
         }
-      
+      } else {
+        return <td />;
+      }
     }
 
     for (let a = 0; a < e.length; a++) {
@@ -54,7 +60,7 @@ const Tables = ({ id, info }) => {
               src={`https://img-api.neople.co.kr/df/items/${e[a].itemId}`}
               alt={`${e[a].itemName}`}
             />
-          </td> 
+          </td>
           <td className={`${e[a].itemRarity}`}>{e[a].itemName}</td>
           <Reinforce id={a} />
           <Enchant id={a} />
@@ -63,16 +69,14 @@ const Tables = ({ id, info }) => {
       table.push(<tbody key={`${id} ${a}`}>{rows}</tbody>);
     }
   } else if (id === 2) {
-      table.push(
-          <thead>
-              <tr>
-                  <th></th>
-              </tr>
-          </thead>
-      )
+    table.push(
+      <thead>
+        <tr>
+          <th></th>
+        </tr>
+      </thead>
+    );
   }
-
-
 
   return (
     <div>
