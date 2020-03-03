@@ -25,7 +25,7 @@ tr {
         color: #68D5ED;
     }
     .커먼 {
-        color: #ffffff;
+        color: black;
     }
     .크로니클 {
         color: #FF6666;
@@ -38,4 +38,18 @@ tr {
         background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+}
+
+img {
+    margin-right: 0px;
+}
+
+caption {
+    height: 40px;
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+th.image {
+    width: 40px;
 }

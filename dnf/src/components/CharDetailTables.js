@@ -2,13 +2,13 @@ import React from "react";
 import "./CharDetailTables.scss";
 
 const Tables = ({ id, info }) => {
-  var e = info.equipment;
   var table = [];
   if (id === 1) {
+    let e = info.equipment;
     table.push(
       <thead key={id}>
         <tr>
-          <th></th>
+          <th className="image"></th>
           <th>이름</th>
           <th>강화 / 증폭</th>
           <th>마법부여</th>
@@ -30,9 +30,16 @@ const Tables = ({ id, info }) => {
 
     function Enchant({ id }) {
       if (e[id].enchant) {
-        if (e[id].enchant.status === undefined && e[id].enchant.reinforceSkill !== undefined) {
-            let s = e[id].enchant.reinforceSkill[0];
-            return <td>{s.skills[0].name} +{s.skills[0].value}</td>;
+        if (
+          e[id].enchant.status === undefined &&
+          e[id].enchant.reinforceSkill !== undefined
+        ) {
+          let s = e[id].enchant.reinforceSkill[0];
+          return (
+            <td>
+              {s.skills[0].name} +{s.skills[0].value}
+            </td>
+          );
         } else if (e[id].enchant.status !== undefined) {
           let s = e[id].enchant.status;
           let content = ``;
@@ -44,7 +51,7 @@ const Tables = ({ id, info }) => {
           }
           return <td>{content}</td>;
         } else {
-            return <td>{e[id].enchant.explain}</td>
+          return <td>{e[id].enchant.explain}</td>;
         }
       } else {
         return <td />;
@@ -69,13 +76,82 @@ const Tables = ({ id, info }) => {
       table.push(<tbody key={`${id} ${a}`}>{rows}</tbody>);
     }
   } else if (id === 2) {
+    let e = info;
     table.push(
-      <thead>
-        <tr>
-          <th></th>
+      <thead key={id}>
+        <tr key={id}>
+          <th className="image"></th>
+          <th>이름</th>
+          <th>엠블렘</th>
         </tr>
       </thead>
     );
+
+    function Emblem({ id }) {
+      if (e[id].emblems === []) {
+        return <td></td>;
+      } else {
+        let rows = [];
+        for (let m = 0; m < e[id].emblems.length; m++) {
+          rows.push(
+            <div key={`${id} ${m}`} className={e[id].emblems[m].itemRarity}>
+              {e[id].emblems[m].itemName}
+            </div>
+          );
+        }
+        return <td>{rows}</td>;
+      }
+    }
+
+    for (let a = 0; a < e.length; a++) {
+      let rows = [];
+      rows.push(
+        <tr key={`${e[a].itemName}`}>
+          <td>
+            <img
+              src={`https://img-api.neople.co.kr/df/items/${e[a].itemId}`}
+              alt={`${e[a].itemName}`}
+            />
+          </td>
+          <td className={`${e[a].itemRarity}`}>{e[a].itemName}</td>
+          <Emblem id={a} />
+        </tr>
+      );
+      table.push(<tbody key={`${id} ${a}`}>{rows}</tbody>);
+    }
+  } else if (id === 3) {
+    let e = info;
+    table.push(
+      <caption key="caption">
+        {e.skillInfo.name} Lv.{e.skillInfo.option.level}
+      </caption>
+    );
+    table.push(
+      <thead key={id}>
+        <tr>
+          <th className="image"></th>
+          <th>이름</th>
+        </tr>
+      </thead>
+    );
+
+    for (let a = 0; a < e.equipment.length; a++) {
+      let rows = [];
+      rows.push(
+        <tr key={`${e.equipment[a].itemName}`}>
+          <td>
+            <img
+              src={`https://img-api.neople.co.kr/df/items/${e.equipment[a].itemId}`}
+              alt={`${e.equipment[a].itemName}`}
+            />
+          </td>
+          <td className={`${e.equipment[a].itemRarity}`}>
+            {e.equipment[a].itemName}
+          </td>
+        </tr>
+      );
+      table.push(<tbody key={`${id} ${a}`}>{rows}</tbody>);
+    }
   }
 
   return (

@@ -10,6 +10,7 @@ const CharDetail = ({ match }) => {
   const id = charId;
   const [e, setEquipment] = useState({});
   const [avatar, setAvatar] = useState({});
+  const [b, setBuffEquipment] = useState({});
   const gotData = useRef(false);
   const [dundamInfo, setDundamInfo] = useState([]);
   const [tab, setTab] = useState(1);
@@ -31,9 +32,20 @@ const CharDetail = ({ match }) => {
         `https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/avatar?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
       )
       .then(response => {
-        setAvatar(response.data);
+        setAvatar(response.data.avatar);
         console.log(response.data.avatar);
       });
+
+    // 버프 강화 장비 조회
+    axios
+      .get(
+        `https://api.neople.co.kr/df/servers/${server}/characters/${id}/skill/buff/equip/equipment?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+      )
+      .then(response => {
+        setBuffEquipment(response.data.skill.buff);
+        console.log(response.data.skill.buff);
+      });
+
     // 던담 정보 긁어오기
     axios
       .get(
@@ -96,12 +108,12 @@ const CharDetail = ({ match }) => {
             {/* 나머지 전부 */}
             <div className="tab">
               {/* 장착 장비, 아바타, 휘장 등 바꿀 수 있게 탭 */}
-              <Tabs onClick={onClick} activeTab={tab}/>
+              <Tabs onClick={onClick} activeTab={tab} />
             </div>
             <div className="table">
               {/* 내용 표시 (테이블 형태) 
                 내용에 따라 컴포넌트를 위에서 그려놓는게 좋을 듯*/}
-              <Tables id={tab} info={e} />
+              <Tables id={tab} info={tab === 1 ? e : (tab === 2 ? avatar : b)} />
             </div>
           </div>
         </div>
