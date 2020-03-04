@@ -111,9 +111,8 @@ const CharDetail = ({ match }) => {
               <Tabs onClick={onClick} activeTab={tab} />
             </div>
             <div className="table">
-              {/* 내용 표시 (테이블 형태) 
-                내용에 따라 컴포넌트를 위에서 그려놓는게 좋을 듯*/}
-              <Tables id={tab} info={tab === 1 ? e : (tab === 2 ? avatar : b)} />
+              {/* 내용 표시 (테이블 형태) */}
+              <Tables id={tab} info={tab === 1 ? e : tab === 2 ? avatar : b} />
             </div>
           </div>
         </div>

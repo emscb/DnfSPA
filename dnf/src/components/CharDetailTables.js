@@ -10,21 +10,45 @@ const Tables = ({ id, info }) => {
         <tr>
           <th className="image"></th>
           <th>이름</th>
-          <th>강화 / 증폭</th>
+          <th>강화 / 증폭 / 재련</th>
           <th>마법부여</th>
         </tr>
       </thead>
     );
 
     function Reinforce({ id }) {
+      // 차원의 능력치가 없으면
       if (e[id].amplificationName === null) {
         if (e[id].reinforce === 0) {
-          return <td></td>;
+          if (e[id].refine === 0) {
+            return <td></td>;
+          } else {
+            return <td>{e[id].refine}재련</td>;
+          }
         } else {
-          return <td style={{ color: "#68D5ED" }}>+{e[id].reinforce}강화</td>;
+          if (e[id].refine !== 0) {
+            return (
+              <td>
+                <div style={{ color: "#68D5ED" }}>+{e[id].reinforce}강화</div>
+                <div>{e[id].refine}재련</div>
+              </td>
+            );
+          } else {
+            return <td style={{ color: "#68D5ED" }}>+{e[id].reinforce}강화</td>;
+          }
         }
       } else {
-        return <td style={{ color: "#FF00FF" }}>+{e[id].reinforce}증폭</td>;
+        // 증폭 있음
+        if (e[id].refine !== 0) {
+          return (
+            <td>
+              <div style={{ color: "#FF00FF" }}>+{e[id].reinforce}증폭</div>
+              <div>{e[id].refine}재련</div>
+            </td>
+          );
+        } else {
+          return <td style={{ color: "#FF00FF" }}>+{e[id].reinforce}증폭</td>;
+        }
       }
     }
 
