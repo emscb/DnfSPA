@@ -21,7 +21,7 @@ const SearchChar = ({ history }) => {
           } else if (response.data.rows.length === 1) {
             // 바로 캐릭터 상세 페이지로
             setMessage("");
-            history.push(`/searchChar/${response.data.rows[0].serverId}/${response.data.rows[0].characterId}`)
+            history.push(`/searchChar/info/${response.data.rows[0].serverId}/${response.data.rows[0].characterId}`)
           } else {
             // 검색 결과 캐릭터 목록 페이지로
             setMessage("");

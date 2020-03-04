@@ -21,7 +21,7 @@ function App() {
         <Route path="/searchItem/:itemId" component={ItemDetail} />
         <Route path="/searchChar" exact component={SearchChar} />
         <Route path="/searchChar/result/:server/:name" component={SearchCharResult} />
-        <Route path="/searchChar/:server/:charId" component={CharDetail} />
+        <Route path="/searchChar/info/:server/:charId" component={CharDetail} />
       </div>
       <Footer />
     </div>
