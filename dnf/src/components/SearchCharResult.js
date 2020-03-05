@@ -38,6 +38,14 @@ const SearchCharResult = ({ match, history }) => {
     gotData.current = true;
   }
 
+  function Dropdown({ serverList }) {
+    return <div>
+      {Object.keys(serverList).map(
+      s => (<div>{serverList[s]}</div>)
+    )}
+    </div>
+  }
+
   function ResultList({ list }) {
     var lists = [];
     for (let a = 0; a < list.length; a++) {
@@ -50,7 +58,7 @@ const SearchCharResult = ({ match, history }) => {
               `/searchChar/info/${list[a].serverId}/${list[a].characterId}`
             );
           }}
-          style={{cursor: "pointer"}}
+          style={{ cursor: "pointer" }}
         >
           <div className="charImage" key="charImage">
             <img
@@ -72,7 +80,13 @@ const SearchCharResult = ({ match, history }) => {
   return (
     <div className="ResultPage">
       <div className="combobox">
-        {servers[charServer]} 서버에 대한 {charName} 검색 결과입니다.
+        <span className="dropdown">
+          {servers[charServer]}▼&nbsp;
+          <div className="dropdown-content">
+            <Dropdown serverList={servers}/>
+          </div>
+        </span>
+        서버에 대한 {charName} 검색 결과입니다.
       </div>
       <div>
         <ResultList list={list} />
