@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
+import "./SearchCharResult.scss";
 
-const SearchCharResult = ({ match }) => {
+const SearchCharResult = ({ match, history }) => {
   /* 제일 위에 "____ 서버에 대한 _____ 검색 결과입니다."
     서버는 콤보 박스로. 바꾸면 페이지 다시 그리게
 
@@ -37,12 +38,45 @@ const SearchCharResult = ({ match }) => {
     gotData.current = true;
   }
 
+  function ResultList({ list }) {
+    var lists = [];
+    for (let a = 0; a < list.length; a++) {
+      lists.push(
+        <div
+          className="char"
+          key={`char${a}`}
+          onClick={e => {
+            history.push(
+              `/searchChar/info/${list[a].serverId}/${list[a].characterId}`
+            );
+          }}
+          style={{cursor: "pointer"}}
+        >
+          <div className="charImage" key="charImage">
+            <img
+              src={`https://img-api.neople.co.kr/df/servers/${list[a].serverId}/characters/${list[a].characterId}?zoom=1`}
+              alt={`${list[a].characterName}`}
+            />
+          </div>
+          <div className="charSimpleInfo" key="charSimpleInfo">
+            <b>{servers[list[a].serverId]}</b> {list[a].characterName}
+            <br />
+            Lv.{list[a].level} {list[a].jobGrowName}
+          </div>
+        </div>
+      );
+    }
+    return <div className="results">{lists}</div>;
+  }
+
   return (
-    <div>
+    <div className="ResultPage">
       <div className="combobox">
         {servers[charServer]} 서버에 대한 {charName} 검색 결과입니다.
       </div>
-      <div className="results"></div>
+      <div>
+        <ResultList list={list} />
+      </div>
     </div>
   );
 };

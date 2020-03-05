@@ -1,0 +1,28 @@
+.ResultPage {
+  display: flex;
+  flex-flow: column;
+  width: 1024px;
+  margin: 0 auto;
+  .combobox {
+    width: 100%;
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+}
+
+.results {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  .char {
+      width: 25%;
+      text-align: center;
+  }
+}
+
+.charSimpleInfo {
+    text-align: center;
+}

@@ -60,16 +60,39 @@ const CharDetail = ({ match }) => {
           const list = $(
             "#Present > table > tbody > tr:nth-child(5) > td:nth-child(2)"
           );
-          setDundamInfo([
-            <div key="dundamBuff">버프 : {list[0].childNodes[0].data}</div>
-          ]);
+          try {
+            setDundamInfo([
+              <div key="dundamBuff">버프 : {list[0].childNodes[0].data}</div>
+            ]);
+          } catch (TypeError) {
+            setDundamInfo([<div key="dundamBuff">버프 : 정보 없음</div>]);
+          }
         } else {
-          const list = $(
+          let list = $(
             "#rogen > table > tbody > tr:nth-child(13) > td:nth-child(3)"
           );
-          setDundamInfo([
-            <div key="dundamRogen">로젠 1시 : {list[0].childNodes[0].data}</div>
-          ]);
+          try {
+            setDundamInfo([
+              <div key="dundamRogen">
+                로젠 1시 : {list[0].childNodes[0].data}
+              </div>
+            ]);
+          } catch (TypeError) {
+            try {
+              list = $(
+                "#rogen > table > tbody > tr:nth-child(12) > td:nth-child(3)"
+              );
+              setDundamInfo([
+                <div key="dundamRogen">
+                  로젠 1시 : {list[0].childNodes[0].data}
+                </div>
+              ]);
+            } catch (TypeError) {
+              setDundamInfo([
+                <div key="dundamRogen">로젠 1시 : 정보 없음</div>
+              ]);
+            }
+          }
         }
       });
 
@@ -97,9 +120,11 @@ const CharDetail = ({ match }) => {
               {/* 직업, 길드, 로젠 1시 딜, 버프력 등 */}
               {e.adventureName}
               <br />
-              {e.jobGrowName}
+              <b>{e.characterName}</b>
               <br />
-              {e.guildName}
+              Lv.{e.level} {e.jobGrowName}
+              <br />
+              {e.guildName!==null ? e.guildName : "길드 없음"}
               <br />
               {dundamInfo}
             </div>

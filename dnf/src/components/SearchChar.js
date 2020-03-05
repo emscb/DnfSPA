@@ -15,7 +15,6 @@ const SearchChar = ({ history }) => {
         )
         .then(response => {
             setInfo(response.data);
-            console.log(response.data);
           if (response.data.rows.length === 0) {
             setMessage("검색 결과가 없습니다.");
           } else if (response.data.rows.length === 1) {
