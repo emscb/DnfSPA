@@ -1,0 +1,63 @@
+.dropdown {
+    position: relative;
+    svg {
+      font-size: 1rem;
+    }
+}
+
+.dropdown-content {
+    position: absolute;
+    display: none;
+    background-color: #F1F5F8;
+    z-index: 1;
+    min-width: 100px;
+    right: 0px;
+    font-size: 1rem;
+    div#server {
+      color: inherit;
+      display: block;
+    }
+    &:hover div#server:hover{
+      background-color: #E5E9EC;
+    }
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.ResultPage {
+  display: flex;
+  flex-flow: column;
+  width: 1024px;
+  margin: 0 auto;
+  .combobox {
+    width: 100%;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    input {
+      font-size: inherit;
+      width: 150px;
+      text-align: center;
+      border: none;
+      border-bottom: 1px solid black;
+    }
+  }
+}
+
+.results {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  .char {
+      width: 25%;
+      text-align: center;
+  }
+}
+
+.charSimpleInfo {
+    text-align: center;
+}

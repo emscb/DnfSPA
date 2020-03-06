@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./Search.scss"
 
-const Search = ({ onSearch }) => {
+const Search = ({ onSearch, type }) => {
     const [value, setValue] = useState('');
 
     const onChange = (e) => {
@@ -24,7 +24,7 @@ const Search = ({ onSearch }) => {
         <div>
             <form className="Search" onSubmit={onSubmit}>
                 <input className="input"
-                    placeholder="아이템 이름을 입력하세요"
+                    placeholder={`${type} 이름을 입력하세요`}
                     value={value}
                     onChange={onChange}
                 ></input>

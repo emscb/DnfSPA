@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useState, useRef } from "react";
 import "./ItemDetail.scss";
 import axios from "axios";
@@ -323,7 +324,7 @@ const ItemDetail = ({ match }) => {
               {`레벨제한: ${i.itemAvailableLevel}`}
               <br />
               <br />
-              <Status list={i.itemStatus} />
+              <Status list={i.itemStatus}/>
               <br />
               <div style={{ whiteSpace: "pre-line" }}>
                 {i.itemExplain !== "" && (
