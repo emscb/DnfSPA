@@ -29,6 +29,7 @@ const SearchCharResult = ({ match, history }) => {
   useEffect(() => {
     gotData.current = false;
     history.push(`/searchChar/result/${charServer}/${charName}`);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [charServer]);
 
   if (gotData.current === false) {
