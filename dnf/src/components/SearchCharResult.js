@@ -1,8 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import "./SearchCharResult.scss";
 import { IoIosArrowDown } from "react-icons/io";
-import { useEffect } from "react";
 
 const SearchCharResult = ({ match, history }) => {
   /* 제일 위에 "____ 서버에 대한 _____ 검색 결과입니다."
@@ -29,7 +28,8 @@ const SearchCharResult = ({ match, history }) => {
 
   useEffect(() => {
     gotData.current = false;
-  }, [charServer, charName]);
+    history.push(`/searchChar/result/${charServer}/${charName}`);
+  }, [charServer]);
 
   if (gotData.current === false) {
     axios
@@ -48,7 +48,14 @@ const SearchCharResult = ({ match, history }) => {
     return (
       <div>
         {Object.keys(serverList).map(s => (
-          <div>{serverList[s]}</div>
+          <div
+            id="server"
+            onClick={e => {
+              setCharServer(s);
+            }}
+          >
+            {serverList[s]}
+          </div>
         ))}
       </div>
     );
@@ -61,7 +68,7 @@ const SearchCharResult = ({ match, history }) => {
         <div
           className="char"
           key={`char${a}`}
-          onClick={e => {
+          onClick={() => {
             history.push(
               `/searchChar/info/${list[a].serverId}/${list[a].characterId}`
             );
@@ -96,13 +103,20 @@ const SearchCharResult = ({ match, history }) => {
           </div>
         </span>
         서버에 대한{" "}
-        <input
-          className="input"
-          value={charName}
-          onChange={e => {
-            setCharName(e.target.value);
+        <form
+          onSubmit={() => {
+            history.push(`/searchChar/result/${charServer}/${charName}`);
           }}
-        />{" "}
+          style={{ display: "inline-block" }}
+        >
+          <input
+            className="input"
+            value={charName}
+            onChange={e => {
+              setCharName(e.target.value);
+            }}
+          />
+        </form>{" "}
         검색 결과입니다.
       </div>
       <div>
