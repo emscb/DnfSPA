@@ -1,5 +1,8 @@
 .dropdown {
     position: relative;
+    svg {
+      font-size: 1rem;
+    }
 }
 
 .dropdown-content {
@@ -9,6 +12,7 @@
     z-index: 1;
     min-width: 100px;
     right: 0px;
+    font-size: 1rem;
 }
 
 .dropdown:hover .dropdown-content {
@@ -26,6 +30,13 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
     text-align: center;
+    input {
+      font-size: inherit;
+      width: 150px;
+      text-align: center;
+      border: none;
+      border-bottom: 1px solid black;
+    }
   }
 }
 

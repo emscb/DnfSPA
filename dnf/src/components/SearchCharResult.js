@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import "./SearchCharResult.scss";
+import { IoIosArrowDown } from "react-icons/io";
+import { useEffect } from "react";
 
 const SearchCharResult = ({ match, history }) => {
   /* 제일 위에 "____ 서버에 대한 _____ 검색 결과입니다."
@@ -25,6 +27,10 @@ const SearchCharResult = ({ match, history }) => {
     all: "모든"
   };
 
+  useEffect(() => {
+    gotData.current = false;
+  }, [charServer, charName]);
+
   if (gotData.current === false) {
     axios
       .get(
@@ -39,11 +45,13 @@ const SearchCharResult = ({ match, history }) => {
   }
 
   function Dropdown({ serverList }) {
-    return <div>
-      {Object.keys(serverList).map(
-      s => (<div>{serverList[s]}</div>)
-    )}
-    </div>
+    return (
+      <div>
+        {Object.keys(serverList).map(s => (
+          <div>{serverList[s]}</div>
+        ))}
+      </div>
+    );
   }
 
   function ResultList({ list }) {
@@ -81,12 +89,21 @@ const SearchCharResult = ({ match, history }) => {
     <div className="ResultPage">
       <div className="combobox">
         <span className="dropdown">
-          {servers[charServer]}▼&nbsp;
+          {servers[charServer]}
+          <IoIosArrowDown />{" "}
           <div className="dropdown-content">
-            <Dropdown serverList={servers}/>
+            <Dropdown serverList={servers} />
           </div>
         </span>
-        서버에 대한 {charName} 검색 결과입니다.
+        서버에 대한{" "}
+        <input
+          className="input"
+          value={charName}
+          onChange={e => {
+            setCharName(e.target.value);
+          }}
+        />{" "}
+        검색 결과입니다.
       </div>
       <div>
         <ResultList list={list} />
