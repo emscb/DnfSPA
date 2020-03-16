@@ -4,7 +4,7 @@ import Search from "./Search";
 import List from "./List";
 import axios from "axios";
 
-const SearchItem = ({ children }) => {
+const SearchItem = () => {
   // API 호출하여 아이템 검색
   const [items, setItems] = useState([]);
   const onSearch = name => {

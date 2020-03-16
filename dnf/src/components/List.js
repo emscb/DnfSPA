@@ -2,10 +2,10 @@ import React from 'react';
 import "./List.scss"
 import ListItem from './ListItem';
 
-const List = ({ items }) => {
+const List = ({ items, trade }) => {
     return (
         <div className="List">
-            {items.map(item => (<ListItem item={item} key={item.id}/>))}  
+            {items.map(item => (<ListItem item={item} key={item.id} trade={trade}/>))}  
         </div>
     );
 };
