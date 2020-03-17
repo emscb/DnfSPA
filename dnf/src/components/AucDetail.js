@@ -11,7 +11,7 @@ const AucDetail = ({ match }) => {
 
   if (!gotData.current) {
     Axios.get(
-      `https://api.neople.co.kr/df/auction?itemId=${id}&sort=unitPrice:asc&limit=30&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+      `https://api.neople.co.kr/df/auction?itemId=${id}&sort=unitPrice:asc&limit=50&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
     ).then(response => {
       console.log(response.data.rows);
       setList(response.data.rows);
@@ -46,7 +46,13 @@ const AucDetail = ({ match }) => {
     </thead>
   ];
   if (list.length === 0) {
-    return <div>등록된 매물이 없습니다.</div>;
+    return (
+      <div
+        style={{ textAlign: "center", fontSize: "1.5rem", fontWeight: "400" }}
+      >
+        등록된 매물이 없습니다.
+      </div>
+    );
   } else {
     table.push(
       <tbody key="tbody">
@@ -70,9 +76,7 @@ const AucDetail = ({ match }) => {
             <td>{l.currentPrice.toLocaleString()}</td>
             <td>{l.averagePrice.toLocaleString()}</td>
             <td>
-              {parseInt(
-                (Date.parse(l.expireDate) - Date.now()) / 3600000
-              )}
+              {parseInt((Date.parse(l.expireDate) - Date.now()) / 3600000)}
               시간
             </td>
           </tr>
