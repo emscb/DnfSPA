@@ -18,13 +18,21 @@ const AucDetail = ({ match }) => {
     gotData.current = true;
   }
 
-  var table = [];
+  var table = [
+    <thead>
+      <tr>
+        <th>아이템</th>
+        <th></th>
+      </tr>
+    </thead>
+  ];
+  if (list.length === 0) {
+    return <div>등록된 매물이 없습니다.</div>;
+  } else {
+    table.push()
+  }
 
-  return (
-    <div>
-      {list.length !== 0 && <table>{table}</table>}
-    </div>
-  );
+  return <div></div>;
 };
 
 export default AucDetail;
