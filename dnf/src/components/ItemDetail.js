@@ -276,25 +276,33 @@ const ItemDetail = ({ match }) => {
       return <div />;
     } else {
       let optionList = [];
+      // 어느 부위인지
       for (let a = 0; a < list.slots.length; a++) {
         optionList.push(<div>{list.slots[a].slotName} 마법부여</div>);
         optionList.push(<br />);
       }
-      for (let a = 0; a < list.enchant.length; a++) {
-        optionList.push(
-          <div>
-            {list.enchant[a].upgrade}/{list.enchant.length-1} 업그레이드
-          </div>
-        );
-        list.enchant[a].status.map(m => {
+      // 업그레이드가 가능한지
+      if (list.enchant[0].explain !== undefined) {
+        // 업글 불가능
+        optionList.push(<div>{list.enchant[0].explain}</div>);
+      } else {
+        // 업글에 따른 옵션
+        for (let a = 0; a < list.enchant.length; a++) {
           optionList.push(
             <div>
-              {m.name} +{m.value}
+              {list.enchant[a].upgrade}/{list.enchant.length - 1} 업그레이드
             </div>
           );
-        });
-        if (a !== list.enchant.length - 1) {
-          optionList.push(<br />);
+          list.enchant[a].status.map(m => {
+            optionList.push(
+              <div>
+                {m.name} +{m.value}
+              </div>
+            );
+          });
+          if (a !== list.enchant.length - 1) {
+            optionList.push(<br />);
+          }
         }
       }
 
