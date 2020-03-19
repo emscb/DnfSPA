@@ -31,6 +31,10 @@ const AucDetail = ({ match }) => {
     <img src={`https://img-api.neople.co.kr/df/items/${itemId}`} alt="" />
   );
 
+  // 그래프 그리기
+
+  // 가장 싼 요일, 가장 비싼 요일 계산하기
+
   var isStackable = itemInfo.itemType === "스태커블";
   var table = [
     <thead key="thead">
