@@ -271,6 +271,45 @@ const ItemDetail = ({ match }) => {
     }
   }
 
+  function CardInfo({ list }) {
+    if (list === undefined) {
+      return <div />;
+    } else {
+      let optionList = [];
+      // 어느 부위인지
+      for (let a = 0; a < list.slots.length; a++) {
+        optionList.push(<div>{list.slots[a].slotName} 마법부여</div>);
+        optionList.push(<br />);
+      }
+      // 업그레이드가 가능한지
+      if (list.enchant[0].explain !== undefined) {
+        // 업글 불가능
+        optionList.push(<div>{list.enchant[0].explain}</div>);
+      } else {
+        // 업글에 따른 옵션
+        for (let a = 0; a < list.enchant.length; a++) {
+          optionList.push(
+            <div>
+              {list.enchant[a].upgrade}/{list.enchant.length - 1} 업그레이드
+            </div>
+          );
+          list.enchant[a].status.map(m => {
+            optionList.push(
+              <div>
+                {m.name} +{m.value}
+              </div>
+            );
+          });
+          if (a !== list.enchant.length - 1) {
+            optionList.push(<br />);
+          }
+        }
+      }
+
+      return <div>{optionList}</div>;
+    }
+  }
+
   function onClickDetail() {
     setViewDetail(!viewDetail);
   }
@@ -324,7 +363,7 @@ const ItemDetail = ({ match }) => {
               {`레벨제한: ${i.itemAvailableLevel}`}
               <br />
               <br />
-              <Status list={i.itemStatus}/>
+              <Status list={i.itemStatus} />
               <br />
               <div style={{ whiteSpace: "pre-line" }}>
                 {i.itemExplain !== "" && (
@@ -338,6 +377,7 @@ const ItemDetail = ({ match }) => {
               <ReinforceSkill list={i.itemReinforceSkill} />
               <Buff list={i.itemBuff} />
               <Thology list={i.mythologyInfo} />
+              <CardInfo list={i.cardInfo} />
               {i.itemObtainInfo && (
                 <div style={{ whiteSpace: "pre-line" }}>
                   <br />
