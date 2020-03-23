@@ -1,9 +1,10 @@
 import React from "react";
 import "./CharDetailTables.scss";
+import Helmet from "react-helmet";
 
-const Tables = ({ id, info }) => {
+const Tables = ({ id, info, history }) => {
   var table = [];
-  if (id === 1) {
+  if (id === 1) {  // 장착 장비 탭
     let e = info.equipment;
     table.push(
       <thead key={id}>
@@ -90,6 +91,8 @@ const Tables = ({ id, info }) => {
             <img
               src={`https://img-api.neople.co.kr/df/items/${e[a].itemId}`}
               alt={`${e[a].itemName}`}
+              style={{cursor: "pointer"}}
+              onClick={() => {history.push(`/searchItem/${e[a].itemId}`)}}
             />
           </td>
           <td className={`${e[a].itemRarity}`}>{e[a].itemName}</td>

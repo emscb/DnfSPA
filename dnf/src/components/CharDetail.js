@@ -4,8 +4,9 @@ import "./CharDetail.scss";
 import cheerio from "cheerio";
 import Tabs from "./CharDetailTabs";
 import Tables from "./CharDetailTables";
+import Helmet from "react-helmet";
 
-const CharDetail = ({ match }) => {
+const CharDetail = ({ match, history }) => {
   const { server, charId } = match.params;
   const id = charId;
   const [e, setEquipment] = useState({});
@@ -137,7 +138,7 @@ const CharDetail = ({ match }) => {
             </div>
             <div className="table">
               {/* 내용 표시 (테이블 형태) */}
-              <Tables id={tab} info={tab === 1 ? e : tab === 2 ? avatar : b} />
+              <Tables id={tab} history={history} info={tab === 1 ? e : tab === 2 ? avatar : b} />
             </div>
           </div>
         </div>
