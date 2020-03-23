@@ -102,7 +102,7 @@ const Tables = ({ id, info, history }) => {
       );
       table.push(<tbody key={`${id} ${a}`}>{rows}</tbody>);
     }
-  } else if (id === 2) {
+  } else if (id === 2) {  // 아바타 탭
     let e = info;
     table.push(
       <thead key={id}>
@@ -146,7 +146,7 @@ const Tables = ({ id, info, history }) => {
       );
       table.push(<tbody key={`${id} ${a}`}>{rows}</tbody>);
     }
-  } else if (id === 3) {
+  } else if (id === 3) {  // 버프 강화 탭
     let e = info;
     table.push(
       <caption key="caption">
