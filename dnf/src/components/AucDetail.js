@@ -114,7 +114,9 @@ const AucDetail = ({ match }) => {
         for (let u = 0; u < itemInfo.cardInfo.enchant.length; u++) {
           buttonList.push(
             <button key={u} onClick={() => setUpgrade(u)}>
-              {u}업글
+              {u === itemInfo.cardInfo.enchant.length - 1
+                ? `풀업글`
+                : `${u}업글`}
             </button>
           );
         }
