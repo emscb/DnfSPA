@@ -2,6 +2,7 @@
 import React, { useState, useRef } from "react";
 import "./ItemDetail.scss";
 import axios from "axios";
+import Helmet from "react-helmet";
 
 const ItemDetail = ({ match }) => {
   const { itemId } = match.params;
@@ -334,6 +335,9 @@ const ItemDetail = ({ match }) => {
   return (
     i.itemName !== undefined && (
       <div className="ItemDetail" style={width}>
+        <Helmet>
+          <title>{i.itemName} 상세 정보</title>
+        </Helmet>
         <div className="title">아이템 상세 정보</div>
         <div className="content">
           <div className="header">

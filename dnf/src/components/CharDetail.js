@@ -108,6 +108,9 @@ const CharDetail = ({ match, history }) => {
   return (
     e.characterName !== undefined && (
       <div>
+        <Helmet>
+          <title>{e.characterName} 상세 정보</title>
+        </Helmet>
         <div className="CharDetail">
           <div className="simpleInfo">
             {/* 사진, 직업 등 간단한 정보 */}

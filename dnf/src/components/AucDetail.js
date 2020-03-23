@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import Axios from "axios";
 import "./AucDetail.scss";
+import Helmet from "react-helmet";
 
 const AucDetail = ({ match }) => {
   const { itemId } = match.params;
@@ -87,7 +88,14 @@ const AucDetail = ({ match }) => {
         ))}
       </tbody>
     );
-    return <table className="auclist">{table}</table>;
+    return <div>
+      <Helmet>
+        <title>
+          {itemInfo.itemName} 검색 결과
+        </title>
+      </Helmet>
+      <table className="auclist">{table}</table>
+    </div>
   }
 };
 

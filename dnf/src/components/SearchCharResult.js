@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import "./SearchCharResult.scss";
 import { IoIosArrowDown } from "react-icons/io";
+import Helmet from "react-helmet";
 
 const SearchCharResult = ({ match, history }) => {
   /* 제일 위에 "____ 서버에 대한 _____ 검색 결과입니다."
@@ -29,7 +30,7 @@ const SearchCharResult = ({ match, history }) => {
   useEffect(() => {
     gotData.current = false;
     history.push(`/searchChar/result/${charServer}/${charName}`);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [charServer]);
 
   if (gotData.current === false) {
@@ -95,6 +96,9 @@ const SearchCharResult = ({ match, history }) => {
 
   return (
     <div className="ResultPage">
+      <Helmet>
+        <title>캐릭터 검색 결과</title>
+      </Helmet>
       <div className="combobox">
         <span className="dropdown">
           {servers[charServer]}
