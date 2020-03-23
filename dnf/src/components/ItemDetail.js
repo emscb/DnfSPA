@@ -218,7 +218,7 @@ const ItemDetail = ({ match }) => {
         itemList.push(
           <div key={list[a].itemId}>
             <a
-              href={`itemDetail?itemId=${list[a].itemId}`}
+              href={`${list[a].itemId}`}
               style={{ color: "black", textDecoration: "none" }}
             >
               {list[a].itemName}
