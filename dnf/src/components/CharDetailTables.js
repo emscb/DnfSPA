@@ -1,11 +1,12 @@
 import React from "react";
 import "./CharDetailTables.scss";
-import Helmet from "react-helmet";
 
 const Tables = ({ id, info, history }) => {
   var table = [];
-  if (id === 1) {  // 장착 장비 탭
+  if (id === 1) {
+    // 장착 장비 탭
     let e = info.equipment;
+    let setInfo = info.setItemInfo;
     table.push(
       <thead key={id}>
         <tr>
@@ -17,7 +18,7 @@ const Tables = ({ id, info, history }) => {
       </thead>
     );
 
-    function Reinforce({ id }) {
+    const Reinforce = ({ id }) => {
       // 차원의 능력치가 없으면
       if (e[id].amplificationName === null) {
         if (e[id].reinforce === 0) {
@@ -51,9 +52,9 @@ const Tables = ({ id, info, history }) => {
           return <td style={{ color: "#FF00FF" }}>+{e[id].reinforce}증폭</td>;
         }
       }
-    }
+    };
 
-    function Enchant({ id }) {
+    const Enchant = ({ id }) => {
       if (e[id].enchant) {
         if (
           e[id].enchant.status === undefined &&
@@ -81,18 +82,20 @@ const Tables = ({ id, info, history }) => {
       } else {
         return <td />;
       }
-    }
+    };
 
+    let rows = [];
     for (let a = 0; a < e.length; a++) {
-      let rows = [];
       rows.push(
         <tr key={`${e[a].slotId}`}>
           <td>
             <img
               src={`https://img-api.neople.co.kr/df/items/${e[a].itemId}`}
               alt={`${e[a].itemName}`}
-              style={{cursor: "pointer"}}
-              onClick={() => {history.push(`/searchItem/${e[a].itemId}`)}}
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                history.push(`/searchItem/${e[a].itemId}`);
+              }}
             />
           </td>
           <td className={`${e[a].itemRarity}`}>{e[a].itemName}</td>
@@ -100,9 +103,24 @@ const Tables = ({ id, info, history }) => {
           <Enchant id={a} />
         </tr>
       );
-      table.push(<tbody key={`${id} ${a}`}>{rows}</tbody>);
     }
-  } else if (id === 2) {  // 아바타 탭
+    table.push(
+      <tbody key={`${id}body`}>
+        {rows}
+        <tr id="setInfo">
+          <td colSpan="4">
+            <div>{`<세트 아이템 정보>`}</div>
+            {setInfo.map(s => (
+              <div key={s.setItemName}>
+                {s.setItemName} {s.activeSetNo}셋
+              </div>
+            ))}
+          </td>
+        </tr>
+      </tbody>
+    );
+  } else if (id === 2) {
+    // 아바타 탭
     let e = info;
     table.push(
       <thead key={id}>
@@ -114,7 +132,7 @@ const Tables = ({ id, info, history }) => {
       </thead>
     );
 
-    function Emblem({ id }) {
+    const Emblem = ({ id }) => {
       if (e[id].emblems === []) {
         return <td></td>;
       } else {
@@ -128,7 +146,7 @@ const Tables = ({ id, info, history }) => {
         }
         return <td>{rows}</td>;
       }
-    }
+    };
 
     for (let a = 0; a < e.length; a++) {
       let rows = [];
@@ -146,7 +164,8 @@ const Tables = ({ id, info, history }) => {
       );
       table.push(<tbody key={`${id} ${a}`}>{rows}</tbody>);
     }
-  } else if (id === 3) {  // 버프 강화 탭
+  } else if (id === 3) {
+    // 버프 강화 탭
     let e = info;
     table.push(
       <caption key="caption">

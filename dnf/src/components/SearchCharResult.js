@@ -52,6 +52,7 @@ const SearchCharResult = ({ match, history }) => {
         {Object.keys(serverList).map(s => (
           <div
             id="server"
+            key={s}
             onClick={e => {
               setCharServer(s);
             }}
