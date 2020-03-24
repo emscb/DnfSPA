@@ -37,6 +37,8 @@ const CharDetail = ({ match, history }) => {
         console.log(response.data.avatar);
       });
 
+    // 장착 크리쳐 조회
+
     // 버프 강화 장비 조회
     axios
       .get(
@@ -46,6 +48,8 @@ const CharDetail = ({ match, history }) => {
         setBuffEquipment(response.data.skill.buff);
         console.log(response.data.skill.buff);
       });
+
+    // 버프 강화 아바타, 크리쳐 조회
 
     // 던담 정보 긁어오기
     axios
