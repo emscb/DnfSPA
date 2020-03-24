@@ -9,9 +9,9 @@ import Helmet from "react-helmet";
 const CharDetail = ({ match, history }) => {
   const { server, charId } = match.params;
   const id = charId;
-  const [e, setEquipment] = useState({});
+  const [equipment, setEquipment] = useState({});
   const [avatar, setAvatar] = useState({});
-  const [b, setBuffEquipment] = useState({});
+  const [buffEquipment, setBuffEquipment] = useState({});
   const gotData = useRef(false);
   const [dundamInfo, setDundamInfo] = useState([]);
   const [tab, setTab] = useState(1);
@@ -50,7 +50,7 @@ const CharDetail = ({ match, history }) => {
     // 던담 정보 긁어오기
     axios
       .get(
-        `http://dundam.xyz/view.jsp?server=${server}&name=${e.characterName}&image=${id}`
+        `http://dundam.xyz/view.jsp?server=${server}&name=${equipment.characterName}&image=${id}`
       )
       .then(response => {
         const $ = cheerio.load(response.data);
@@ -106,10 +106,10 @@ const CharDetail = ({ match, history }) => {
   };
 
   return (
-    e.characterName !== undefined && (
+    equipment.characterName !== undefined && (
       <div>
         <Helmet>
-          <title>{e.characterName} 상세 정보</title>
+          <title>{equipment.characterName} 상세 정보</title>
         </Helmet>
         <div className="CharDetail">
           <div className="simpleInfo">
@@ -117,18 +117,18 @@ const CharDetail = ({ match, history }) => {
             <div className="charImg">
               <img
                 src={`https://img-api.neople.co.kr/df/servers/${server}/characters/${id}?zoom=2`}
-                alt={`${e.characterName}`}
+                alt={`${equipment.characterName}`}
               />
             </div>
             <div className="info">
               {/* 직업, 길드, 로젠 1시 딜, 버프력 등 */}
-              {e.adventureName}
+              {equipment.adventureName}
               <br />
-              <b>{e.characterName}</b>
+              <b>{equipment.characterName}</b>
               <br />
-              Lv.{e.level} {e.jobGrowName}
+              Lv.{equipment.level} {equipment.jobGrowName}
               <br />
-              {e.guildName!==null ? e.guildName : "길드 없음"}
+              {equipment.guildName !== null ? equipment.guildName : "길드 없음"}
               <br />
               {dundamInfo}
             </div>
@@ -141,7 +141,13 @@ const CharDetail = ({ match, history }) => {
             </div>
             <div className="table">
               {/* 내용 표시 (테이블 형태) */}
-              <Tables id={tab} history={history} info={tab === 1 ? e : tab === 2 ? avatar : b} />
+              <Tables
+                id={tab}
+                history={history}
+                info={
+                  tab === 1 ? equipment : tab === 2 ? avatar : buffEquipment
+                }
+              />
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ const Tables = ({ id, info, history }) => {
   var table = [];
   if (id === 1) {
     // 장착 장비 탭
-    let e = info.equipment;
+    let equipments = info.equipment;
     let setInfo = info.setItemInfo;
     table.push(
       <thead key={id}>
@@ -20,54 +20,54 @@ const Tables = ({ id, info, history }) => {
 
     const Reinforce = ({ id }) => {
       // 차원의 능력치가 없으면
-      if (e[id].amplificationName === null) {
-        if (e[id].reinforce === 0) {
-          if (e[id].refine === 0) {
+      if (equipments[id].amplificationName === null) {
+        if (equipments[id].reinforce === 0) {
+          if (equipments[id].refine === 0) {
             return <td></td>;
           } else {
-            return <td>{e[id].refine}재련</td>;
+            return <td>{equipments[id].refine}재련</td>;
           }
         } else {
-          if (e[id].refine !== 0) {
+          if (equipments[id].refine !== 0) {
             return (
               <td>
-                <div style={{ color: "#68D5ED" }}>+{e[id].reinforce}강화</div>
-                <div>{e[id].refine}재련</div>
+                <div style={{ color: "#68D5ED" }}>+{equipments[id].reinforce}강화</div>
+                <div>{equipments[id].refine}재련</div>
               </td>
             );
           } else {
-            return <td style={{ color: "#68D5ED" }}>+{e[id].reinforce}강화</td>;
+            return <td style={{ color: "#68D5ED" }}>+{equipments[id].reinforce}강화</td>;
           }
         }
       } else {
         // 증폭 있음
-        if (e[id].refine !== 0) {
+        if (equipments[id].refine !== 0) {
           return (
             <td>
-              <div style={{ color: "#FF00FF" }}>+{e[id].reinforce}증폭</div>
-              <div>{e[id].refine}재련</div>
+              <div style={{ color: "#FF00FF" }}>+{equipments[id].reinforce}증폭</div>
+              <div>{equipments[id].refine}재련</div>
             </td>
           );
         } else {
-          return <td style={{ color: "#FF00FF" }}>+{e[id].reinforce}증폭</td>;
+          return <td style={{ color: "#FF00FF" }}>+{equipments[id].reinforce}증폭</td>;
         }
       }
     };
 
     const Enchant = ({ id }) => {
-      if (e[id].enchant) {
+      if (equipments[id].enchant) {
         if (
-          e[id].enchant.status === undefined &&
-          e[id].enchant.reinforceSkill !== undefined
+          equipments[id].enchant.status === undefined &&
+          equipments[id].enchant.reinforceSkill !== undefined
         ) {
-          let s = e[id].enchant.reinforceSkill[0];
+          let s = equipments[id].enchant.reinforceSkill[0];
           return (
             <td>
               {s.skills[0].name} +{s.skills[0].value}
             </td>
           );
-        } else if (e[id].enchant.status !== undefined) {
-          let s = e[id].enchant.status;
+        } else if (equipments[id].enchant.status !== undefined) {
+          let s = equipments[id].enchant.status;
           let content = ``;
           for (let m = 0; m < s.length; m++) {
             content += `${s[m].name} +${s[m].value}`;
@@ -77,7 +77,7 @@ const Tables = ({ id, info, history }) => {
           }
           return <td>{content}</td>;
         } else {
-          return <td>{e[id].enchant.explain}</td>;
+          return <td>{equipments[id].enchant.explain}</td>;
         }
       } else {
         return <td />;
@@ -85,20 +85,20 @@ const Tables = ({ id, info, history }) => {
     };
 
     let rows = [];
-    for (let a = 0; a < e.length; a++) {
+    for (let a = 0; a < equipments.length; a++) {
       rows.push(
-        <tr key={`${e[a].slotId}`}>
+        <tr key={`${equipments[a].slotId}`}>
           <td>
             <img
-              src={`https://img-api.neople.co.kr/df/items/${e[a].itemId}`}
-              alt={`${e[a].itemName}`}
+              src={`https://img-api.neople.co.kr/df/items/${equipments[a].itemId}`}
+              alt={`${equipments[a].itemName}`}
               style={{ cursor: "pointer" }}
               onClick={() => {
-                history.push(`/searchItem/${e[a].itemId}`);
+                history.push(`/searchItem/${equipments[a].itemId}`);
               }}
             />
           </td>
-          <td className={`${e[a].itemRarity}`}>{e[a].itemName}</td>
+          <td className={`${equipments[a].itemRarity}`}>{equipments[a].itemName}</td>
           <Reinforce id={a} />
           <Enchant id={a} />
         </tr>
