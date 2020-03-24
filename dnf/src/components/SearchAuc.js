@@ -11,7 +11,7 @@ const SearchAuc = () => {
   const onSearch = name => {
     try {
       Axios.get(
-        `https://api.neople.co.kr/df/items?itemName=${name}&wordType=front&q=trade:true&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+        `https://api.neople.co.kr/df/items?itemName=${name}&wordType=full&q=trade:true&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
       ).then(response => {
         if (response.data.rows.length === 0) {
         } else {
