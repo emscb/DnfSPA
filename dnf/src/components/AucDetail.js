@@ -3,7 +3,7 @@ import Axios from "axios";
 import "./AucDetail.scss";
 import Helmet from "react-helmet";
 
-const AucDetail = ({ match }) => {
+const AucDetail = ({ match, history }) => {
   const { itemId } = match.params;
   const id = itemId;
   const gotData = useRef(false);
@@ -29,8 +29,15 @@ const AucDetail = ({ match }) => {
     gotData.current = true;
   }
 
-  const ItemImg = ({ id }) => (
-    <img src={`https://img-api.neople.co.kr/df/items/${itemId}`} alt="" />
+  const ItemImg = () => (
+    <img
+      src={`https://img-api.neople.co.kr/df/items/${itemId}`}
+      alt=""
+      style={{ cursor: "pointer" }}
+      onClick={() => {
+        history.push(`/searchItem/${itemId}`);
+      }}
+    />
   );
 
   // 그래프 그리기
