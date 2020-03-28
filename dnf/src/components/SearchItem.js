@@ -12,7 +12,7 @@ const SearchItem = () => {
     try {
       axios
         .get(
-          `https://api.neople.co.kr/df/items?itemName=${name}&wordType=match&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+          `https://api.neople.co.kr/df/items?itemName=${name}&wordType=front&limit=30&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
         )
         .then(response => {
           if (response.data.rows.length === 0) {
