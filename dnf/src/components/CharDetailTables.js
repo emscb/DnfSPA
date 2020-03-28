@@ -31,12 +31,18 @@ const Tables = ({ id, info, history }) => {
           if (equipments[id].refine !== 0) {
             return (
               <td>
-                <div style={{ color: "#68D5ED" }}>+{equipments[id].reinforce}강화</div>
+                <div style={{ color: "#68D5ED" }}>
+                  +{equipments[id].reinforce}강화
+                </div>
                 <div>{equipments[id].refine}재련</div>
               </td>
             );
           } else {
-            return <td style={{ color: "#68D5ED" }}>+{equipments[id].reinforce}강화</td>;
+            return (
+              <td style={{ color: "#68D5ED" }}>
+                +{equipments[id].reinforce}강화
+              </td>
+            );
           }
         }
       } else {
@@ -44,12 +50,18 @@ const Tables = ({ id, info, history }) => {
         if (equipments[id].refine !== 0) {
           return (
             <td>
-              <div style={{ color: "#FF00FF" }}>+{equipments[id].reinforce}증폭</div>
+              <div style={{ color: "#FF00FF" }}>
+                +{equipments[id].reinforce}증폭
+              </div>
               <div>{equipments[id].refine}재련</div>
             </td>
           );
         } else {
-          return <td style={{ color: "#FF00FF" }}>+{equipments[id].reinforce}증폭</td>;
+          return (
+            <td style={{ color: "#FF00FF" }}>
+              +{equipments[id].reinforce}증폭
+            </td>
+          );
         }
       }
     };
@@ -98,7 +110,9 @@ const Tables = ({ id, info, history }) => {
               }}
             />
           </td>
-          <td className={`${equipments[a].itemRarity}`}>{equipments[a].itemName}</td>
+          <td className={`${equipments[a].itemRarity}`}>
+            {equipments[a].itemName}
+          </td>
           <Reinforce id={a} />
           <Enchant id={a} />
         </tr>
@@ -137,8 +151,7 @@ const Tables = ({ id, info, history }) => {
         return <td></td>;
       } else if (e[id].emblems === undefined) {
         return <td />;
-      }
-      else {
+      } else {
         let rows = [];
         for (let m = 0; m < e[id].emblems.length; m++) {
           rows.push(
@@ -158,8 +171,8 @@ const Tables = ({ id, info, history }) => {
           <td>
             <img
               src={`https://img-api.neople.co.kr/df/items/${e[a].itemId}`}
-              alt={`${e[a].itemName}`}
-              style={{cursor: "pointer"}}
+              alt={e[a].itemName}
+              style={{ cursor: "pointer" }}
               onClick={() => {
                 history.push(`/searchItem/${e[a].itemId}`);
               }}
@@ -191,14 +204,14 @@ const Tables = ({ id, info, history }) => {
     for (let a = 0; a < e.equipment.length; a++) {
       let rows = [];
       rows.push(
-        <tr key={`${e.equipment[a].itemName}`}>
+        <tr key={e.equipment[a].itemName}>
           <td>
             <img
               src={`https://img-api.neople.co.kr/df/items/${e.equipment[a].itemId}`}
               alt={`${e.equipment[a].itemName}`}
             />
           </td>
-          <td className={`${e.equipment[a].itemRarity}`}>
+          <td className={e.equipment[a].itemRarity}>
             {e.equipment[a].itemName}
           </td>
         </tr>
