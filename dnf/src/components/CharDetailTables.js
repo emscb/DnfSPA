@@ -148,6 +148,7 @@ const Tables = ({ id, info, history }) => {
       }
     };
 
+    let rows = [];
     for (let a = 0; a < e.length; a++) {
       let rows = [];
       rows.push(
@@ -164,6 +165,7 @@ const Tables = ({ id, info, history }) => {
       );
       table.push(<tbody key={`${id} ${a}`}>{rows}</tbody>);
     }
+    table.push(<tbody key={`${id} tbody`}>{rows}</tbody>);
   } else if (id === 3) {
     // 버프 강화 탭
     let e = info;
