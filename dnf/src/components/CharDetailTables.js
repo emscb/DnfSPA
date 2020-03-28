@@ -150,7 +150,6 @@ const Tables = ({ id, info, history }) => {
 
     let rows = [];
     for (let a = 0; a < e.length; a++) {
-      let rows = [];
       rows.push(
         <tr key={`${e[a].itemName}`}>
           <td>
@@ -163,7 +162,6 @@ const Tables = ({ id, info, history }) => {
           <Emblem id={a} />
         </tr>
       );
-      table.push(<tbody key={`${id} ${a}`}>{rows}</tbody>);
     }
     table.push(<tbody key={`${id} tbody`}>{rows}</tbody>);
   } else if (id === 3) {
