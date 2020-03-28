@@ -135,7 +135,10 @@ const Tables = ({ id, info, history }) => {
     const Emblem = ({ id }) => {
       if (e[id].emblems === []) {
         return <td></td>;
-      } else {
+      } else if (e[id].emblems === undefined) {
+        return <td />;
+      }
+      else {
         let rows = [];
         for (let m = 0; m < e[id].emblems.length; m++) {
           rows.push(
