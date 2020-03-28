@@ -99,20 +99,18 @@ const Tables = ({ id, info, history }) => {
     let rows = [];
     for (let a = 0; a < equipments.length; a++) {
       rows.push(
-        <tr key={`${equipments[a].slotId}`}>
+        <tr key={equipments[a].slotId}>
           <td>
             <img
               src={`https://img-api.neople.co.kr/df/items/${equipments[a].itemId}`}
-              alt={`${equipments[a].itemName}`}
+              alt={equipments[a].itemName}
               style={{ cursor: "pointer" }}
               onClick={() => {
                 history.push(`/searchItem/${equipments[a].itemId}`);
               }}
             />
           </td>
-          <td className={`${equipments[a].itemRarity}`}>
-            {equipments[a].itemName}
-          </td>
+          <td className={equipments[a].itemRarity}>{equipments[a].itemName}</td>
           <Reinforce id={a} />
           <Enchant id={a} />
         </tr>
@@ -148,7 +146,7 @@ const Tables = ({ id, info, history }) => {
 
     const Emblem = ({ id }) => {
       if (e[id].emblems === []) {
-        return <td></td>;
+        return <td />;
       } else if (e[id].emblems === undefined) {
         return <td />;
       } else {
@@ -167,7 +165,7 @@ const Tables = ({ id, info, history }) => {
     let rows = [];
     for (let a = 0; a < e.length; a++) {
       rows.push(
-        <tr key={`${e[a].itemName}`}>
+        <tr key={e[a].itemName}>
           <td>
             <img
               src={`https://img-api.neople.co.kr/df/items/${e[a].itemId}`}
