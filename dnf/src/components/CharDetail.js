@@ -10,7 +10,8 @@ const CharDetail = ({ match, history }) => {
   const { server, charId } = match.params;
   const id = charId;
   const [equipment, setEquipment] = useState({});
-  const [avatar, setAvatar] = useState({});
+  const [avatar, setAvatar] = useState([]);
+  const [creature, setCreature] = useState([]);
   const [buffEquipment, setBuffEquipment] = useState({});
   const gotData = useRef(false);
   const [dundamInfo, setDundamInfo] = useState([]);
@@ -24,7 +25,6 @@ const CharDetail = ({ match, history }) => {
       )
       .then(response => {
         setEquipment(response.data);
-        console.log(response.data);
       });
 
     // 장착 아바타 조회
@@ -34,10 +34,16 @@ const CharDetail = ({ match, history }) => {
       )
       .then(response => {
         setAvatar(response.data.avatar);
-        console.log(response.data.avatar);
       });
 
     // 장착 크리쳐 조회
+    axios
+      .get(
+        `https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/creature?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+      )
+      .then(response => {
+        setCreature(response.data.creature);
+      });
 
     // 버프 강화 장비 조회
     axios
@@ -46,7 +52,6 @@ const CharDetail = ({ match, history }) => {
       )
       .then(response => {
         setBuffEquipment(response.data.skill.buff);
-        console.log(response.data.skill.buff);
       });
 
     // 버프 강화 아바타, 크리쳐 조회
@@ -149,7 +154,7 @@ const CharDetail = ({ match, history }) => {
                 id={tab}
                 history={history}
                 info={
-                  tab === 1 ? equipment : tab === 2 ? avatar : buffEquipment
+                  tab === 1 ? equipment : tab === 2 ? avatar.concat(creature) : buffEquipment
                 }
               />
             </div>

@@ -39,7 +39,6 @@ const SearchCharResult = ({ match, history }) => {
         `https://api.neople.co.kr/df/servers/${charServer}/characters?characterName=${charName}&wordType=full&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
       )
       .then(response => {
-        console.log(response.data.rows);
         setList(response.data.rows);
       });
 
@@ -70,7 +69,7 @@ const SearchCharResult = ({ match, history }) => {
       lists.push(
         <div
           className="char"
-          key={`char${a}`}
+          key={list[a].characterId}
           onClick={() => {
             history.push(
               `/searchChar/info/${list[a].serverId}/${list[a].characterId}`
