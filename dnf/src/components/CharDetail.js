@@ -25,7 +25,6 @@ const CharDetail = ({ match, history }) => {
       )
       .then(response => {
         setEquipment(response.data);
-        console.log(response.data);
       });
 
     // 장착 아바타 조회
@@ -35,7 +34,6 @@ const CharDetail = ({ match, history }) => {
       )
       .then(response => {
         setAvatar(response.data.avatar);
-        console.log(response.data.avatar);
       });
 
     // 장착 크리쳐 조회
@@ -45,7 +43,6 @@ const CharDetail = ({ match, history }) => {
       )
       .then(response => {
         setCreature(response.data.creature);
-        console.log(response.data.creature);
       });
 
     // 버프 강화 장비 조회
@@ -55,7 +52,6 @@ const CharDetail = ({ match, history }) => {
       )
       .then(response => {
         setBuffEquipment(response.data.skill.buff);
-        console.log(response.data.skill.buff);
       });
 
     // 버프 강화 아바타, 크리쳐 조회
