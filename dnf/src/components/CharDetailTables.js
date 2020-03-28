@@ -195,27 +195,118 @@ const Tables = ({ id, info, history }) => {
         <tr>
           <th className="image"></th>
           <th>이름</th>
+          <th className="image"></th>
+          <th>이름</th>
         </tr>
       </thead>
     );
 
-    for (let a = 0; a < e.equipment.length; a++) {
-      let rows = [];
+    const Emblem = ({ id }) => {
+      if (e.avatar[id].emblems === []) {
+        return <td />;
+      } else if (e.avatar[id].emblems === undefined) {
+        return <td />;
+      } else {
+        let rows = [];
+        for (let m = 0; m < e.avatar[id].emblems.length; m++) {
+          rows.push(
+            <div
+              key={`${id} ${m}`}
+              className={e.avatar[id].emblems[m].itemRarity}
+            >
+              {e.avatar[id].emblems[m].itemName}
+            </div>
+          );
+        }
+        return <>{rows}</>;
+      }
+    };
+
+    let rows = [];
+    for (let a = 0; a < parseInt(e.equipment.length / 2) + 1; a++) {
       rows.push(
-        <tr key={e.equipment[a].itemName}>
+        <tr key={2 * a}>
+          {e.equipment[2 * a] !== undefined && (
+            <>
+              <td>
+                <img
+                  src={`https://img-api.neople.co.kr/df/items/${
+                    e.equipment[2 * a].itemId
+                  }`}
+                  alt={e.equipment[2 * a].itemName}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    history.push(`/searchItem/${e.equipment[a].itemId}`);
+                  }}
+                />
+              </td>
+              <td className={e.equipment[2 * a].itemRarity}>
+                {e.equipment[2 * a].itemName}
+              </td>
+            </>
+          )}
+          {e.equipment[2 * a + 1] !== undefined && (
+            <>
+              <td>
+                <img
+                  src={`https://img-api.neople.co.kr/df/items/${
+                    e.equipment[2 * a + 1].itemId
+                  }`}
+                  alt={e.equipment[2 * a + 1].itemName}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    history.push(`/searchItem/${e.equipment[a + 1].itemId}`);
+                  }}
+                />
+              </td>
+              <td className={e.equipment[2 * a + 1].itemRarity}>
+                {e.equipment[2 * a + 1].itemName}
+              </td>
+            </>
+          )}
+        </tr>
+      );
+    }
+
+    for (let a = 0; a < e.avatar.length; a++) {
+      rows.push(
+        <tr key={`avatar ${a}`}>
           <td>
             <img
-              src={`https://img-api.neople.co.kr/df/items/${e.equipment[a].itemId}`}
-              alt={`${e.equipment[a].itemName}`}
+              src={`https://img-api.neople.co.kr/df/items/${e.avatar[a].itemId}`}
+              alt={e.equipment[a].itemName}
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                history.push(`/searchItem/${e.avatar[a].itemId}`);
+              }}
             />
           </td>
-          <td className={e.equipment[a].itemRarity}>
-            {e.equipment[a].itemName}
+          <td className={e.avatar[a].itemRarity}>{e.avatar[a].itemName}</td>
+          <td colSpan={2}>
+            <Emblem id={a} />
           </td>
         </tr>
       );
-      table.push(<tbody key={`${id} ${a}`}>{rows}</tbody>);
     }
+
+    rows.push(
+      <tr key="creature">
+        <td>
+          <img
+            src={`https://img-api.neople.co.kr/df/items/${e.creature[0].itemId}`}
+            alt={e.creature[0].itemName}
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              history.push(`/searchItem/${e.creature[0].itemId}`);
+            }}
+          />
+        </td>
+        <td className={e.creature[0].itemRarity}>{e.creature[0].itemName}</td>
+        <td colSpan={2} />
+      </tr>
+    );
+
+    table.push(<tbody key={`${id} tbody`}>{rows}</tbody>);
   }
 
   return (
