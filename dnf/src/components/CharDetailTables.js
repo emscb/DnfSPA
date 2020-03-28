@@ -159,6 +159,10 @@ const Tables = ({ id, info, history }) => {
             <img
               src={`https://img-api.neople.co.kr/df/items/${e[a].itemId}`}
               alt={`${e[a].itemName}`}
+              style={{cursor: "pointer"}}
+              onClick={() => {
+                history.push(`/searchItem/${e[a].itemId}`);
+              }}
             />
           </td>
           <td className={`${e[a].itemRarity}`}>{e[a].itemName}</td>
