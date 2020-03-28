@@ -26,7 +26,6 @@ const ItemDetail = ({ match }) => {
       )
       .then(response => {
         setItemData(response.data);
-        console.log(response.data);
       });
     gotData.current = true;
   }
@@ -38,7 +37,6 @@ const ItemDetail = ({ match }) => {
       )
       .then(response => {
         setSetData(response.data);
-        console.log(response.data);
       });
     gotSetData.current = true;
   }
@@ -59,7 +57,7 @@ const ItemDetail = ({ match }) => {
     }
   }
 
-  function Thology({ list }) {
+  const Thology = ({ list }) => {
     if (list === undefined) {
       return <div />;
     } else {
@@ -91,9 +89,9 @@ const ItemDetail = ({ match }) => {
       }
       return <div>{optionList}</div>;
     }
-  }
+  };
 
-  function ReinforceSkill({ list }) {
+  const ReinforceSkill = ({ list }) => {
     if (list === undefined) {
       return <div />;
     } else {
@@ -156,7 +154,7 @@ const ItemDetail = ({ match }) => {
       }
       return <div key="">{skillList}</div>;
     }
-  }
+  };
 
   function Buff({ list }) {
     if (list === undefined) {
@@ -218,7 +216,7 @@ const ItemDetail = ({ match }) => {
         itemList.push(
           <div key={list[a].itemId}>
             <a
-              href={`${list[a].itemId}`}
+              href={list[a].itemId}
               style={{ color: "black", textDecoration: "none" }}
             >
               {list[a].itemName}
@@ -251,7 +249,7 @@ const ItemDetail = ({ match }) => {
           for (let b = 0; b < list[a].status.length; b++) {
             let n = list[a].status[b];
             optionList.push(
-              <div key={`${n.name}${list[a].optionNo}`}>
+              <div key={`${n.name} ${list[a].optionNo}`}>
                 {n.name} +{n.value}
               </div>
             );
