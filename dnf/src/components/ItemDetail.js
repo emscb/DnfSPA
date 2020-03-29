@@ -156,7 +156,7 @@ const ItemDetail = ({ match }) => {
     }
   };
 
-  function Buff({ list }) {
+  const Buff = ({ list }) => {
     if (list === undefined) {
       return <div />;
     } else {
@@ -177,9 +177,9 @@ const ItemDetail = ({ match }) => {
       }
       return <div>{buffList}</div>;
     }
-  }
+  };
 
-  function Remodel({ list }) {
+  const Remodel = ({ list }) => {
     if (list === undefined) {
       return <div />;
     } else {
@@ -205,9 +205,9 @@ const ItemDetail = ({ match }) => {
       }
       return <div>{stepList}</div>;
     }
-  }
+  };
 
-  function SetItemList({ list }) {
+  const SetItemList = ({ list }) => {
     if (list === undefined) {
       return <div />;
     } else {
@@ -226,9 +226,9 @@ const ItemDetail = ({ match }) => {
       }
       return <div>{itemList}</div>;
     }
-  }
+  };
 
-  function SetItemOption({ list }) {
+  const SetItemOption = ({ list }) => {
     if (list === undefined) {
       return <div />;
     } else {
@@ -268,9 +268,9 @@ const ItemDetail = ({ match }) => {
       }
       return <div>{optionList}</div>;
     }
-  }
+  };
 
-  function CardInfo({ list }) {
+  const CardInfo = ({ list }) => {
     if (list === undefined) {
       return <div />;
     } else {
@@ -307,13 +307,13 @@ const ItemDetail = ({ match }) => {
 
       return <div>{optionList}</div>;
     }
-  }
+  };
 
-  function onClickDetail() {
+  const onClickDetail = () => {
     setViewDetail(!viewDetail);
-  }
+  };
 
-  function onClickSet() {
+  const onClickSet = () => {
     setViewSet(!viewSet);
     if (!viewSet) {
       setWidth({
@@ -328,7 +328,7 @@ const ItemDetail = ({ match }) => {
         marginLeft: "auto"
       });
     }
-  }
+  };
 
   return (
     i.itemName !== undefined && (
