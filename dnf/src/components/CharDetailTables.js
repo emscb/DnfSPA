@@ -1,5 +1,7 @@
 import React from "react";
 import "./CharDetailTables.scss";
+import "../modules/CharDetail";
+import { Reinforce, Enchant, Emblem, AvatarEmblem } from "../modules/CharDetail";
 
 const Tables = ({ id, info, history }) => {
   var table = [];
@@ -18,84 +20,6 @@ const Tables = ({ id, info, history }) => {
       </thead>
     );
 
-    const Reinforce = ({ id }) => {
-      // 차원의 능력치가 없으면
-      if (equipments[id].amplificationName === null) {
-        if (equipments[id].reinforce === 0) {
-          if (equipments[id].refine === 0) {
-            return <td></td>;
-          } else {
-            return <td>{equipments[id].refine}재련</td>;
-          }
-        } else {
-          if (equipments[id].refine !== 0) {
-            return (
-              <td>
-                <div style={{ color: "#68D5ED" }}>
-                  +{equipments[id].reinforce}강화
-                </div>
-                <div>{equipments[id].refine}재련</div>
-              </td>
-            );
-          } else {
-            return (
-              <td style={{ color: "#68D5ED" }}>
-                +{equipments[id].reinforce}강화
-              </td>
-            );
-          }
-        }
-      } else {
-        // 증폭 있음
-        if (equipments[id].refine !== 0) {
-          return (
-            <td>
-              <div style={{ color: "#FF00FF" }}>
-                +{equipments[id].reinforce}증폭
-              </div>
-              <div>{equipments[id].refine}재련</div>
-            </td>
-          );
-        } else {
-          return (
-            <td style={{ color: "#FF00FF" }}>
-              +{equipments[id].reinforce}증폭
-            </td>
-          );
-        }
-      }
-    };
-
-    const Enchant = ({ id }) => {
-      if (equipments[id].enchant) {
-        if (
-          equipments[id].enchant.status === undefined &&
-          equipments[id].enchant.reinforceSkill !== undefined
-        ) {
-          let s = equipments[id].enchant.reinforceSkill[0];
-          return (
-            <td>
-              {s.skills[0].name} +{s.skills[0].value}
-            </td>
-          );
-        } else if (equipments[id].enchant.status !== undefined) {
-          let s = equipments[id].enchant.status;
-          let content = ``;
-          for (let m = 0; m < s.length; m++) {
-            content += `${s[m].name} +${s[m].value}`;
-            if (m + 1 !== s.length) {
-              content += `, `;
-            }
-          }
-          return <td>{content}</td>;
-        } else {
-          return <td>{equipments[id].enchant.explain}</td>;
-        }
-      } else {
-        return <td />;
-      }
-    };
-
     let rows = [];
     for (let a = 0; a < equipments.length; a++) {
       rows.push(
@@ -111,8 +35,8 @@ const Tables = ({ id, info, history }) => {
             />
           </td>
           <td className={equipments[a].itemRarity}>{equipments[a].itemName}</td>
-          <Reinforce id={a} />
-          <Enchant id={a} />
+          <Reinforce info={equipments} id={a} />
+          <Enchant info={equipments} id={a} />
         </tr>
       );
     }
@@ -144,23 +68,6 @@ const Tables = ({ id, info, history }) => {
       </thead>
     );
 
-    const Emblem = ({ id }) => {
-      if (e[id].emblems === []) {
-        return <td />;
-      } else if (e[id].emblems === undefined) {
-        return <td />;
-      } else {
-        let rows = [];
-        for (let m = 0; m < e[id].emblems.length; m++) {
-          rows.push(
-            <div key={`${id} ${m}`} className={e[id].emblems[m].itemRarity}>
-              {e[id].emblems[m].itemName}
-            </div>
-          );
-        }
-        return <td>{rows}</td>;
-      }
-    };
     if (e[0] !== null) {
       let rows = [];
       for (let a = 0; a < e.length; a++) {
@@ -177,7 +84,7 @@ const Tables = ({ id, info, history }) => {
               />
             </td>
             <td className={`${e[a].itemRarity}`}>{e[a].itemName}</td>
-            <Emblem id={a} />
+            <Emblem info={e} id={a} />
           </tr>
         );
       }
@@ -204,26 +111,6 @@ const Tables = ({ id, info, history }) => {
       </thead>
     );
 
-    const Emblem = ({ id }) => {
-      if (e.avatar[id].emblems === []) {
-        return <td />;
-      } else if (e.avatar[id].emblems === undefined) {
-        return <td />;
-      } else {
-        let rows = [];
-        for (let m = 0; m < e.avatar[id].emblems.length; m++) {
-          rows.push(
-            <div
-              key={`${id} ${m}`}
-              className={e.avatar[id].emblems[m].itemRarity}
-            >
-              {e.avatar[id].emblems[m].itemName}
-            </div>
-          );
-        }
-        return <>{rows}</>;
-      }
-    };
     let rows = [];
     if (e.equipment !== null) {
       for (let a = 0; a < parseInt(e.equipment.length / 2) + 1; a++) {
@@ -290,7 +177,7 @@ const Tables = ({ id, info, history }) => {
             </td>
             <td className={e.avatar[a].itemRarity}>{e.avatar[a].itemName}</td>
             <td colSpan={2}>
-              <Emblem id={a} />
+              <AvatarEmblem info={e} id={a} />
             </td>
           </tr>
         );
