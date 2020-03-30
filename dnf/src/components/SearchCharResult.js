@@ -45,7 +45,7 @@ const SearchCharResult = ({ match, history }) => {
     gotData.current = true;
   }
 
-  function Dropdown({ serverList }) {
+  const Dropdown = ({ serverList }) => {
     return (
       <div>
         {Object.keys(serverList).map(s => (
@@ -61,9 +61,9 @@ const SearchCharResult = ({ match, history }) => {
         ))}
       </div>
     );
-  }
+  };
 
-  function ResultList({ list }) {
+  const ResultList = ({ list }) => {
     var lists = [];
     for (let a = 0; a < list.length; a++) {
       lists.push(
@@ -92,7 +92,7 @@ const SearchCharResult = ({ match, history }) => {
       );
     }
     return <div className="results">{lists}</div>;
-  }
+  };
 
   return (
     <div className="ResultPage">
