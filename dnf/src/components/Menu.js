@@ -46,7 +46,7 @@ const MenuItem = styled(NavLink)`
   }
 `;
 
-const Menu = ({ menu, onSelect }) => {
+const Menu = () => {
   return (
     <div>
       <MenuBlock>
