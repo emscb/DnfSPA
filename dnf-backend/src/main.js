@@ -3,7 +3,8 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import Mongoose from 'mongoose';
-
+import api from './api';
+import cors from '@koa/cors'
 const { PORT, MONGO_URI } = process.env;
 
 Mongoose.connect(MONGO_URI, { useNewUrlParser: true, useFindAndModify: false })
@@ -14,13 +15,13 @@ Mongoose.connect(MONGO_URI, { useNewUrlParser: true, useFindAndModify: false })
     console.error(e);
   });
 
-const api = require('./api');
-
 const app = new Koa();
 const router = new Router();
 
+app.use(cors());
+
 // 라우터 설정
-router.use('/api', api.routers());
+router.use('/api', api.routes());
 app.use(bodyParser());
 
 app.use(router.routes()).use(router.allowedMethods());
