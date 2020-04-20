@@ -3,4 +3,6 @@ import auc from './auc';
 
 const api = new Router();
 
-api.use('/auc', auc.routers());
+api.use('/auc', auc.routes());
+
+export default api;
