@@ -1,33 +1,65 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Axios from "axios";
 import "./AucDetail.scss";
 import Helmet from "react-helmet";
 
+var reslist, reslist2;
+const crawl = async (id) => {
+  try {
+    reslist = await Axios.get(
+      `https://api.neople.co.kr/df/auction?itemId=${id}&sort=unitPrice:asc&limit=400&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+    );
+    console.log(reslist.data.rows);
+
+    reslist2 = await Axios.get(
+      `https://api.neople.co.kr/df/items/${id}?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+    );
+    console.log(reslist2.data);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 const AucDetail = ({ match, history }) => {
   const { itemId } = match.params;
   const id = itemId;
-  const gotData = useRef(false);
   const [list, setList] = useState([]);
-  const [itemInfo, setItemInfo] = useState({});
+  const [itemInfo, setItemInfo] = useState([]);
   const [upgrade, setUpgrade] = useState(-1);
 
-  if (!gotData.current) {
-    Axios.get(
-      `https://api.neople.co.kr/df/auction?itemId=${id}&sort=unitPrice:asc&limit=400&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
-    ).then(response => {
-      console.log(response.data.rows);
-      setList(response.data.rows);
-    });
-
-    Axios.get(
-      `https://api.neople.co.kr/df/items/${id}?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
-    ).then(response => {
-      console.log(response.data);
-      setItemInfo(response.data);
-    });
-
-    gotData.current = true;
+  // DB에 데이터 쌓기
+  const date = new Date();
+  let thatday;
+  if (date.getHours() < 6) {
+    thatday = `${date.getFullYear()}-${date.getMonth() + 1}-${
+      date.getDate() - 2
+    }`;
+  } else {
+    thatday = `${date.getFullYear()}-${date.getMonth() + 1}-${
+      date.getDate() - 1
+    }`;
   }
+
+  const saveToDB = () => {
+    try {
+      Axios.post(`http://localhost:4000/api/auc/${id}`, {
+        date: thatday,
+        itemName: itemInfo.itemName,
+        itemId: itemInfo.itemId,
+        avgPrice: list[0].averagePrice,
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    crawl(id).then(() => {
+      setList(reslist.data.rows);
+      setItemInfo(reslist2.data);
+      saveToDB();
+    });
+  }, [id]);
 
   const ItemImg = () => (
     <img
@@ -66,13 +98,13 @@ const AucDetail = ({ match, history }) => {
             <th>어제 평균가</th>
             <th>남은 시간</th>
           </tr>
-        </thead>
+        </thead>,
       ];
 
       table.push(
         <tbody key="tbody">
           {list.map(
-            l =>
+            (l) =>
               (upgrade === -1 ? true : upgrade === l.upgrade) && (
                 <tr key={`${l.auctionNo}`}>
                   <td>
@@ -116,7 +148,7 @@ const AucDetail = ({ match, history }) => {
         let buttonList = [
           <button key="all" onClick={() => setUpgrade(-1)}>
             전체
-          </button>
+          </button>,
         ];
         for (let u = 0; u < itemInfo.cardInfo.enchant.length; u++) {
           buttonList.push(
