@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import "./AucDetail.scss";
 import Helmet from "react-helmet";
+const {BACK_URL} = process.env;
 
 var reslist, reslist2;
 const crawl = async (id) => {
@@ -50,7 +51,7 @@ const AucDetail = ({ match, history }) => {
   useEffect(() => {
     if (list[0] !== undefined && itemInfo.length !== 0) {
       try {
-        Axios.post(`http://localhost:4000/api/auc/${id}`, {
+        Axios.post(`${BACK_URL}/auc/${id}`, {
           date: thatday,
           itemName: itemInfo.itemName,
           itemId: itemInfo.itemId,
