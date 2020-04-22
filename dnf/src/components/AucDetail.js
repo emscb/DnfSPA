@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import "./AucDetail.scss";
 import Helmet from "react-helmet";
-const {BACK_URL} = process.env;
+const { BACK_URL } = process.env;
 
 var reslist, reslist2;
 const crawl = async (id) => {
@@ -43,8 +43,10 @@ const AucDetail = ({ match, history }) => {
 
   useEffect(() => {
     crawl(id).then(() => {
-      setList(reslist.data.rows);
-      setItemInfo(reslist2.data);
+      if (reslist !== undefined && reslist2 !== undefined) {
+        setList(reslist.data.rows);
+        setItemInfo(reslist2.data);
+      }
     });
   }, [id]);
 
