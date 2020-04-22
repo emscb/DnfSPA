@@ -4,7 +4,7 @@ import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import Mongoose from 'mongoose';
 import api from './api';
-import cors from '@koa/cors'
+import cors from '@koa/cors';
 const { PORT, MONGO_URI } = process.env;
 
 Mongoose.connect(MONGO_URI, { useNewUrlParser: true, useFindAndModify: false })
