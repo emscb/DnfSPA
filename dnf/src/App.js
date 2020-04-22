@@ -23,7 +23,10 @@ function App() {
         <Route path="/searchItem" exact component={SearchItem} />
         <Route path="/searchItem/:itemId" component={ItemDetail} />
         <Route path="/searchChar" exact component={SearchChar} />
-        <Route path="/searchChar/result/:server/:name" component={SearchCharResult} />
+        <Route
+          path="/searchChar/result/:server/:name"
+          component={SearchCharResult}
+        />
         <Route path="/searchChar/info/:server/:charId" component={CharDetail} />
         <Route path="/searchAuc" exact component={SearchAuc} />
         <Route path="/searchAuc/:itemId" component={AucDetail} />
