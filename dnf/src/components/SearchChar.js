@@ -7,13 +7,13 @@ import Helmet from "react-helmet";
 // 캐릭터 검색 창 (세부 정보x)
 const SearchChar = ({ history }) => {
   const [message, setMessage] = useState("");
-  const onSearch = name => {
+  const onSearch = (name) => {
     try {
       axios
         .get(
           `https://api.neople.co.kr/df/servers/all/characters?characterName=${name}&wordType=full&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
         )
-        .then(response => {
+        .then((response) => {
           if (response.data.rows.length === 0) {
             setMessage("검색 결과가 없습니다.");
           } else if (response.data.rows.length === 1) {

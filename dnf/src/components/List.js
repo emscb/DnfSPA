@@ -1,13 +1,15 @@
-import React from 'react';
-import "./List.scss"
-import ListItem from './ListItem';
+import React from "react";
+import "./List.scss";
+import ListItem from "./ListItem";
 
 const List = ({ items, trade }) => {
-    return (
-        <div className="List">
-            {items.map(item => (<ListItem item={item} key={item.id} trade={trade}/>))}  
-        </div>
-    );
+  return (
+    <div className="List">
+      {items.map((item) => (
+        <ListItem item={item} key={item.id} trade={trade} />
+      ))}
+    </div>
+  );
 };
 
 export default List;

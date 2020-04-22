@@ -10,7 +10,7 @@ import {
   Thology,
   CardInfo,
   SetItemList,
-  SetItemOption
+  SetItemOption,
 } from "../modules/ItemDetail";
 
 const ItemDetail = ({ match }) => {
@@ -25,7 +25,7 @@ const ItemDetail = ({ match }) => {
   const [width, setWidth] = useState({
     width: "712px",
     marginRight: "auto",
-    marginLeft: "auto"
+    marginLeft: "auto",
   });
 
   if (gotData.current === false) {
@@ -33,7 +33,7 @@ const ItemDetail = ({ match }) => {
       .get(
         `https://api.neople.co.kr/df/items/${id}?wordType=full&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
       )
-      .then(response => {
+      .then((response) => {
         setItemData(response.data);
       });
     gotData.current = true;
@@ -44,7 +44,7 @@ const ItemDetail = ({ match }) => {
       .get(
         `https://api.neople.co.kr/df/setitems/${i.setItemId}?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
       )
-      .then(response => {
+      .then((response) => {
         setSetData(response.data);
       });
     gotSetData.current = true;
@@ -60,13 +60,13 @@ const ItemDetail = ({ match }) => {
       setWidth({
         width: "1012px",
         marginRight: (window.innerWidth - 712) / 2 - 300 + "px",
-        marginLeft: "595.5px"
+        marginLeft: "595.5px",
       });
     } else {
       setWidth({
         width: "712px",
         marginRight: "auto",
-        marginLeft: "auto"
+        marginLeft: "auto",
       });
     }
   };
@@ -141,7 +141,7 @@ const ItemDetail = ({ match }) => {
                   style={{
                     borderBottom: "1px solid black",
                     marginBottom: "10px",
-                    marginTop: "10px"
+                    marginTop: "10px",
                   }}
                 />
                 <SetItemList list={s.setItems} />
@@ -149,7 +149,7 @@ const ItemDetail = ({ match }) => {
                   style={{
                     borderBottom: "1px solid black",
                     marginBottom: "10px",
-                    marginTop: "10px"
+                    marginTop: "10px",
                   }}
                 />
                 <SetItemOption toggle={viewDetail} list={s.setItemOption} />

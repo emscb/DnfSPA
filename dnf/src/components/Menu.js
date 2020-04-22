@@ -6,7 +6,7 @@ const menus = [
   { name: "home", text: "홈" },
   { name: "searchItem", text: "아이템 검색" },
   { name: "searchChar", text: "캐릭터 검색" },
-  { name: "searchAuc", text: "경매장 검색" }
+  { name: "searchAuc", text: "경매장 검색" },
 ];
 
 const MenuBlock = styled.div`
@@ -31,6 +31,7 @@ const MenuItem = styled(NavLink)`
   &:hover {
     color: #495057;
   }
+  
 
   &.active {
     font-weight: 600;
@@ -50,12 +51,12 @@ const Menu = () => {
   return (
     <div>
       <MenuBlock>
-        {menus.map(m => (
+        {menus.map((m) => (
           <MenuItem
             key={m.name}
             activeClassName="active"
             exact={m.name === "home"}
-            to={m.name === 'home' ? '/' : `/${m.name}`}
+            to={m.name === "home" ? "/" : `/${m.name}`}
           >
             {m.text}
           </MenuItem>

@@ -1,7 +1,12 @@
 import React from "react";
 import "./CharDetailTables.scss";
 import "../modules/CharDetail";
-import { Reinforce, Enchant, Emblem, AvatarEmblem } from "../modules/CharDetail";
+import {
+  Reinforce,
+  Enchant,
+  Emblem,
+  AvatarEmblem,
+} from "../modules/CharDetail";
 
 const Tables = ({ id, info, history }) => {
   var table = [];
@@ -46,7 +51,7 @@ const Tables = ({ id, info, history }) => {
         <tr id="setInfo">
           <td colSpan="4">
             <div>{`<세트 아이템 정보>`}</div>
-            {setInfo.map(s => (
+            {setInfo.map((s) => (
               <div key={s.setItemName}>
                 {s.setItemName} {s.activeSetNo}셋
               </div>

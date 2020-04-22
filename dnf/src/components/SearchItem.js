@@ -16,17 +16,19 @@ const Message = styled.div`
 const SearchItem = () => {
   // API 호출하여 아이템 검색
   const [items, setItems] = useState([]);
-  const onSearch = name => {
+  const onSearch = (name) => {
+    setItems([]);
     try {
       axios
         .get(
           `https://api.neople.co.kr/df/items?itemName=${name}&wordType=front&limit=30&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
         )
-        .then(response => {
+        .then((response) => {
           if (response.data.rows.length === 0) {
+            setItems(-1);
           } else {
             var list = [];
-            response.data.rows.map(row =>
+            response.data.rows.map((row) =>
               list.push({ id: row.itemId, name: row.itemName })
             );
             setItems(list);

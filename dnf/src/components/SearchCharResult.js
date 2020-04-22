@@ -24,7 +24,7 @@ const SearchCharResult = ({ match, history }) => {
     hilder: "힐더",
     prey: "프레이",
     siroco: "시로코",
-    all: "모든"
+    all: "모든",
   };
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const SearchCharResult = ({ match, history }) => {
       .get(
         `https://api.neople.co.kr/df/servers/${charServer}/characters?characterName=${charName}&wordType=full&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
       )
-      .then(response => {
+      .then((response) => {
         setList(response.data.rows);
       });
 
@@ -48,11 +48,11 @@ const SearchCharResult = ({ match, history }) => {
   const Dropdown = ({ serverList }) => {
     return (
       <div>
-        {Object.keys(serverList).map(s => (
+        {Object.keys(serverList).map((s) => (
           <div
             id="server"
             key={s}
-            onClick={e => {
+            onClick={(e) => {
               setCharServer(s);
             }}
           >
@@ -117,7 +117,7 @@ const SearchCharResult = ({ match, history }) => {
           <input
             className="input"
             value={charName}
-            onChange={e => {
+            onChange={(e) => {
               setCharName(e.target.value);
             }}
           />

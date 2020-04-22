@@ -5,11 +5,11 @@ const Tabs = ({ onClick, activeTab }) => {
   const tabs = [
     { id: 1, name: "장착 장비" },
     { id: 2, name: "아바타 & 크리쳐" },
-    { id: 3, name: "버프 강화" }
+    { id: 3, name: "버프 강화" },
   ];
   return (
     <div className="tabs">
-      {tabs.map(i => (
+      {tabs.map((i) => (
         <button
           key={i.id}
           onClick={() => {

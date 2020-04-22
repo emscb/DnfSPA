@@ -7,7 +7,7 @@ const Status = ({ list }) => {
   } else {
     return (
       <div>
-        {list.map(l => (
+        {list.map((l) => (
           <div key={l.name}>
             {l.name}: {l.value}
           </div>
@@ -57,7 +57,7 @@ const ReinforceSkill = ({ list }) => {
     for (let a = 0; a < list.length; a++) {
       if (list[a].jobName === "공통") {
         if (list[a].levelRange) {
-          list[a].levelRange.map(l => {
+          list[a].levelRange.map((l) => {
             if (l.minLevel === l.maxLevel) {
               skillList.push(
                 <div key={skillList.length}>
@@ -73,7 +73,7 @@ const ReinforceSkill = ({ list }) => {
             }
           });
         } else if (list[a].skills) {
-          list[a].skills.map(l => {
+          list[a].skills.map((l) => {
             skillList.push(
               <div key={l.skillId}>
                 {l.name} +{l.value}
@@ -83,7 +83,7 @@ const ReinforceSkill = ({ list }) => {
         }
       } else {
         if (list[a].levelRange) {
-          list[a].levelRange.map(l => {
+          list[a].levelRange.map((l) => {
             if (l.minLevel === l.maxLevel) {
               skillList.push(
                 <div key={skillList.length}>
@@ -99,7 +99,7 @@ const ReinforceSkill = ({ list }) => {
             }
           });
         } else if (list[a].skills) {
-          list[a].skills.map(l => {
+          list[a].skills.map((l) => {
             skillList.push(
               <div key={l.skillId}>
                 {list[a].jobName} {l.name} +{l.value}
@@ -249,7 +249,7 @@ const CardInfo = ({ list }) => {
             {list.enchant[a].upgrade}/{list.enchant.length - 1} 업그레이드
           </div>
         );
-        list.enchant[a].status.map(m => {
+        list.enchant[a].status.map((m) => {
           optionList.push(
             <div>
               {m.name} +{m.value}
@@ -274,5 +274,5 @@ export {
   Remodel,
   CardInfo,
   SetItemList,
-  SetItemOption
+  SetItemOption,
 };

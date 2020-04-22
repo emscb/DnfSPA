@@ -25,7 +25,7 @@ const CharDetail = ({ match, history }) => {
       .get(
         `https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/equipment?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
       )
-      .then(response => {
+      .then((response) => {
         setEquipment(response.data);
       });
 
@@ -34,7 +34,7 @@ const CharDetail = ({ match, history }) => {
       .get(
         `https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/avatar?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
       )
-      .then(response => {
+      .then((response) => {
         setAvatar(response.data.avatar);
       });
 
@@ -43,7 +43,7 @@ const CharDetail = ({ match, history }) => {
       .get(
         `https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/creature?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
       )
-      .then(response => {
+      .then((response) => {
         setCreature(response.data.creature);
       });
 
@@ -52,7 +52,7 @@ const CharDetail = ({ match, history }) => {
       .get(
         `https://api.neople.co.kr/df/servers/${server}/characters/${id}/skill/buff/equip/equipment?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
       )
-      .then(response => {
+      .then((response) => {
         setBuffEquipment(response.data.skill.buff);
       });
 
@@ -61,7 +61,7 @@ const CharDetail = ({ match, history }) => {
       .get(
         `https://api.neople.co.kr/df/servers/${server}/characters/${id}/skill/buff/equip/avatar?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
       )
-      .then(response => {
+      .then((response) => {
         setBuffAvatar(response.data.skill.buff);
       });
 
@@ -70,7 +70,7 @@ const CharDetail = ({ match, history }) => {
       .get(
         `https://api.neople.co.kr/df/servers/${server}/characters/${id}/skill/buff/equip/creature?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
       )
-      .then(response => {
+      .then((response) => {
         setBuffCreature(response.data.skill.buff);
       });
 
@@ -79,7 +79,7 @@ const CharDetail = ({ match, history }) => {
       .get(
         `http://dundam.xyz/view.jsp?server=${server}&name=${equipment.characterName}&image=${id}`
       )
-      .then(response => {
+      .then((response) => {
         const $ = cheerio.load(response.data);
         const isBuffer = $(
           "#Present > table > tbody > tr:nth-child(5) > td:nth-child(2)"
@@ -90,7 +90,7 @@ const CharDetail = ({ match, history }) => {
           );
           try {
             setDundamInfo([
-              <div key="dundamBuff">버프 : {list[0].childNodes[0].data}</div>
+              <div key="dundamBuff">버프 : {list[0].childNodes[0].data}</div>,
             ]);
           } catch (TypeError) {
             setDundamInfo([<div key="dundamBuff">버프 : 정보 없음</div>]);
@@ -103,7 +103,7 @@ const CharDetail = ({ match, history }) => {
             setDundamInfo([
               <div key="dundamRogen">
                 로젠 1시 : {list[0].childNodes[0].data}
-              </div>
+              </div>,
             ]);
           } catch (TypeError) {
             try {
@@ -113,11 +113,11 @@ const CharDetail = ({ match, history }) => {
               setDundamInfo([
                 <div key="dundamRogen">
                   로젠 1시 : {list[0].childNodes[0].data}
-                </div>
+                </div>,
               ]);
             } catch (TypeError) {
               setDundamInfo([
-                <div key="dundamRogen">로젠 1시 : 정보 없음</div>
+                <div key="dundamRogen">로젠 1시 : 정보 없음</div>,
               ]);
             }
           }
@@ -127,7 +127,7 @@ const CharDetail = ({ match, history }) => {
     gotData.current = true;
   }
 
-  const onClick = id => {
+  const onClick = (id) => {
     // 받아온 id로 어떤 컴포넌트를 그릴지 정해야 함
     setTab(id);
   };

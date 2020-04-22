@@ -9,10 +9,7 @@ const ListItem = ({ item, trade }) => {
   return (
     <div className="ListItem">
       <img src={`https://img-api.neople.co.kr/df/items/${item.id}`} alt="" />
-      <Link
-        style={{ color: "black", textDecoration: "none" }}
-        to={linkto}
-      >
+      <Link style={{ color: "black", textDecoration: "none" }} to={linkto}>
         {content}
       </Link>
     </div>
