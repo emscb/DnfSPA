@@ -1,5 +1,6 @@
 
 dnf-backend/node_modules/
 
-dnf-backend/.env
+dnf/.env
 
+dnf-backend/.env
