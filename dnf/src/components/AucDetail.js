@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import "./AucDetail.scss";
 import Helmet from "react-helmet";
@@ -40,26 +40,27 @@ const AucDetail = ({ match, history }) => {
     }`;
   }
 
-  const saveToDB = () => {
-    try {
-      Axios.post(`http://localhost:4000/api/auc/${id}`, {
-        date: thatday,
-        itemName: itemInfo.itemName,
-        itemId: itemInfo.itemId,
-        avgPrice: list[0].averagePrice,
-      });
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   useEffect(() => {
     crawl(id).then(() => {
       setList(reslist.data.rows);
       setItemInfo(reslist2.data);
-      saveToDB();
     });
   }, [id]);
+
+  useEffect(() => {
+    if (list[0] !== undefined && itemInfo.length !== 0) {
+      try {
+        Axios.post(`http://localhost:4000/api/auc/${id}`, {
+          date: thatday,
+          itemName: itemInfo.itemName,
+          itemId: itemInfo.itemId,
+          avgPrice: list[0].averagePrice,
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }, [list, itemInfo, id, thatday]);
 
   const ItemImg = () => (
     <img
