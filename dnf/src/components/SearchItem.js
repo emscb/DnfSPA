@@ -4,6 +4,14 @@ import Search from "./Search";
 import List from "./List";
 import axios from "axios";
 import Helmet from "react-helmet";
+import styled from "styled-components";
+
+const Message = styled.div`
+  height: 4rem;
+  text-align: center;
+  font-size: 1.125rem;
+  padding: 0.5rem;
+`;
 
 const SearchItem = () => {
   // API 호출하여 아이템 검색
@@ -36,7 +44,13 @@ const SearchItem = () => {
       </Helmet>
       <div className="app-title">아이템 검색</div>
       <Search onSearch={onSearch} type="아이템" />
-      <List items={items} />
+      {items === -1 ? (
+        <Message>
+          <u>검색 결과가 없습니다.</u>
+        </Message>
+      ) : (
+        <List items={items} />
+      )}
     </div>
   );
 };
