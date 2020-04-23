@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import "./AucDetail.scss";
 import Helmet from "react-helmet";
+require("dotenv").config();
 const { BACK_URL } = process.env;
 
 var reslist, reslist2;
