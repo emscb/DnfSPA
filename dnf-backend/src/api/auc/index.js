@@ -13,6 +13,7 @@ GET /auc/:id 아이템 평균판매가 조회
 const recentSearch = (ctx) => {};
 
 const avgSave = async (ctx) => {
+  // 유효값 검증
   const schema = Joi.object().keys({
     date: Joi.date().required(),
     itemName: Joi.string().required(),
@@ -28,17 +29,24 @@ const avgSave = async (ctx) => {
   }
 
   const { date, itemName, itemId, avgPrice } = ctx.request.body;
-  const auc = new Auc({
-    date,
-    itemName,
-    itemId,
-    avgPrice,
-  });
-  try {
-    await auc.save();
-    ctx.body = auc;
-  } catch (e) {
-    ctx.throw(500, e);
+
+  // 중복 체크
+  const check = await Auc.find().exec();
+  if (check.length !== 0) {
+    const auc = new Auc({
+      date,
+      itemName,
+      itemId,
+      avgPrice,
+    });
+    try {
+      await auc.save();
+      ctx.body = auc;
+    } catch (e) {
+      ctx.throw(500, e);
+    }
+  } else {
+    ctx.body = 'Already saved.';
   }
 };
 
