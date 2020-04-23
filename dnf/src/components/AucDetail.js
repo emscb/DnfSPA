@@ -4,7 +4,7 @@ import "./AucDetail.scss";
 import Helmet from "react-helmet";
 import { BACK_URL } from "../config";
 
-var reslist, reslist2;
+var reslist, reslist2, priceList;
 const crawl = async id => {
 	try {
 		reslist = await Axios.get(
@@ -16,6 +16,9 @@ const crawl = async id => {
 			`https://api.neople.co.kr/df/items/${id}?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
 		);
 		console.log(reslist2.data);
+
+		priceList = await Axios.get(`${BACK_URL}/auc/${id}`);
+		console.log(priceList.data);
 	} catch (e) {
 		console.error(e);
 	}
