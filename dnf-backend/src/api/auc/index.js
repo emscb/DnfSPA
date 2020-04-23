@@ -31,7 +31,10 @@ const avgSave = async (ctx) => {
   const { date, itemName, itemId, avgPrice } = ctx.request.body;
 
   // 중복 체크
-  const check = await Auc.find().exec();
+  const check = await Auc.find({
+    date: date,
+    itemId: itemId,
+  }).exec();
   if (check.length === 0) {
     const auc = new Auc({
       date,
