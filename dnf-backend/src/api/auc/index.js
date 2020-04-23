@@ -32,7 +32,7 @@ const avgSave = async (ctx) => {
 
   // 중복 체크
   const check = await Auc.find().exec();
-  if (check.length !== 0) {
+  if (check.length === 0) {
     const auc = new Auc({
       date,
       itemName,
