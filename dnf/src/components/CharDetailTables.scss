@@ -1,59 +1,60 @@
 table {
-    width: 100%;
+	width: 100%;
 }
 
-tbody tr, tbody td {
-    text-align: center;
-    background-color: #E6F3FE
+tbody tr,
+tbody td {
+	text-align: center;
+	background-color: #e6f3fe;
 }
 
 thead {
-    background-color: #B1D4F1;
+	background-color: #b1d4f1;
 }
 
 tr {
-    .에픽 {
-        color: #FFB400;
-    }
-    .유니크 {
-        color: #FF00FF;
-    }
-    .레어 {
-        color: #B36BFF;
-    }
-    .언커먼 {
-        color: #68D5ED;
-    }
-    .커먼 {
-        color: black;
-    }
-    .크로니클 {
-        color: #FF6666;
-    }
-    .레전더리 {
-        color: #FF7800;
-    }
-    .신화 {
-        background: linear-gradient(180deg, #FFB400 0%, #FF00FF 100%);
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+	.에픽 {
+		color: #ffb400;
+	}
+	.유니크 {
+		color: #ff00ff;
+	}
+	.레어 {
+		color: #b36bff;
+	}
+	.언커먼 {
+		color: #68d5ed;
+	}
+	.커먼 {
+		color: black;
+	}
+	.크로니클 {
+		color: #ff6666;
+	}
+	.레전더리 {
+		color: #ff7800;
+	}
+	.신화 {
+		background: linear-gradient(180deg, #ffb400 0%, #ff00ff 100%);
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
 }
 
 td img {
-    margin-right: 0px;
+	margin-right: 0px;
 }
 
 caption {
-    height: 40px;
-    font-weight: 500;
-    font-size: 1.5rem;
+	height: 40px;
+	font-weight: 500;
+	font-size: 1.5rem;
 }
 
 th.image {
-    width: 40px;
+	width: 40px;
 }
 
 tr#setInfo {
-    height: 6rem;
+	height: 6rem;
 }

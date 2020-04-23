@@ -8,12 +8,12 @@ var reslist, reslist2;
 const crawl = async id => {
 	try {
 		reslist = await Axios.get(
-			`https://api.neople.co.kr/df/auction?itemId=${id}&sort=unitPrice:asc&limit=400&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`,
+			`https://api.neople.co.kr/df/auction?itemId=${id}&sort=unitPrice:asc&limit=400&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
 		);
 		console.log(reslist.data.rows);
 
 		reslist2 = await Axios.get(
-			`https://api.neople.co.kr/df/items/${id}?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`,
+			`https://api.neople.co.kr/df/items/${id}?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
 		);
 		console.log(reslist2.data);
 	} catch (e) {
@@ -127,9 +127,9 @@ const AucDetail = ({ match, history }) => {
 										시간
 									</td>
 								</tr>
-							),
+							)
 					)}
-				</tbody>,
+				</tbody>
 			);
 			return <table>{table}</table>;
 		};
@@ -145,7 +145,7 @@ const AucDetail = ({ match, history }) => {
 					buttonList.push(
 						<button key={u} onClick={() => setUpgrade(u)}>
 							{u === itemInfo.cardInfo.enchant.length - 1 ? `풀업글` : `${u}업글`}
-						</button>,
+						</button>
 					);
 				}
 				return <div>{buttonList}</div>;

@@ -1,59 +1,59 @@
 .ItemDetail {
-  // width: 512px;
-  // margin-left: auto;
-  // margin-right: auto;
-  margin-top: 6rem;
-  margin-bottom: 6rem;
-  border-radius: 4px;
+	// width: 512px;
+	// margin-left: auto;
+	// margin-right: auto;
+	margin-top: 6rem;
+	margin-bottom: 6rem;
+	border-radius: 4px;
 
-  .title {
-    width: 712px;
-    background: #6b86ed;
-    color: black;
-    height: 4rem;
-    font-size: 1.5rem;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-  }
+	.title {
+		width: 712px;
+		background: #6b86ed;
+		color: black;
+		height: 4rem;
+		font-size: 1.5rem;
+		align-items: center;
+		justify-content: center;
+		display: flex;
+	}
 
-  .content {
-    width: 1012px;
-    img {
-      width: 40px;
-      height: auto;
-      margin: 10px;
-    }
-    .header {
-      width: 712px;
-      background: wheat;
-      display: grid;
-      grid-template-columns: 60px 1fr;
-      .name {
-        align-self: center;
-        text-align: center;
-      }
-    }
-    .bodyset {
-      display: flex;
-      flex-direction: row;
-      .body {
-        width: 692px;
-        padding: 10px;
-        background-color: #f8edd9;
-        height: 100%;
-        .changeDetail,
-        .changeViewSet {
-          display: flex;
-          justify-content: flex-end;
-        }
-      }
-      .set {
-          width: 280px;
-          padding: 10px;
-          background-color: wheat;
-          height: 100%;
-      }
-    }
-  }
+	.content {
+		width: 1012px;
+		img {
+			width: 40px;
+			height: auto;
+			margin: 10px;
+		}
+		.header {
+			width: 712px;
+			background: wheat;
+			display: grid;
+			grid-template-columns: 60px 1fr;
+			.name {
+				align-self: center;
+				text-align: center;
+			}
+		}
+		.bodyset {
+			display: flex;
+			flex-direction: row;
+			.body {
+				width: 692px;
+				padding: 10px;
+				background-color: #f8edd9;
+				height: 100%;
+				.changeDetail,
+				.changeViewSet {
+					display: flex;
+					justify-content: flex-end;
+				}
+			}
+			.set {
+				width: 280px;
+				padding: 10px;
+				background-color: wheat;
+				height: 100%;
+			}
+		}
+	}
 }

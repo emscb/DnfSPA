@@ -1,25 +1,25 @@
 .SearchChar {
-    width: 512px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10rem;
-    border-radius: 4px;
-    overflow: hidden;
+	width: 512px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10rem;
+	border-radius: 4px;
+	overflow: hidden;
 
-    .app-title {
-        background: #E07838;
-        color: white;
-        height: 4rem;
-        font-size: 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .message {
-        height: 4rem;
-        text-align: center;
-        font-size: 1.125rem;
-        padding: 0.5rem;
-    }
+	.app-title {
+		background: #e07838;
+		color: white;
+		height: 4rem;
+		font-size: 1.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.message {
+		height: 4rem;
+		text-align: center;
+		font-size: 1.125rem;
+		padding: 0.5rem;
+	}
 }

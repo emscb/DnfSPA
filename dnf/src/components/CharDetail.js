@@ -23,7 +23,7 @@ const CharDetail = ({ match, history }) => {
 		// 장착 장비 조회
 		axios
 			.get(
-				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/equipment?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`,
+				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/equipment?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
 			)
 			.then(response => {
 				setEquipment(response.data);
@@ -32,7 +32,7 @@ const CharDetail = ({ match, history }) => {
 		// 장착 아바타 조회
 		axios
 			.get(
-				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/avatar?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`,
+				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/avatar?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
 			)
 			.then(response => {
 				setAvatar(response.data.avatar);
@@ -41,7 +41,7 @@ const CharDetail = ({ match, history }) => {
 		// 장착 크리쳐 조회
 		axios
 			.get(
-				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/creature?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`,
+				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/creature?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
 			)
 			.then(response => {
 				setCreature(response.data.creature);
@@ -50,7 +50,7 @@ const CharDetail = ({ match, history }) => {
 		// 버프 강화 장비 조회
 		axios
 			.get(
-				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/skill/buff/equip/equipment?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`,
+				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/skill/buff/equip/equipment?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
 			)
 			.then(response => {
 				setBuffEquipment(response.data.skill.buff);
@@ -59,7 +59,7 @@ const CharDetail = ({ match, history }) => {
 		// 버프 강화 아바타 조회
 		axios
 			.get(
-				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/skill/buff/equip/avatar?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`,
+				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/skill/buff/equip/avatar?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
 			)
 			.then(response => {
 				setBuffAvatar(response.data.skill.buff);
@@ -68,7 +68,7 @@ const CharDetail = ({ match, history }) => {
 		// 버프 강화 크리쳐 조회
 		axios
 			.get(
-				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/skill/buff/equip/creature?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`,
+				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/skill/buff/equip/creature?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
 			)
 			.then(response => {
 				setBuffCreature(response.data.skill.buff);
@@ -77,7 +77,7 @@ const CharDetail = ({ match, history }) => {
 		// 던담 정보 긁어오기
 		axios
 			.get(
-				`http://dundam.xyz/view.jsp?server=${server}&name=${equipment.characterName}&image=${id}`,
+				`http://dundam.xyz/view.jsp?server=${server}&name=${equipment.characterName}&image=${id}`
 			)
 			.then(response => {
 				const $ = cheerio.load(response.data);
