@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import "./AucDetail.scss";
 import Helmet from "react-helmet";
-require("dotenv").config();
-const { BACK_URL } = process.env;
+import { BACK_URL } from "../config";
 
 var reslist, reslist2;
 const crawl = async (id) => {

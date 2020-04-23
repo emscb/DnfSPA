@@ -4,3 +4,5 @@ dnf-backend/node_modules/
 dnf/.env
 
 dnf-backend/.env
+
+dnf/src/config.js
