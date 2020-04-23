@@ -4,6 +4,7 @@ import Search from "./Search";
 import List from "./List";
 import "./SearchItem.scss";
 import Helmet from "react-helmet";
+import { BACK_URL } from "../config";
 
 const SearchAuc = () => {
 	// API 호출하여 아이템 검색
