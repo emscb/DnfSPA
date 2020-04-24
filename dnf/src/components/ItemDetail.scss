@@ -1,13 +1,18 @@
+$max-width: 1920px;
+@function get-vw($target) {
+	$vw-context: ($max-width * 0.01);
+	@return ($target / $vw-context) * 1vw;
+}
 .ItemDetail {
-	// width: 512px;
-	// margin-left: auto;
-	// margin-right: auto;
+	width: 34vw;
+	margin-left: 33vw;
+	margin-right: 33vw;
 	margin-top: 6rem;
 	margin-bottom: 6rem;
 	border-radius: 4px;
 
 	.title {
-		width: 712px;
+		width: 34vw;
 		background: #6b86ed;
 		color: black;
 		height: 4rem;
@@ -18,14 +23,15 @@
 	}
 
 	.content {
-		width: 1012px;
+		width: 34vw + get-vw(300px);
+		font-size: 1rem;
 		img {
 			width: 40px;
 			height: auto;
 			margin: 10px;
 		}
 		.header {
-			width: 712px;
+			width: 34vw;
 			background: wheat;
 			display: grid;
 			grid-template-columns: 60px 1fr;
@@ -38,8 +44,8 @@
 			display: flex;
 			flex-direction: row;
 			.body {
-				width: 692px;
-				padding: 10px;
+				width: 34vw - get-vw(20px);
+				padding: get-vw(10px);
 				background-color: #f8edd9;
 				height: 100%;
 				.changeDetail,
@@ -49,8 +55,8 @@
 				}
 			}
 			.set {
-				width: 280px;
-				padding: 10px;
+				width: get-vw(300px) - get-vw(20px);
+				padding: get-vw(10px);
 				background-color: wheat;
 				height: 100%;
 			}

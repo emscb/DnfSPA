@@ -23,9 +23,9 @@ const ItemDetail = ({ match }) => {
 	const [viewDetail, setViewDetail] = useState(false);
 	const [viewSet, setViewSet] = useState(true);
 	const [width, setWidth] = useState({
-		width: "712px",
-		marginRight: "auto",
-		marginLeft: "auto",
+		width: "34vw",
+		marginRight: "33vw",
+		marginLeft: "33vw",
 	});
 
 	if (gotData.current === false) {
@@ -58,15 +58,15 @@ const ItemDetail = ({ match }) => {
 		setViewSet(!viewSet);
 		if (!viewSet) {
 			setWidth({
-				width: "1012px",
-				marginRight: (window.innerWidth - 712) / 2 - 300 + "px",
-				marginLeft: "595.5px",
+				width: "49.625vw",
+				marginRight: "17.375vw",
+				marginLeft: "33vw",
 			});
 		} else {
 			setWidth({
-				width: "712px",
-				marginRight: "auto",
-				marginLeft: "auto",
+				width: "34vw",
+				marginRight: "33vw",
+				marginLeft: "33vw",
 			});
 		}
 	};
