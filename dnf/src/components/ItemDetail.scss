@@ -17,6 +17,9 @@ $max-width: 1920px;
 		color: black;
 		height: 4rem;
 		font-size: 1.5rem;
+		@media (max-width: 1300px) {
+			font-size: 1.25rem;
+		}
 		align-items: center;
 		justify-content: center;
 		display: flex;
@@ -25,6 +28,9 @@ $max-width: 1920px;
 	.content {
 		width: 34vw + get-vw(300px);
 		font-size: 1rem;
+		@media (max-width: 1300px) {
+			font-size: 0.75rem;
+		}
 		img {
 			width: 40px;
 			height: auto;
