@@ -31,15 +31,6 @@ const AucDetail = ({ match, history }) => {
 	const [itemInfo, setItemInfo] = useState([]);
 	const [upgrade, setUpgrade] = useState(-1);
 
-	// DB에 데이터 쌓기
-	const date = new Date();
-	let thatday;
-	if (date.getHours() < 6) {
-		thatday = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() - 2}`;
-	} else {
-		thatday = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() - 1}`;
-	}
-
 	useEffect(() => {
 		crawl(id).then(() => {
 			if (reslist !== undefined && reslist2 !== undefined) {
@@ -48,6 +39,15 @@ const AucDetail = ({ match, history }) => {
 			}
 		});
 	}, [id]);
+
+	// DB에 데이터 쌓기
+	const date = new Date();
+	let thatday;
+	if (date.getHours() < 6) {
+		thatday = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() - 2}`;
+	} else {
+		thatday = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() - 1}`;
+	}
 
 	useEffect(() => {
 		if (list[0] !== undefined && itemInfo.length !== 0) {
