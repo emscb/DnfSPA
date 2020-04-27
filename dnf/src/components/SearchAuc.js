@@ -27,7 +27,7 @@ const SearchAuc = () => {
 	};
 
 	return (
-		<div className="SearchItem">
+		<div className="SearchAuc">
 			<Helmet>
 				<title>경매장 검색</title>
 			</Helmet>
