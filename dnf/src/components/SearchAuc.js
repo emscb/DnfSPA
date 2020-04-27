@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Axios from "axios";
 import Search from "./Search";
 import List from "./List";
-import "./SearchItem.scss";
+import "./SearchAuc.scss";
 import Helmet from "react-helmet";
 import { BACK_URL } from "../config";
 
@@ -31,9 +31,17 @@ const SearchAuc = () => {
 			<Helmet>
 				<title>경매장 검색</title>
 			</Helmet>
-			<div className="app-title">경매장 검색</div>
-			<Search onSearch={onSearch} type="아이템" />
-			<List items={items} trade={true} />
+			<div className="recent">
+
+			</div>
+			<div className="main">
+				<div className="app-title">경매장 검색</div>
+				<Search onSearch={onSearch} type="아이템" />
+				<List items={items} trade={true} />
+			</div>
+			<div className="frequently">
+
+			</div>
 		</div>
 	);
 };
