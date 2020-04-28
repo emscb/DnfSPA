@@ -10,6 +10,7 @@ import CharDetail from "./components/CharDetail";
 import Home from "./components/Home";
 import SearchAuc from "./components/SearchAuc";
 import AucDetail from "./components/AucDetail";
+import SearchAucContainer from "./containers/SearchAucContainer";
 
 function App() {
 	return (
@@ -23,7 +24,7 @@ function App() {
 				<Route path="/searchChar" exact component={SearchChar} />
 				<Route path="/searchChar/result/:server/:name" component={SearchCharResult} />
 				<Route path="/searchChar/info/:server/:charId" component={CharDetail} />
-				<Route path="/searchAuc" exact component={SearchAuc} />
+				<Route path="/searchAuc" exact component={SearchAucContainer} />
 				<Route path="/searchAuc/:itemId" component={AucDetail} />
 			</div>
 			<Footer />
