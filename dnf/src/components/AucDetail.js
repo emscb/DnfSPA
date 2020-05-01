@@ -44,10 +44,11 @@ const AucDetail = ({ match, history }) => {
 	const date = new Date();
 	let thatday;
 	if (date.getHours() < 6) {
-		thatday = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() - 2}`;
+		date.setDate(date.getDate() - 2);
 	} else {
-		thatday = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() - 1}`;
+		date.setDate(date.getDate() - 1);
 	}
+	thatday = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 
 	useEffect(() => {
 		if (list[0] !== undefined && itemInfo.length !== 0) {
