@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Search from "./Search";
 import List from "./List";
@@ -9,6 +9,7 @@ import { BACK_URL } from "../config";
 const SearchAuc = ({ list, addItem }) => {
 	// API 호출하여 아이템 검색
 	const [items, setItems] = useState([]);
+	const [freqItems, setFreqItems] = useState([]);
 	const onSearch = name => {
 		try {
 			Axios.get(
@@ -26,21 +27,34 @@ const SearchAuc = ({ list, addItem }) => {
 		}
 	};
 
+	// 가장 많이 검색된 아이템 조회
+	useEffect(() => {
+		try {
+			Axios.get(`${BACK_URL}/auc/`).then(response => {
+				setFreqItems(response.data);
+			});
+		} catch (e) {
+			console.error(e);
+		}
+	}, []);
+
 	return (
 		<div className="SearchAuc">
 			<Helmet>
 				<title>경매장 검색</title>
 			</Helmet>
 			<div className="recent">
-				{console.log(list)}
-				<button onClick={addItem}>클릭</button>
+				<div className="title">최근 검색한 아이템</div>
 			</div>
 			<div className="main">
 				<div className="app-title">경매장 검색</div>
 				<Search onSearch={onSearch} type="아이템" />
 				<List items={items} trade={true} />
 			</div>
-			<div className="frequently"></div>
+			<div className="frequently">
+				<div className="title">가장 많이 검색한 아이템</div>
+				{console.log(freqItems)}
+			</div>
 		</div>
 	);
 };
