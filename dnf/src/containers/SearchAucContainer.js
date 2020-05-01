@@ -4,9 +4,14 @@ import { connect } from "react-redux";
 import { addItem } from "../modules/recentSearch";
 
 const SearchAucContainer = ({ list, addItem }) => {
-	return <SearchAuc list={list} addItem={addItem}/>;
+	return <SearchAuc list={list} addItem={addItem} />;
 };
 
-export default connect(state => ({ list: state.recentSearch.list }), {
-	addItem,
-},)(SearchAucContainer);
+export default connect(
+	state => ({ list: state.recentSearch.list }),
+	dispatch => ({
+		addItem: () => {
+			dispatch(addItem());
+		},
+	})
+)(SearchAucContainer);

@@ -6,7 +6,7 @@ import "./SearchAuc.scss";
 import Helmet from "react-helmet";
 import { BACK_URL } from "../config";
 
-const SearchAuc = () => {
+const SearchAuc = ({ list, addItem }) => {
 	// API 호출하여 아이템 검색
 	const [items, setItems] = useState([]);
 	const onSearch = name => {
@@ -32,16 +32,15 @@ const SearchAuc = () => {
 				<title>경매장 검색</title>
 			</Helmet>
 			<div className="recent">
-
+				{console.log(list)}
+				<button onClick={addItem}>클릭</button>
 			</div>
 			<div className="main">
 				<div className="app-title">경매장 검색</div>
 				<Search onSearch={onSearch} type="아이템" />
 				<List items={items} trade={true} />
 			</div>
-			<div className="frequently">
-
-			</div>
+			<div className="frequently"></div>
 		</div>
 	);
 };

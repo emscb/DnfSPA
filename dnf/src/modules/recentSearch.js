@@ -1,6 +1,6 @@
 const ADD = "recentSearch/ADD";
 
-export const addItem = (id, name) => ({ type: ADD });
+export const addItem = () => ({ type: ADD });
 
 const initialState = { list: 0 };
 

@@ -8,7 +8,6 @@ import SearchChar from "./components/SearchChar";
 import SearchCharResult from "./components/SearchCharResult";
 import CharDetail from "./components/CharDetail";
 import Home from "./components/Home";
-import SearchAuc from "./components/SearchAuc";
 import AucDetail from "./components/AucDetail";
 import SearchAucContainer from "./containers/SearchAucContainer";
 
