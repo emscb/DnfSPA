@@ -24,13 +24,14 @@ const crawl = async id => {
 	}
 };
 
-const AucDetail = ({ match, history }) => {
+const AucDetail = ({ match, history, add }) => {
 	const { itemId } = match.params;
 	const id = itemId;
 	const [list, setList] = useState([]);
 	const [itemInfo, setItemInfo] = useState([]);
 	const [upgrade, setUpgrade] = useState(-1);
 
+	// 정보 초기화
 	useEffect(() => {
 		crawl(id).then(() => {
 			if (reslist !== undefined && reslist2 !== undefined) {
@@ -39,6 +40,13 @@ const AucDetail = ({ match, history }) => {
 			}
 		});
 	}, [id]);
+
+	// 최근 검색한 아이템 목록에 추가
+	useEffect(() => {
+		if (itemInfo.itemName !== undefined) {
+			add(id, itemInfo.itemName);
+		}
+	}, [id, add, itemInfo]);
 
 	// DB에 데이터 쌓기
 	const date = new Date();

@@ -5,8 +5,9 @@ import List from "./List";
 import "./SearchAuc.scss";
 import Helmet from "react-helmet";
 import { BACK_URL } from "../config";
+import { Link } from "react-router-dom";
 
-const SearchAuc = ({ list, addItem }) => {
+const SearchAuc = ({ list }) => {
 	// API 호출하여 아이템 검색
 	const [items, setItems] = useState([]);
 	const [freqItems, setFreqItems] = useState([]);
@@ -45,6 +46,17 @@ const SearchAuc = ({ list, addItem }) => {
 			</Helmet>
 			<div className="recent">
 				<div className="title">최근 검색한 아이템</div>
+				{list.map(item => (
+					<div className="item" key={item.id}>
+					<img src={`https://img-api.neople.co.kr/df/items/${item.id}`} alt="" />
+					<Link
+						style={{ textDecoration: "none", color: "black" }}
+						to={`searchAuc/${item.id}`}
+					>
+						{item.name}
+					</Link>
+				</div>
+				))}
 			</div>
 			<div className="main">
 				<div className="app-title">경매장 검색</div>
@@ -53,7 +65,17 @@ const SearchAuc = ({ list, addItem }) => {
 			</div>
 			<div className="frequently">
 				<div className="title">가장 많이 검색한 아이템</div>
-				{console.log(freqItems)}
+				{freqItems.map(item => (
+					<div className="item" key={item._id.id}>
+						<img src={`https://img-api.neople.co.kr/df/items/${item._id.id}`} alt="" />
+						<Link
+							style={{ textDecoration: "none", color: "black" }}
+							to={`searchAuc/${item._id.id}`}
+						>
+							{item._id.name}
+						</Link>
+					</div>
+				))}
 			</div>
 		</div>
 	);
