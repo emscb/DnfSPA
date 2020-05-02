@@ -12,6 +12,7 @@ import {
 	SetItemList,
 	SetItemOption,
 } from "../modules/ItemDetail";
+import { API_KEY } from "../config";
 
 const ItemDetail = ({ match }) => {
 	const { itemId } = match.params;
@@ -31,7 +32,7 @@ const ItemDetail = ({ match }) => {
 	if (gotData.current === false) {
 		axios
 			.get(
-				`https://api.neople.co.kr/df/items/${id}?wordType=full&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+				`https://api.neople.co.kr/df/items/${id}?wordType=full&apikey=${API_KEY}`
 			)
 			.then(response => {
 				setItemData(response.data);
@@ -42,7 +43,7 @@ const ItemDetail = ({ match }) => {
 	if (!gotSetData.current && i.setItemId) {
 		axios
 			.get(
-				`https://api.neople.co.kr/df/setitems/${i.setItemId}?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+				`https://api.neople.co.kr/df/setitems/${i.setItemId}?apikey=${API_KEY}`
 			)
 			.then(response => {
 				setSetData(response.data);

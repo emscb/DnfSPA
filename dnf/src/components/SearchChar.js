@@ -3,6 +3,7 @@ import "./SearchChar.scss";
 import Search from "./Search";
 import axios from "axios";
 import Helmet from "react-helmet";
+import { API_KEY } from "../config";
 
 // 캐릭터 검색 창 (세부 정보x)
 const SearchChar = ({ history }) => {
@@ -11,7 +12,7 @@ const SearchChar = ({ history }) => {
 		try {
 			axios
 				.get(
-					`https://api.neople.co.kr/df/servers/all/characters?characterName=${name}&wordType=full&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+					`https://api.neople.co.kr/df/servers/all/characters?characterName=${name}&wordType=full&apikey=${API_KEY}`
 				)
 				.then(response => {
 					if (response.data.rows.length === 0) {

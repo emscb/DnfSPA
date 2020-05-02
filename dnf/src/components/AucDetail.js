@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import "./AucDetail.scss";
 import Helmet from "react-helmet";
-import { BACK_URL } from "../config";
+import { BACK_URL, API_KEY } from "../config";
 
 var reslist, reslist2, priceList;
 const crawl = async id => {
 	try {
 		reslist = await Axios.get(
-			`https://api.neople.co.kr/df/auction?itemId=${id}&sort=unitPrice:asc&limit=400&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+			`https://api.neople.co.kr/df/auction?itemId=${id}&sort=unitPrice:asc&limit=400&apikey=${API_KEY}`
 		);
 		console.log(reslist.data.rows);
 
 		reslist2 = await Axios.get(
-			`https://api.neople.co.kr/df/items/${id}?apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+			`https://api.neople.co.kr/df/items/${id}?apikey=${API_KEY}`
 		);
 		console.log(reslist2.data);
 

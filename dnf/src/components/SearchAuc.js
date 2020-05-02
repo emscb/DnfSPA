@@ -4,7 +4,7 @@ import Search from "./Search";
 import List from "./List";
 import "./SearchAuc.scss";
 import Helmet from "react-helmet";
-import { BACK_URL } from "../config";
+import { BACK_URL, API_KEY } from "../config";
 import { Link } from "react-router-dom";
 
 const SearchAuc = ({ list }) => {
@@ -14,7 +14,7 @@ const SearchAuc = ({ list }) => {
 	const onSearch = name => {
 		try {
 			Axios.get(
-				`https://api.neople.co.kr/df/items?itemName=${name}&wordType=full&q=trade:true&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+				`https://api.neople.co.kr/df/items?itemName=${name}&wordType=full&q=trade:true&apikey=${API_KEY}`
 			).then(response => {
 				if (response.data.rows.length === 0) {
 				} else {

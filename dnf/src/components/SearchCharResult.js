@@ -3,6 +3,7 @@ import axios from "axios";
 import "./SearchCharResult.scss";
 import { IoIosArrowDown } from "react-icons/io";
 import Helmet from "react-helmet";
+import { API_KEY } from "../config";
 
 const SearchCharResult = ({ match, history }) => {
 	/* 제일 위에 "____ 서버에 대한 _____ 검색 결과입니다."
@@ -36,7 +37,7 @@ const SearchCharResult = ({ match, history }) => {
 	if (gotData.current === false) {
 		axios
 			.get(
-				`https://api.neople.co.kr/df/servers/${charServer}/characters?characterName=${charName}&wordType=full&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+				`https://api.neople.co.kr/df/servers/${charServer}/characters?characterName=${charName}&wordType=full&apikey=${API_KEY}`
 			)
 			.then(response => {
 				setList(response.data.rows);

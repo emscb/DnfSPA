@@ -5,6 +5,7 @@ import List from "./List";
 import axios from "axios";
 import Helmet from "react-helmet";
 import styled from "styled-components";
+import { API_KEY } from "../config";
 
 const Message = styled.div`
 	height: 4rem;
@@ -21,7 +22,7 @@ const SearchItem = () => {
 		try {
 			axios
 				.get(
-					`https://api.neople.co.kr/df/items?itemName=${name}&wordType=front&limit=30&apikey=nJeolB5EWc0nUNTYk62nFcPH3e9L9WJG`
+					`https://api.neople.co.kr/df/items?itemName=${name}&wordType=front&limit=30&apikey=${API_KEY}`
 				)
 				.then(response => {
 					if (response.data.rows.length === 0) {
