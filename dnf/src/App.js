@@ -8,8 +8,8 @@ import SearchChar from "./components/SearchChar";
 import SearchCharResult from "./components/SearchCharResult";
 import CharDetail from "./components/CharDetail";
 import Home from "./components/Home";
-import SearchAuc from "./components/SearchAuc";
-import AucDetail from "./components/AucDetail";
+import SearchAucContainer from "./containers/SearchAucContainer";
+import AucDetailContainer from "./containers/AucDetailContainer";
 
 function App() {
 	return (
@@ -23,8 +23,8 @@ function App() {
 				<Route path="/searchChar" exact component={SearchChar} />
 				<Route path="/searchChar/result/:server/:name" component={SearchCharResult} />
 				<Route path="/searchChar/info/:server/:charId" component={CharDetail} />
-				<Route path="/searchAuc" exact component={SearchAuc} />
-				<Route path="/searchAuc/:itemId" component={AucDetail} />
+				<Route path="/searchAuc" exact component={SearchAucContainer} />
+				<Route path="/searchAuc/:itemId" component={AucDetailContainer} />
 			</div>
 			<Footer />
 		</div>
