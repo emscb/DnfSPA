@@ -56,7 +56,7 @@ const AucDetail = ({ match, history, add }) => {
 	} else {
 		date.setDate(date.getDate() - 1);
 	}
-	thatday = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+	thatday = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 09:00:00`;
 
 	useEffect(() => {
 		if (list[0] !== undefined && itemInfo.length !== 0) {
