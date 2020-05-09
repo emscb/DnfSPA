@@ -14,9 +14,26 @@ const SearchAuc = ({ list }) => {
 	const onSearch = name => {
 		try {
 			Axios.get(
-				`https://api.neople.co.kr/df/items?itemName=${name}&wordType=full&q=trade:true&apikey=${API_KEY}`
+				`https://api.neople.co.kr/df/items?itemName=${name}&wordType=match&q=trade:true&apikey=${API_KEY}`
 			).then(response => {
 				if (response.data.rows.length === 0) {
+					Axios.get(
+						`https://api.neople.co.kr/df/items?itemName=${name}&wordType=front&q=trade:true&apikey=${API_KEY}`
+					).then(response => {
+						if (response.data.rows.length === 0) {
+							Axios.get(
+								`https://api.neople.co.kr/df/items?itemName=${name}&wordType=full&q=trade:true&apikey=${API_KEY}`
+							).then(response => {
+								var list = [];
+								response.data.rows.map(row => list.push({ id: row.itemId, name: row.itemName }));
+								setItems(list);
+							});
+						} else {
+							var list = [];
+							response.data.rows.map(row => list.push({ id: row.itemId, name: row.itemName }));
+							setItems(list);
+						}
+					});
 				} else {
 					var list = [];
 					response.data.rows.map(row => list.push({ id: row.itemId, name: row.itemName }));
@@ -48,14 +65,11 @@ const SearchAuc = ({ list }) => {
 				<div className="title">최근 검색한 아이템</div>
 				{list.map(item => (
 					<div className="item" key={item.id}>
-					<img src={`https://img-api.neople.co.kr/df/items/${item.id}`} alt="" />
-					<Link
-						style={{ textDecoration: "none", color: "black" }}
-						to={`searchAuc/${item.id}`}
-					>
-						{item.name}
-					</Link>
-				</div>
+						<img src={`https://img-api.neople.co.kr/df/items/${item.id}`} alt="" />
+						<Link style={{ textDecoration: "none", color: "black" }} to={`searchAuc/${item.id}`}>
+							{item.name}
+						</Link>
+					</div>
 				))}
 			</div>
 			<div className="main">
