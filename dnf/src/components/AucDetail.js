@@ -4,18 +4,20 @@ import "./AucDetail.scss";
 import Helmet from "react-helmet";
 import { BACK_URL, API_KEY } from "../config";
 
-var reslist, reslist2, priceList;
+var registered_list, itemInfo_response, priceList;
 const crawl = async id => {
 	try {
-		reslist = await Axios.get(
+		// 경매장 등록 목록 검색
+		registered_list = await Axios.get(
 			`https://api.neople.co.kr/df/auction?itemId=${id}&sort=unitPrice:asc&limit=400&apikey=${API_KEY}`
 		);
-		console.log(reslist.data.rows);
+		console.log(registered_list.data.rows);
 
-		reslist2 = await Axios.get(
+		// 아이템 정보 검색
+		itemInfo_response = await Axios.get(
 			`https://api.neople.co.kr/df/items/${id}?apikey=${API_KEY}`
 		);
-		console.log(reslist2.data);
+		console.log(itemInfo_response.data);
 
 		priceList = await Axios.get(`${BACK_URL}/auc/${id}`);
 		console.log(priceList.data);
@@ -34,9 +36,9 @@ const AucDetail = ({ match, history, add }) => {
 	// 정보 초기화
 	useEffect(() => {
 		crawl(id).then(() => {
-			if (reslist !== undefined && reslist2 !== undefined) {
-				setList(reslist.data.rows);
-				setItemInfo(reslist2.data);
+			if (registered_list !== undefined && itemInfo_response !== undefined) {
+				setList(registered_list.data.rows);
+				setItemInfo(itemInfo_response.data);
 			}
 		});
 	}, [id]);
