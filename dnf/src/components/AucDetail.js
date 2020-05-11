@@ -91,6 +91,7 @@ const AucDetail = ({ match, history, add }) => {
 	// 가장 싼 요일, 가장 비싼 요일 계산하기
 
 	const isStackable = itemInfo.itemType === "스태커블";
+	const isCard = itemInfo.cardInfo !== undefined;
 	const isUpgradable =
 		itemInfo.cardInfo !== undefined && itemInfo.cardInfo.enchant[0].explain === undefined;
 	if (list.length === 0) {
@@ -117,7 +118,8 @@ const AucDetail = ({ match, history, add }) => {
 
 			table.push(
 				<tbody key="tbody">
-					{list.map(
+					{/* 카드 외에 너무 많은 결과를 보여주는 걸 방지 */}
+					{(isCard ? list : list.slice(0, 50)).map(
 						l =>
 							(upgrade === -1 ? true : upgrade === l.upgrade) && (
 								<tr key={`${l.auctionNo}`}>
