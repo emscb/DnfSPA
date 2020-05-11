@@ -234,8 +234,8 @@ const CardInfo = ({ list }) => {
     let optionList = [];
     // 어느 부위인지
     for (let a = 0; a < list.slots.length; a++) {
-      optionList.push(<div>{list.slots[a].slotName} 마법부여</div>);
-      optionList.push(<br />);
+      optionList.push(<div key={a}>{list.slots[a].slotName} 마법부여</div>);
+      optionList.push(<br key={`br${a}`}/>);
     }
     // 업그레이드가 가능한지
     if (list.enchant[0].explain !== undefined) {
@@ -245,19 +245,19 @@ const CardInfo = ({ list }) => {
       // 업글에 따른 옵션
       for (let a = 0; a < list.enchant.length; a++) {
         optionList.push(
-          <div>
+          <div key={`${a}upgrade`}>
             {list.enchant[a].upgrade}/{list.enchant.length - 1} 업그레이드
           </div>
         );
         list.enchant[a].status.map((m) => {
           optionList.push(
-            <div>
+            <div key={`${a}upgrade status ${m.name}`}>
               {m.name} +{m.value}
             </div>
           );
         });
         if (a !== list.enchant.length - 1) {
-          optionList.push(<br />);
+          optionList.push(<br key={`${a}upgrade br`} />);
         }
       }
     }
