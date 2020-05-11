@@ -90,7 +90,9 @@ const AucDetail = ({ match, history, add }) => {
 
 	// 가장 싼 요일, 가장 비싼 요일 계산하기
 
-	var isStackable = itemInfo.itemType === "스태커블";
+	const isStackable = itemInfo.itemType === "스태커블";
+	const isUpgradable =
+		itemInfo.cardInfo !== undefined && itemInfo.cardInfo.enchant[0].explain === undefined;
 	if (list.length === 0) {
 		return (
 			<div style={{ textAlign: "center", fontSize: "1.5rem", fontWeight: "400" }}>
@@ -125,12 +127,11 @@ const AucDetail = ({ match, history, add }) => {
 									<td>
 										<span style={{ margin: "0px 5px" }}>{itemInfo.itemName}</span>
 										{/* 만약 업그레이드가 가능한 카드라면 */}
-										{itemInfo.cardInfo !== undefined &&
-											itemInfo.cardInfo.enchant[0].explain === undefined && (
-												<span>
-													{l.upgrade}/{itemInfo.cardInfo.enchant.length - 1}
-												</span>
-											)}
+										{isUpgradable && (
+											<span>
+												{l.upgrade}/{itemInfo.cardInfo.enchant.length - 1}
+											</span>
+										)}
 									</td>
 									{isStackable && <td>{l.count}</td>}
 									<td>{l.unitPrice.toLocaleString()}</td>
@@ -149,7 +150,7 @@ const AucDetail = ({ match, history, add }) => {
 		};
 
 		const ButtonList = () => {
-			if (itemInfo.cardInfo !== undefined && itemInfo.cardInfo.enchant[0].explain === undefined) {
+			if (isUpgradable) {
 				let buttonList = [
 					<button key="all" onClick={() => setUpgrade(-1)}>
 						전체
@@ -174,7 +175,7 @@ const AucDetail = ({ match, history, add }) => {
 					<Helmet>
 						<title>{itemInfo.itemName} 검색 결과</title>
 					</Helmet>
-					{itemInfo.cardInfo !== undefined && itemInfo.cardInfo.enchant[0].explain === undefined && (
+					{isUpgradable && (
 						<div className="chooseUpgrade">
 							<ButtonList />
 						</div>
