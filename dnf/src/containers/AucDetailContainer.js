@@ -1,10 +1,13 @@
 import React from "react";
 import AucDetail from "../components/AucDetail";
 import { addItem } from "../modules/recentSearch";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
-const AucDetailContainer = ({ match, history, addItem }) => {
-	return <AucDetail match={match} history={history} add={addItem} />;
+const AucDetailContainer = ({ match, history }) => {
+	const dispatch = useDispatch();
+	return (
+		<AucDetail match={match} history={history} add={(id, name) => dispatch(addItem(id, name))} />
+	);
 };
 
-export default connect(state => ({}), { addItem })(AucDetailContainer);
+export default React.memo(AucDetailContainer);
