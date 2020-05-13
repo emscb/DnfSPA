@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./SearchChar.scss";
+import "./styles/SearchChar.scss";
 import Search from "./Search";
 import axios from "axios";
 import Helmet from "react-helmet";

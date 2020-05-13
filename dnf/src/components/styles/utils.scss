@@ -1,0 +1,13 @@
+$common: #ffffff;
+$uncommon: #68d5ed;
+$rare: #b36bff;
+$unique: #ff00ff;
+$epic: #ffb400;
+$chronicle: #ff6666;
+$legendary: #ff7800;
+
+@mixin myth() {
+	background: linear-gradient(180deg, #ffb400 0%, #ff00ff 100%);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}

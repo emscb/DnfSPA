@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Search from "./Search";
 import List from "./List";
-import "./SearchAuc.scss";
+import "./styles/SearchAuc.scss";
 import Helmet from "react-helmet";
 import { BACK_URL, API_KEY } from "../config";
 import { Link } from "react-router-dom";

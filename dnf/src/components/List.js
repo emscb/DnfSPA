@@ -1,5 +1,5 @@
 import React from "react";
-import "./List.scss";
+import "./styles/List.scss";
 import ListItem from "./ListItem";
 
 const List = ({ items, trade }) => {

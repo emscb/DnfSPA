@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import "./CharDetail.scss";
+import "./styles/CharDetail.scss";
 import cheerio from "cheerio";
 import Tabs from "./CharDetailTabs";
 import Tables from "./CharDetailTables";

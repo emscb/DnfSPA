@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import "./SearchCharResult.scss";
+import "./styles/SearchCharResult.scss";
 import { IoIosArrowDown } from "react-icons/io";
 import Helmet from "react-helmet";
 import { API_KEY } from "../config";

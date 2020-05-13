@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "./ItemDetail.scss";
+import "./styles/ItemDetail.scss";
 import axios from "axios";
 import Helmet from "react-helmet";
 import {

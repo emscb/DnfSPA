@@ -1,5 +1,5 @@
 import React from "react";
-import "./CharDetailTabs.scss";
+import "./styles/CharDetailTabs.scss";
 
 const Tabs = ({ onClick, activeTab }) => {
 	const tabs = [

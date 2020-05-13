@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import "./AucDetail.scss";
+import "./styles/AucDetail.scss";
 import Helmet from "react-helmet";
 import { BACK_URL, API_KEY } from "../config";
 

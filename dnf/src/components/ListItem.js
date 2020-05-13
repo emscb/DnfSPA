@@ -1,5 +1,5 @@
 import React from "react";
-import "./ListItem.scss";
+import "./styles/ListItem.scss";
 import { Link } from "react-router-dom";
 
 const ListItem = ({ item, trade }) => {

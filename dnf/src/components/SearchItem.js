@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./SearchItem.scss";
+import "./styles/SearchItem.scss";
 import Search from "./Search";
 import List from "./List";
 import axios from "axios";

@@ -1,5 +1,5 @@
 import React from "react";
-import "./CharDetailTables.scss";
+import "./styles/CharDetailTables.scss";
 import "../modules/CharDetail";
 import { Reinforce, Enchant, Emblem, AvatarEmblem } from "../modules/CharDetail";
 

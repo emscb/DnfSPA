@@ -1,3 +1,5 @@
+@import "./utils";
+
 table {
 	width: 100%;
 }
@@ -14,30 +16,28 @@ thead {
 
 tr {
 	.에픽 {
-		color: #ffb400;
+		color: $epic;
 	}
 	.유니크 {
-		color: #ff00ff;
+		color: $unique;
 	}
 	.레어 {
-		color: #b36bff;
+		color: $rare;
 	}
 	.언커먼 {
-		color: #68d5ed;
+		color: $uncommon;
 	}
 	.커먼 {
-		color: black;
+		color: $common;
 	}
 	.크로니클 {
-		color: #ff6666;
+		color: $chronicle;
 	}
 	.레전더리 {
-		color: #ff7800;
+		color: $legendary;
 	}
 	.신화 {
-		background: linear-gradient(180deg, #ffb400 0%, #ff00ff 100%);
-		background-clip: text;
-		-webkit-text-fill-color: transparent;
+		@include myth();
 	}
 }
 
