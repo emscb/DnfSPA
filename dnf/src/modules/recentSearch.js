@@ -7,9 +7,9 @@ const initialState = [];
 function recentSearch(state = initialState, action) {
 	switch (action.type) {
 		case ADD:
-			return state
-				.filter(item => item.id !== action.id)
-				.concat([{ id: action.id, name: action.name }]);
+			return [{ id: action.id, name: action.name }].concat(
+				state.filter(item => item.id !== action.id)
+			);
 		default:
 			return state;
 	}
