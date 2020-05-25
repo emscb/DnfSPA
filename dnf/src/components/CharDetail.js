@@ -18,7 +18,10 @@ const CharDetail = ({ match, history }) => {
 	const [buffCreature, setBuffCreature] = useState({});
 	const gotData = useRef(false);
 	const [dundamInfo, setDundamInfo] = useState([]);
+	const [dunoffInfo, setDunoffInfo] = useState([]);
 	const [tab, setTab] = useState(1);
+	const [dundamLoadding, setDundamLoadding] = useState(true);
+	const [dunoffLoadding, setDunoffLoadding] = useState(true);
 
 	if (gotData.current === false) {
 		// 장착 장비 조회
@@ -84,25 +87,52 @@ const CharDetail = ({ match, history }) => {
 				const $ = cheerio.load(response.data);
 				const isBuffer = $("#Present > table > tbody > tr:nth-child(5) > td:nth-child(2)").length;
 				if (isBuffer === 1) {
-					const list = $("#Present > table > tbody > tr:nth-child(5) > td:nth-child(2)");
+					const result = $("#Present > table > tbody > tr:nth-child(5) > td:nth-child(2)");
+					const resultScore = $("#Present > table > tbody > tr:nth-child(9) > td");
 					try {
-						setDundamInfo([<div key="dundamBuff">버프 : {list[0].childNodes[0].data}</div>]);
+						setDundamInfo([
+							<div key="dundamBuff">던담 버프 : {result[0].childNodes[0].data}</div>,
+							<div key="dundamBuffScore">던담 점수 : {resultScore[0].childNodes[0].data}</div>,
+						]);
 					} catch (TypeError) {
-						setDundamInfo([<div key="dundamBuff">버프 : 정보 없음</div>]);
+						setDundamInfo([<div key="dundamBuff">던담 버프 : 정보 없음</div>]);
 					}
 				} else {
-					let list = $("#rogen > table > tbody > tr:nth-child(13) > td:nth-child(3)");
+					let result = $("#rogen > table > tbody > tr:nth-child(13) > td:nth-child(3)");
 					try {
-						setDundamInfo([<div key="dundamRogen">로젠 1시 : {list[0].childNodes[0].data}</div>]);
+						setDundamInfo([
+							<div key="dundamRogen">던담 로젠 1시 : {result[0].childNodes[0].data}</div>,
+						]);
 					} catch (TypeError) {
 						try {
-							list = $("#rogen > table > tbody > tr:nth-child(12) > td:nth-child(3)");
-							setDundamInfo([<div key="dundamRogen">로젠 1시 : {list[0].childNodes[0].data}</div>]);
+							result = $("#rogen > table > tbody > tr:nth-child(12) > td:nth-child(3)");
+							setDundamInfo([
+								<div key="dundamRogen">던담 로젠 1시 : {result[0].childNodes[0].data}</div>,
+							]);
 						} catch (TypeError) {
-							setDundamInfo([<div key="dundamRogen">로젠 1시 : 정보 없음</div>]);
+							setDundamInfo([<div key="dundamRogen">던담 로젠 1시 : 정보 없음</div>]);
 						}
 					}
 				}
+				setDundamLoadding(false);
+			});
+
+		// 던오프 정보 긁어오기
+		axios
+			.get(`https://dunfaoff.com/SearchResult.df?server=${server}&characterid=${id}`)
+			.then(response => {
+				const $ = cheerio.load(response.data);
+				const resultScore = $("#holy_buff_list > div.holyBuffTable > div:nth-child(8) > div > a");
+				const result = $("#holy_buff_list > div.holyBuffTable > div:nth-child(9) > div > a");
+				try {
+					setDunoffInfo([
+						<div key="dunoffBuff">던오프 버프 : {result[0].children[0].data}</div>,
+						<div key="dunoffBuffScore">던오프 점수 : {resultScore[0].children[0].data}</div>,
+					]);
+				} catch (TypeError) {
+					setDunoffInfo([<div key="dunoffBuff">던오프 버프 : 정보 없음</div>]);
+				}
+				setDunoffLoadding(false);
 			});
 
 		gotData.current = true;
@@ -138,7 +168,8 @@ const CharDetail = ({ match, history }) => {
 							<br />
 							{equipment.guildName !== null ? equipment.guildName : "길드 없음"}
 							<br />
-							{dundamInfo}
+							{dundamLoadding ? `던담 정보 로딩 중` : dundamInfo}
+							{dunoffLoadding ? `던오프 정보 로딩 중` : dunoffInfo}
 						</div>
 					</div>
 					<div className="detailInfo">
