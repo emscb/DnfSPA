@@ -1,6 +1,6 @@
 import React from "react";
 import SearchItem from "./components/SearchItem";
-import { Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import ItemDetail from "./components/ItemDetail";
 import Menu from "./components/Menu";
 import Footer from "./components/Footer";
@@ -17,14 +17,16 @@ function App() {
 			<div style={{ flex: "1" }}>
 				<Menu />
 				{/* 메뉴 누르면 커서가 바로 잡히게 할 수 있을까 */}
-				<Route path="/" component={Home} exact />
-				<Route path="/searchItem" exact component={SearchItem} />
-				<Route path="/searchItem/:itemId" component={ItemDetail} />
-				<Route path="/searchChar" exact component={SearchChar} />
-				<Route path="/searchChar/result/:server/:name" component={SearchCharResult} />
-				<Route path="/searchChar/info/:server/:charId" component={CharDetail} />
-				<Route path="/searchAuc" exact component={SearchAucContainer} />
-				<Route path="/searchAuc/:itemId" component={AucDetailContainer} />
+				<BrowserRouter basename={process.env.PUBLIC_URL}>
+					<Route path="/" component={Home} exact />
+					<Route path="/searchItem" exact component={SearchItem} />
+					<Route path="/searchItem/:itemId" component={ItemDetail} />
+					<Route path="/searchChar" exact component={SearchChar} />
+					<Route path="/searchChar/result/:server/:name" component={SearchCharResult} />
+					<Route path="/searchChar/info/:server/:charId" component={CharDetail} />
+					<Route path="/searchAuc" exact component={SearchAucContainer} />
+					<Route path="/searchAuc/:itemId" component={AucDetailContainer} />
+				</BrowserRouter>
 			</div>
 			<Footer />
 		</div>
