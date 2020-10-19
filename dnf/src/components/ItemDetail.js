@@ -31,9 +31,7 @@ const ItemDetail = ({ match }) => {
 
 	if (gotData.current === false) {
 		axios
-			.get(
-				`https://api.neople.co.kr/df/items/${id}?wordType=full&apikey=${API_KEY}`
-			)
+			.get(`https://api.neople.co.kr/df/items/${id}?wordType=full&apikey=${API_KEY}`)
 			.then(response => {
 				setItemData(response.data);
 			});
@@ -42,9 +40,7 @@ const ItemDetail = ({ match }) => {
 
 	if (!gotSetData.current && i.setItemId) {
 		axios
-			.get(
-				`https://api.neople.co.kr/df/setitems/${i.setItemId}?apikey=${API_KEY}`
-			)
+			.get(`https://api.neople.co.kr/df/setitems/${i.setItemId}?apikey=${API_KEY}`)
 			.then(response => {
 				setSetData(response.data);
 			});
@@ -98,7 +94,7 @@ const ItemDetail = ({ match }) => {
 							{i.setItemId && (
 								<div className="changeViewSet" style={{ marginTop: "10px" }}>
 									<button onClick={onClickSet}>
-										{viewSet ? "세트 옵션 숨기기" : "세트 옵션 보기"}
+										{viewSet ? `세트 옵션 숨기기` : `세트 옵션 보기`}
 									</button>
 								</div>
 							)}
