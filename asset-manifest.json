@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/DnfSPA/static/css/main.39e4dafc.chunk.css",
-    "main.js": "/DnfSPA/static/js/main.38334e78.chunk.js",
-    "main.js.map": "/DnfSPA/static/js/main.38334e78.chunk.js.map",
+    "main.js": "/DnfSPA/static/js/main.0a8db545.chunk.js",
+    "main.js.map": "/DnfSPA/static/js/main.0a8db545.chunk.js.map",
     "runtime-main.js": "/DnfSPA/static/js/runtime-main.d976ae1f.js",
     "runtime-main.js.map": "/DnfSPA/static/js/runtime-main.d976ae1f.js.map",
     "static/js/2.d46137e0.chunk.js": "/DnfSPA/static/js/2.d46137e0.chunk.js",
     "static/js/2.d46137e0.chunk.js.map": "/DnfSPA/static/js/2.d46137e0.chunk.js.map",
     "index.html": "/DnfSPA/index.html",
-    "precache-manifest.5472ca2e424105ccc5ef9181fe8e9ee7.js": "/DnfSPA/precache-manifest.5472ca2e424105ccc5ef9181fe8e9ee7.js",
+    "precache-manifest.9544de2765a14e1d90e3afe1c3be1d79.js": "/DnfSPA/precache-manifest.9544de2765a14e1d90e3afe1c3be1d79.js",
     "service-worker.js": "/DnfSPA/service-worker.js",
     "static/css/main.39e4dafc.chunk.css.map": "/DnfSPA/static/css/main.39e4dafc.chunk.css.map",
     "static/js/2.d46137e0.chunk.js.LICENSE.txt": "/DnfSPA/static/js/2.d46137e0.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.d976ae1f.js",
     "static/js/2.d46137e0.chunk.js",
     "static/css/main.39e4dafc.chunk.css",
-    "static/js/main.38334e78.chunk.js"
+    "static/js/main.0a8db545.chunk.js"
   ]
 }
