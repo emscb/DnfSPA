@@ -9,6 +9,7 @@ import { API_KEY } from "../config";
 const CharDetail = ({ match, history }) => {
 	const { server, charId } = match.params;
 	const id = charId;
+	const [info, setInfo] = useState({});
 	const [equipment, setEquipment] = useState({});
 	const [avatar, setAvatar] = useState([]);
 	const [creature, setCreature] = useState([]);
@@ -19,13 +20,33 @@ const CharDetail = ({ match, history }) => {
 	const [tab, setTab] = useState(1);
 
 	if (gotData.current === false) {
+		// 기본 정보 조회
+		axios
+			.get(`https://api.neople.co.kr/df/servers/${server}/characters/${id}?apikey=${API_KEY}`)
+			.then(response => {
+				setInfo({
+					adventureName: response.data.adventureName,
+					characterName: response.data.characterName,
+					guildId: response.data.guildId,
+					guildName: response.data.guildName,
+					jobGrowId: response.data.jobGrowId,
+					jobGrowName: response.data.jobGrowName,
+					level: response.data.level,
+				});
+			});
+
 		// 장착 장비 조회
 		axios
 			.get(
 				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/equipment?apikey=${API_KEY}`
 			)
 			.then(response => {
-				setEquipment(response.data);
+				let equipments = {};
+				for (let i = 0; i < response.data.equipment.length; i++) {
+					let e = response.data.equipment[i];
+					Object.assign(equipments, { [e.slotId]: e, setItemInfo: response.data.setItemInfo });
+				}
+				setEquipment(equipments);
 			});
 
 		// 장착 아바타 조회
@@ -82,10 +103,10 @@ const CharDetail = ({ match, history }) => {
 	};
 
 	return (
-		equipment.characterName !== undefined && (
+		info.characterName !== undefined && (
 			<div>
 				<Helmet>
-					<title>{equipment.characterName} 상세 정보</title>
+					<title>{info.characterName} 상세 정보</title>
 				</Helmet>
 				<div className="CharDetail">
 					<div className="simpleInfo">
@@ -93,28 +114,30 @@ const CharDetail = ({ match, history }) => {
 						<div className="charImg">
 							<img
 								src={`https://img-api.neople.co.kr/df/servers/${server}/characters/${id}?zoom=2`}
-								alt={`${equipment.characterName}`}
+								alt={`${info.characterName}`}
 							/>
 						</div>
 						<div className="info">
 							{/* 직업, 길드, 바로가기 */}
-							{equipment.adventureName}
+							{info.adventureName}
 							<br />
-							<b>{equipment.characterName}</b>
+							<b>{info.characterName}</b>
 							<br />
-							Lv.{equipment.level} {equipment.jobGrowName}
+							Lv.{info.level} {info.jobGrowName}
 							<br />
-							{equipment.guildName !== null ? equipment.guildName : "길드 없음"}
+							{info.guildName !== null ? info.guildName : "길드 없음"}
 							<br />
 							<a
 								target="_blank"
-								href={`http://dundam.xyz/view.jsp?server=${server}&name=${equipment.characterName}&image=${id}`}
+								rel="noopener noreferrer"
+								href={`http://dundam.xyz/view.jsp?server=${server}&name=${info.characterName}&image=${id}`}
 							>
 								던담 바로 가기
 							</a>
 							<br />
 							<a
 								target="_blank"
+								rel="noopener noreferrer"
 								href={`https://dunfaoff.com/SearchResult.df?server=${server}&characterid=${id}`}
 							>
 								던오프 바로 가기
@@ -129,17 +152,19 @@ const CharDetail = ({ match, history }) => {
 						</div>
 						<div className="table">
 							{/* 내용 표시 (테이블 형태) */}
-							<Tables
-								id={tab}
-								history={history}
-								info={
-									tab === 1
-										? equipment
-										: tab === 2
-										? avatar.concat(creature)
-										: Object.assign(buffEquipment, buffAvatar, buffCreature)
-								}
-							/>
+							{equipment.WEAPON !== undefined && (
+								<Tables
+									id={tab}
+									history={history}
+									info={
+										tab === 1
+											? equipment
+											: tab === 2
+											? avatar.concat(creature)
+											: Object.assign(buffEquipment, buffAvatar, buffCreature)
+									}
+								/>
+							)}
 						</div>
 					</div>
 				</div>

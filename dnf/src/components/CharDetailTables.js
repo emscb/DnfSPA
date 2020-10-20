@@ -3,11 +3,26 @@ import "./styles/CharDetailTables.scss";
 import "../modules/CharDetail";
 import { Reinforce, Enchant, Emblem, AvatarEmblem } from "../modules/CharDetail";
 
+const itemOrder = [
+	"WEAPON",
+	"SHOULDER",
+	"JACKET",
+	"PANTS",
+	"WAIST",
+	"SHOES",
+	"WRIST",
+	"AMULET",
+	"RING",
+	"SUPPORT",
+	"MAGIC_STON",
+	"EARRING",
+];
+
 const Tables = ({ id, info, history }) => {
 	var table = [];
 	if (id === 1) {
 		// 장착 장비 탭
-		let equipments = info.equipment;
+		let equipments = info;
 		let setInfo = info.setItemInfo;
 		table.push(
 			<thead key={id}>
@@ -15,33 +30,35 @@ const Tables = ({ id, info, history }) => {
 					<th className="image"></th>
 					<th>이름</th>
 					<th>강화 / 증폭 / 재련</th>
-					<th>마법부여</th>
+					<th>마법 부여</th>
 				</tr>
 			</thead>
 		);
 
 		let rows = [];
-		for (let a = 0; a < equipments.length; a++) {
+		itemOrder.map(position => {
 			rows.push(
-				<tr key={equipments[a].slotId}>
+				<tr key={`${position}`}>
 					<td>
 						<img
-							src={`https://img-api.neople.co.kr/df/items/${equipments[a].itemId}`}
-							alt={equipments[a].itemName}
+							src={`https://img-api.neople.co.kr/df/items/${equipments[position].itemId}`}
+							alt={equipments[position].itemName}
 							style={{ cursor: "pointer" }}
 							onClick={() => {
-								history.push(`/searchItem/${equipments[a].itemId}`);
+								history.push(`/searchItem/${equipments[position].itemId}`);
 							}}
 						/>
 					</td>
-					<td className={equipments[a].itemRarity}>{equipments[a].itemName}</td>
-					<Reinforce info={equipments} id={a} />
-					<Enchant info={equipments} id={a} />
+					<td className={equipments[position].itemRarity}>{equipments[position].itemName}</td>
+					<Reinforce info={equipments} id={position} />
+					<Enchant info={equipments} id={position} />
 				</tr>
 			);
-		}
+			return 0;
+		});
+
 		table.push(
-			<tbody key={`${id}body`}>
+			<tbody key="equipments">
 				{rows}
 				<tr id="setInfo">
 					<td colSpan="4">
@@ -94,7 +111,6 @@ const Tables = ({ id, info, history }) => {
 	} else if (id === 3) {
 		// 버프 강화 탭
 		let e = info;
-		console.log(e);
 		table.push(
 			<caption key="caption">
 				{e.skillInfo.name} Lv.{e.skillInfo.option.level}
