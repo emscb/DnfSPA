@@ -24,9 +24,11 @@ const Search = ({ onSearch, type }) => {
 			<form className="Search" onSubmit={onSubmit}>
 				<input
 					className="input"
+					id={`${type}`}
 					placeholder={`${type} 이름을 입력하세요`}
 					value={value}
 					onChange={onChange}
+					autoComplete
 				></input>
 				<button className="button" type="submit">
 					검색
