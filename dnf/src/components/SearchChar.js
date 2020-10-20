@@ -12,7 +12,7 @@ const SearchChar = ({ history }) => {
 		try {
 			axios
 				.get(
-					`https://api.neople.co.kr/df/servers/all/characters?characterName=${name}&wordType=full&apikey=${API_KEY}`
+					`https://api.neople.co.kr/df/servers/all/characters?characterName=${name}&limit=20&wordType=full&apikey=${API_KEY}`
 				)
 				.then(response => {
 					if (response.data.rows.length === 0) {
