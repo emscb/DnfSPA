@@ -61,7 +61,7 @@ const Enchant = ({ info }) => {
 			}
 			return <td>{content}</td>;
 		} else {
-			return <td>{equipments[id].enchant.explain}</td>;
+			return <td>{item.enchant.explain}</td>;
 		}
 	} else {
 		return <td />;
