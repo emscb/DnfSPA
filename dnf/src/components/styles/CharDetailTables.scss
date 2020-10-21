@@ -8,6 +8,7 @@ tbody tr,
 tbody td {
 	text-align: center;
 	background-color: #e6f3fe;
+	height: 2.5rem;
 }
 
 thead {
@@ -15,6 +16,7 @@ thead {
 }
 
 tr {
+	color: #000;
 	.에픽 {
 		color: $epic;
 	}
@@ -55,6 +57,6 @@ th.image {
 	width: 40px;
 }
 
-tr#setInfo {
-	height: 6rem;
+tr#setInfo td {
+	padding: 1rem 0;
 }

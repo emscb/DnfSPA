@@ -4,6 +4,7 @@
 	margin-right: auto;
 	display: flex;
 	flex-direction: row;
+
 	.simpleInfo {
 		.charImg {
 			img {
@@ -12,8 +13,14 @@
 		}
 		.info {
 			text-align: center;
+
+			a {
+				text-decoration: none;
+				color: #000;
+			}
 		}
 	}
+
 	.detailInfo {
 		flex: 1;
 	}
