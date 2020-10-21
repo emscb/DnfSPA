@@ -1,57 +1,57 @@
 import React from "react";
 
-const Reinforce = ({ info, id }) => {
-	// 차원의 능력치가 없으면
-	let equipments = info;
-	if (equipments[id].amplificationName === null) {
-		if (equipments[id].reinforce === 0) {
-			if (equipments[id].refine === 0) {
+const Reinforce = ({ info }) => {
+	let item = info;
+	if (item.amplificationName === null || item.amplificationName === undefined) {
+		// 차원의 능력치가 없으면
+		if (item.reinforce === 0 || item.reinforce === undefined) {
+			if (item.refine === 0 || item.refine === undefined) {
 				return <td />;
 			} else {
-				return <td>{equipments[id].refine}재련</td>;
+				return <td>{item.refine}재련</td>;
 			}
 		} else {
-			if (equipments[id].refine !== 0) {
+			if (item.refine !== 0) {
 				return (
 					<td>
-						<div style={{ color: "#68D5ED" }}>+{equipments[id].reinforce}강화</div>
-						<div>{equipments[id].refine}재련</div>
+						<div style={{ color: "#68D5ED" }}>+{item.reinforce}강화</div>
+						<div>{item.refine}재련</div>
 					</td>
 				);
 			} else {
-				return <td style={{ color: "#68D5ED" }}>+{equipments[id].reinforce}강화</td>;
+				return <td style={{ color: "#68D5ED" }}>+{item.reinforce}강화</td>;
 			}
 		}
 	} else {
 		// 증폭 있음
-		if (equipments[id].refine !== 0) {
+		if (item.refine !== 0) {
 			return (
 				<td>
-					<div style={{ color: "#FF00FF" }}>+{equipments[id].reinforce}증폭</div>
-					<div>{equipments[id].refine}재련</div>
+					<div style={{ color: "#FF00FF" }}>+{item.reinforce}증폭</div>
+					<div>{item.refine}재련</div>
 				</td>
 			);
 		} else {
-			return <td style={{ color: "#FF00FF" }}>+{equipments[id].reinforce}증폭</td>;
+			return <td style={{ color: "#FF00FF" }}>+{item.reinforce}증폭</td>;
 		}
 	}
 };
 
-const Enchant = ({ info, id }) => {
-	let equipments = info;
-	if (equipments[id].enchant) {
+const Enchant = ({ info }) => {
+	let item = info;
+	if (item.enchant) {
 		if (
-			equipments[id].enchant.status === undefined &&
-			equipments[id].enchant.reinforceSkill !== undefined
+			item.enchant.status === undefined &&
+			item.enchant.reinforceSkill !== undefined
 		) {
-			let s = equipments[id].enchant.reinforceSkill[0];
+			let s = item.enchant.reinforceSkill[0];
 			return (
 				<td>
 					{s.skills[0].name} +{s.skills[0].value}
 				</td>
 			);
-		} else if (equipments[id].enchant.status !== undefined) {
-			let s = equipments[id].enchant.status;
+		} else if (item.enchant.status !== undefined) {
+			let s = item.enchant.status;
 			let content = ``;
 			for (let m = 0; m < s.length; m++) {
 				content += `${s[m].name} +${s[m].value}`;
