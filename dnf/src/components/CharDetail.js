@@ -127,12 +127,13 @@ const CharDetail = ({ match, history }) => {
 							<br />
 							{info.guildName !== null ? info.guildName : "길드 없음"}
 							<br />
+							<br />
 							<a
 								target="_blank"
 								rel="noopener noreferrer"
 								href={`http://dundam.xyz/view.jsp?server=${server}&name=${info.characterName}&image=${id}`}
 							>
-								던담 바로 가기
+								<b>던담 바로 가기</b>
 							</a>
 							<br />
 							<a
@@ -140,7 +141,7 @@ const CharDetail = ({ match, history }) => {
 								rel="noopener noreferrer"
 								href={`https://dunfaoff.com/SearchResult.df?server=${server}&characterid=${id}`}
 							>
-								던오프 바로 가기
+								<b>던오프 바로 가기</b>
 							</a>
 						</div>
 					</div>

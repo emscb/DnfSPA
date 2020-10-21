@@ -50,8 +50,8 @@ const Tables = ({ id, info, history }) => {
 						/>
 					</td>
 					<td className={equipments[position].itemRarity}>{equipments[position].itemName}</td>
-					<Reinforce info={equipments} id={position} />
-					<Enchant info={equipments} id={position} />
+					<Reinforce info={equipments[position]} />
+					<Enchant info={equipments[position]} />
 				</tr>
 			);
 			return 0;
