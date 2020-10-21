@@ -16,6 +16,8 @@ const itemOrder = [
 	"SUPPORT",
 	"MAGIC_STON",
 	"EARRING",
+	"TITLE",
+	"CREATURE",
 ];
 
 const Tables = ({ id, info, history }) => {
@@ -36,6 +38,7 @@ const Tables = ({ id, info, history }) => {
 		);
 
 		let rows = [];
+		console.log(equipments); // wip
 		itemOrder.map(position => {
 			rows.push(
 				<tr key={`${position}`}>

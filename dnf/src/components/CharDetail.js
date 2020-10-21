@@ -159,9 +159,9 @@ const CharDetail = ({ match, history }) => {
 									history={history}
 									info={
 										tab === 1
-											? equipment
+											? Object.assign(equipment, {"CREATURE": creature})
 											: tab === 2
-											? avatar.concat(creature)
+											? avatar
 											: Object.assign(buffEquipment, buffAvatar, buffCreature)
 									}
 								/>
