@@ -52,7 +52,12 @@ const Tables = ({ id, info, history }) => {
 							}}
 						/>
 					</td>
-					<td className={equipments[position].itemRarity}>{equipments[position].itemName}</td>
+					<td className={equipments[position].itemRarity}>
+						{equipments[position].itemName}
+						{equipments[position].upgradeInfo && (
+							<div className="sirocoUpgrade">{equipments[position].upgradeInfo.itemName}</div>
+						)}
+					</td>
 					<Reinforce info={equipments[position]} />
 					<Enchant info={equipments[position]} />
 				</tr>
