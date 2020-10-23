@@ -52,7 +52,7 @@ const Tables = ({ id, info, history }) => {
 						/>
 					</td>
 					<td className={equipments[position].itemRarity}>
-						{equipments[position].itemName}
+						<div>{equipments[position].itemName}</div>
 						{equipments[position].upgradeInfo && (
 							<div className="sirocoUpgrade">{equipments[position].upgradeInfo.itemName}</div>
 						)}
@@ -81,7 +81,7 @@ const Tables = ({ id, info, history }) => {
 		);
 	} else if (id === 2) {
 		// 아바타 탭
-		let e = info;
+		let avatars = info;
 		table.push(
 			<thead key={id}>
 				<tr key={id}>
@@ -92,18 +92,18 @@ const Tables = ({ id, info, history }) => {
 			</thead>
 		);
 
-		if (e[0] !== null) {
+		if (avatars[0] !== null) {
 			let rows = [];
-			for (let a = 0; a < e.length; a++) {
+			for (let i = 0; i < avatars.length; i++) {
 				rows.push(
-					<tr key={e[a].itemName}>
+					<tr key={avatars[i].itemName}>
 						<td>
 							<img
-								src={`https://img-api.neople.co.kr/df/items/${e[a].itemId}`}
-								alt={e[a].itemName}
+								src={`https://img-api.neople.co.kr/df/items/${avatars[i].itemId}`}
+								alt={avatars[i].itemName}
 								style={{ cursor: "pointer" }}
 								onClick={() => {
-									history.push(`/searchItem/${e[a].itemId}`);
+									history.push(`/searchItem/${avatars[i].itemId}`);
 								}}
 							/>
 						</td>
@@ -117,7 +117,7 @@ const Tables = ({ id, info, history }) => {
 		}
 	} else if (id === 3) {
 		// 버프 강화 탭
-		let e = info;
+		let equipments = info;
 		table.push(
 			<caption key="caption">
 				{e.skillInfo.name} Lv.{e.skillInfo.option.level}
