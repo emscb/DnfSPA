@@ -128,7 +128,7 @@ const Tables = ({ id, info, history }) => {
 		// 버프 강화 탭
 		let equipments = info;
 		table.push(
-			<caption>
+			<caption key="skillCaption">
 				<div>
 					{equipments.skillInfo.name} Lv.{equipments.skillInfo.option.level}
 				</div>
@@ -172,7 +172,7 @@ const Tables = ({ id, info, history }) => {
 			return 0;
 		});
 
-		rows.push(<tr></tr>);
+		rows.push(<tr key=""></tr>);
 
 		let avatars = info.avatar;
 		if (avatars[0] !== null) {
