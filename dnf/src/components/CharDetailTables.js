@@ -87,6 +87,7 @@ const Tables = ({ id, info, history }) => {
 				<tr key={id}>
 					<th className="image"></th>
 					<th>이름</th>
+					<th>선택 능력치</th>
 					<th>엠블렘</th>
 				</tr>
 			</thead>
@@ -107,8 +108,16 @@ const Tables = ({ id, info, history }) => {
 								}}
 							/>
 						</td>
-						<td className={`${e[a].itemRarity}`}>{e[a].itemName}</td>
-						<Emblem info={e} id={a} />
+						<td className={`${avatars[i].itemRarity}`}>
+							<div>{avatars[i].itemName}</div>
+							{avatars[i].clone.itemId !== null && (
+								<div className="cloneName">{avatars[i].clone.itemName}</div>
+							)}
+						</td>
+						<td>
+							<div>{avatars[i].optionAbility}</div>
+						</td>
+						<Emblem info={avatars} id={i} />
 					</tr>
 				);
 			}
