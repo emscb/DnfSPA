@@ -11,16 +11,13 @@ const crawl = async id => {
 		registered_list = await Axios.get(
 			`https://api.neople.co.kr/df/auction?itemId=${id}&sort=unitPrice:asc&limit=400&apikey=${API_KEY}`
 		);
-		// console.log(registered_list.data.rows);
 
 		// 아이템 정보 검색
 		itemInfo_response = await Axios.get(
 			`https://api.neople.co.kr/df/items/${id}?apikey=${API_KEY}`
 		);
-		// console.log(itemInfo_response.data);
 
 		priceList = await Axios.get(`${BACK_URL}/auc/${id}`);
-		// console.log(priceList.data);
 	} catch (e) {
 		console.error(e);
 	}

@@ -38,7 +38,6 @@ const Tables = ({ id, info, history }) => {
 		);
 
 		let rows = [];
-		console.log(equipments); // wip
 		itemOrder.map(position => {
 			rows.push(
 				<tr key={`${position}`}>
