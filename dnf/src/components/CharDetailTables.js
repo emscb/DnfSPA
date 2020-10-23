@@ -119,8 +119,10 @@ const Tables = ({ id, info, history }) => {
 		// 버프 강화 탭
 		let equipments = info;
 		table.push(
-			<caption key="caption">
-				{e.skillInfo.name} Lv.{e.skillInfo.option.level}
+			<caption>
+				<div>
+					{equipments.skillInfo.name} Lv.{equipments.skillInfo.option.level}
+				</div>
 			</caption>
 		);
 		table.push(
@@ -128,96 +130,67 @@ const Tables = ({ id, info, history }) => {
 				<tr>
 					<th className="image"></th>
 					<th>이름</th>
-					<th className="image"></th>
-					<th>이름</th>
+					<th>강화 / 증폭 / 재련</th>
+					<th>마법 부여</th>
 				</tr>
 			</thead>
 		);
 
 		let rows = [];
-		if (e.equipment !== null) {
-			for (let a = 0; a < parseInt(e.equipment.length / 2) + 1; a++) {
-				rows.push(
-					<tr key={2 * a}>
-						{e.equipment[2 * a] !== undefined && (
-							<>
-								<td>
-									<img
-										src={`https://img-api.neople.co.kr/df/items/${e.equipment[2 * a].itemId}`}
-										alt={e.equipment[2 * a].itemName}
-										style={{ cursor: "pointer" }}
-										onClick={() => {
-											history.push(`/searchItem/${e.equipment[2 * a].itemId}`);
-										}}
-									/>
-								</td>
-								<td className={e.equipment[2 * a].itemRarity}>{e.equipment[2 * a].itemName}</td>
-							</>
-						)}
-						{e.equipment[2 * a + 1] !== undefined && (
-							<>
-								<td>
-									<img
-										src={`https://img-api.neople.co.kr/df/items/${e.equipment[2 * a + 1].itemId}`}
-										alt={e.equipment[2 * a + 1].itemName}
-										style={{ cursor: "pointer" }}
-										onClick={() => {
-											history.push(`/searchItem/${e.equipment[2 * a + 1].itemId}`);
-										}}
-									/>
-								</td>
-								<td className={e.equipment[2 * a + 1].itemRarity}>
-									{e.equipment[2 * a + 1].itemName}
-								</td>
-							</>
-						)}
-					</tr>
-				);
-			}
-		}
-
-		if (e.avatar !== null) {
-			for (let a = 0; a < e.avatar.length; a++) {
-				rows.push(
-					<tr key={`avatar ${a}`}>
-						<td>
-							<img
-								src={`https://img-api.neople.co.kr/df/items/${e.avatar[a].itemId}`}
-								alt={e.equipment[a].itemName}
-								style={{ cursor: "pointer" }}
-								onClick={() => {
-									history.push(`/searchItem/${e.avatar[a].itemId}`);
-								}}
-							/>
-						</td>
-						<td className={e.avatar[a].itemRarity}>{e.avatar[a].itemName}</td>
-						<td colSpan={2}>
-							<AvatarEmblem info={e} id={a} />
-						</td>
-					</tr>
-				);
-			}
-		}
-
-		if (e.creature !== null) {
+		itemOrder.map(position => {
 			rows.push(
-				<tr key="creature">
+				<tr key={`${position}`}>
 					<td>
 						<img
-							src={`https://img-api.neople.co.kr/df/items/${e.creature[0].itemId}`}
-							alt={e.creature[0].itemName}
+							src={`https://img-api.neople.co.kr/df/items/${equipments[position].itemId}`}
+							alt={equipments[position].itemName}
 							style={{ cursor: "pointer" }}
 							onClick={() => {
-								history.push(`/searchItem/${e.creature[0].itemId}`);
+								history.push(`/searchItem/${equipments[position].itemId}`);
 							}}
 						/>
 					</td>
-					<td className={e.creature[0].itemRarity}>{e.creature[0].itemName}</td>
-					<td colSpan={2} />
+					<td className={equipments[position].itemRarity}>
+						<div>{equipments[position].itemName}</div>
+						{equipments[position].upgradeInfo && (
+							<div className="sirocoUpgrade">{equipments[position].upgradeInfo.itemName}</div>
+						)}
+					</td>
+					<Reinforce info={equipments[position]} />
+					<Enchant info={equipments[position]} />
 				</tr>
 			);
-		}
+			return 0;
+		});
 
+		rows.push(<tr></tr>);
+
+		let avatars = info.avatar;
+		if (avatars[0] !== null) {
+			for (let i = 0; i < avatars.length; i++) {
+				rows.push(
+					<tr key={avatars[i].itemName}>
+						<td>
+							<img
+								src={`https://img-api.neople.co.kr/df/items/${avatars[i].itemId}`}
+								alt={avatars[i].itemName}
+								style={{ cursor: "pointer" }}
+								onClick={() => {
+									history.push(`/searchItem/${avatars[i].itemId}`);
+								}}
+							/>
+						</td>
+						<td className={`${avatars[i].itemRarity}`}>
+							<div>{avatars[i].itemName}</div>
+						</td>
+						<td>
+							<div>{avatars[i].optionAbility}</div>
+						</td>
+						<Emblem info={avatars} id={i} />
+					</tr>
+				);
+			}
+		}
 		table.push(<tbody key={`${id} tbody`}>{rows}</tbody>);
 	}
 

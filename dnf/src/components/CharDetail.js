@@ -73,7 +73,19 @@ const CharDetail = ({ match, history }) => {
 				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/skill/buff/equip/equipment?apikey=${API_KEY}`
 			)
 			.then(response => {
-				setBuffEquipment(response.data.skill.buff);
+				if (response.data.skill.buff.equipment !== null) {
+					let equipments = {};
+					for (let i = 0; i < response.data.skill.buff.equipment.length; i++) {
+						let e = response.data.skill.buff.equipment[i];
+						Object.assign(equipments, {
+							[e.slotId]: e,
+							skillInfo: response.data.skill.buff.skillInfo,
+						});
+					}
+					setBuffEquipment(equipments);
+				} else {
+					setBuffEquipment({});
+				}
 			});
 
 		// 버프 강화 아바타 조회
@@ -159,10 +171,10 @@ const CharDetail = ({ match, history }) => {
 									history={history}
 									info={
 										tab === 1
-											? Object.assign(equipment, {"CREATURE": creature})
+											? Object.assign(equipment, { CREATURE: creature })
 											: tab === 2
 											? avatar
-											: Object.assign(buffEquipment, buffAvatar, buffCreature)
+											: Object.assign(buffEquipment, buffAvatar, { CREATURE: buffCreature.creature[0] })
 									}
 								/>
 							)}
