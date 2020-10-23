@@ -17,13 +17,41 @@ const Status = ({ list }) => {
 	}
 };
 
+const Siroco = ({ toggle, list }) => {
+	if (list === undefined) {
+		return <div />;
+	} else {
+		let optionList = [];
+		optionList.push(
+			<div key="title">
+				<br />
+				{`<시로코 융합 옵션>`}
+				<br />
+			</div>
+		);
+		for (let a = 0; a < list.options.length; a++) {
+			optionList.push(
+				<div key={a}>{toggle ? list.options[a].explainDetail : list.options[a].explain}</div>
+			);
+		}
+		for (let a = 0; a < list.options.length; a++) {
+			optionList.push(
+				<div key={a + list.options.length}>
+					{toggle ? list.options[a].buffExplainDetail : list.options[a].buffExplain}
+				</div>
+			);
+		}
+		return <div>{optionList}</div>;
+	}
+};
+
 const Thology = ({ toggle, list }) => {
 	if (list === undefined) {
 		return <div />;
 	} else {
 		let optionList = [];
 		optionList.push(
-			<div key="">
+			<div key="title">
 				<br />
 				{`<신화 전용 옵션>`}
 				<br />
@@ -258,4 +286,4 @@ const CardInfo = ({ list }) => {
 	}
 };
 
-export { Status, Thology, ReinforceSkill, Buff, Remodel, CardInfo, SetItemList, SetItemOption };
+export { Status, Siroco, Thology, ReinforceSkill, Buff, Remodel, CardInfo, SetItemList, SetItemOption };

@@ -11,6 +11,7 @@ import {
 	CardInfo,
 	SetItemList,
 	SetItemOption,
+	Siroco,
 } from "../modules/ItemDetail";
 import { API_KEY } from "../config";
 
@@ -113,6 +114,7 @@ const ItemDetail = ({ match }) => {
 									</div>
 								)}
 							</div>
+							<Siroco list={i.sirocoInfo} />
 							<Remodel list={i.remodelInfo} />
 							<ReinforceSkill list={i.itemReinforceSkill} />
 							<Buff list={i.itemBuff} />

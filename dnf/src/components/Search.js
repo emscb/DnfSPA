@@ -28,7 +28,7 @@ const Search = ({ onSearch, type }) => {
 					placeholder={`${type} 이름을 입력하세요`}
 					value={value}
 					onChange={onChange}
-					autoComplete
+					autoComplete="ture"
 				></input>
 				<button className="button" type="submit">
 					검색
