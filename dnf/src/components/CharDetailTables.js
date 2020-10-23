@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/CharDetailTables.scss";
 import "../modules/CharDetail";
-import { Reinforce, Enchant, Emblem, AvatarEmblem } from "../modules/CharDetail";
+import { Reinforce, Enchant, Emblem } from "../modules/CharDetail";
 
 const itemOrder = [
 	"WEAPON",
