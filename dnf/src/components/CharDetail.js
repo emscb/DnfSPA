@@ -174,7 +174,10 @@ const CharDetail = ({ match, history }) => {
 											? Object.assign(equipment, { CREATURE: creature })
 											: tab === 2
 											? avatar
-											: Object.assign(buffEquipment, buffAvatar, { CREATURE: buffCreature.creature[0] })
+											: Object.assign(buffEquipment, buffAvatar, {
+													CREATURE:
+														buffCreature.creature !== null ? buffCreature.creature[0] : undefined,
+											  })
 									}
 								/>
 							)}

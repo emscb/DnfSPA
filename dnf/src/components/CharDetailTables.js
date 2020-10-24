@@ -147,7 +147,7 @@ const Tables = ({ id, info, history }) => {
 
 		let rows = [];
 		itemOrder.map(position => {
-			rows.push(
+			equipments[position] !== undefined && rows.push(
 				<tr key={`${position}`}>
 					<td>
 						<img
