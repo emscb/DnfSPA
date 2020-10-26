@@ -156,74 +156,83 @@ const Tables = ({ id, info, history }) => {
 				</div>
 			</caption>
 		);
-		table.push(
-			<thead key={id}>
-				<tr>
-					<th className="image"></th>
-					<th>이름</th>
-					<th>강화 / 증폭 / 재련</th>
-					<th>마법 부여</th>
-				</tr>
-			</thead>
-		);
 
-		let rows = [];
-		itemOrder.map(position => {
-			equipments[position] !== undefined &&
-				rows.push(
-					<tr key={`${position}`}>
-						<td>
-							<img
-								src={`https://img-api.neople.co.kr/df/items/${equipments[position].itemId}`}
-								alt={equipments[position].itemName}
-								style={{ cursor: "pointer" }}
-								onClick={() => {
-									history.push(`/searchItem/${equipments[position].itemId}`);
-								}}
-							/>
-						</td>
-						<td className={equipments[position].itemRarity}>
-							<div>{equipments[position].itemName}</div>
-							{equipments[position].upgradeInfo && (
-								<div className="sirocoUpgrade">{equipments[position].upgradeInfo.itemName}</div>
-							)}
-						</td>
-						<Reinforce info={equipments[position]} />
-						<Enchant info={equipments[position]} />
+		if (info.avatar === null && info.creature === undefined && Object.keys(info).length === 3) {
+			return (
+				<>
+					<table>{table}</table>
+				</>
+			);
+		} else {
+			table.push(
+				<thead key={id}>
+					<tr>
+						<th className="image"></th>
+						<th>이름</th>
+						<th>강화 / 증폭 / 재련</th>
+						<th>마법 부여</th>
 					</tr>
-				);
-			return 0;
-		});
+				</thead>
+			);
 
-		rows.push(<tr key=""></tr>);
+			let rows = [];
+			itemOrder.map(position => {
+				equipments[position] !== undefined &&
+					rows.push(
+						<tr key={`${position}`}>
+							<td>
+								<img
+									src={`https://img-api.neople.co.kr/df/items/${equipments[position].itemId}`}
+									alt={equipments[position].itemName}
+									style={{ cursor: "pointer" }}
+									onClick={() => {
+										history.push(`/searchItem/${equipments[position].itemId}`);
+									}}
+								/>
+							</td>
+							<td className={equipments[position].itemRarity}>
+								<div>{equipments[position].itemName}</div>
+								{equipments[position].upgradeInfo && (
+									<div className="sirocoUpgrade">{equipments[position].upgradeInfo.itemName}</div>
+								)}
+							</td>
+							<Reinforce info={equipments[position]} />
+							<Enchant info={equipments[position]} />
+						</tr>
+					);
+				return 0;
+			});
 
-		let avatars = info.avatar;
-		if (avatars[0] !== null) {
-			for (let i = 0; i < avatars.length; i++) {
-				rows.push(
-					<tr key={avatars[i].itemName}>
-						<td>
-							<img
-								src={`https://img-api.neople.co.kr/df/items/${avatars[i].itemId}`}
-								alt={avatars[i].itemName}
-								style={{ cursor: "pointer" }}
-								onClick={() => {
-									history.push(`/searchItem/${avatars[i].itemId}`);
-								}}
-							/>
-						</td>
-						<td className={`${avatars[i].itemRarity}`}>
-							<div>{avatars[i].itemName}</div>
-						</td>
-						<td>
-							<div>{avatars[i].optionAbility}</div>
-						</td>
-						<Emblem info={avatars} id={i} />
-					</tr>
-				);
+			rows.push(<tr key=""></tr>);
+
+			let avatars = info.avatar;
+			if (avatars !== null) {
+				for (let i = 0; i < avatars.length; i++) {
+					rows.push(
+						<tr key={avatars[i].itemName}>
+							<td>
+								<img
+									src={`https://img-api.neople.co.kr/df/items/${avatars[i].itemId}`}
+									alt={avatars[i].itemName}
+									style={{ cursor: "pointer" }}
+									onClick={() => {
+										history.push(`/searchItem/${avatars[i].itemId}`);
+									}}
+								/>
+							</td>
+							<td className={`${avatars[i].itemRarity}`}>
+								<div>{avatars[i].itemName}</div>
+							</td>
+							<td>
+								<div>{avatars[i].optionAbility}</div>
+							</td>
+							<Emblem info={avatars} id={i} />
+						</tr>
+					);
+				}
 			}
+			table.push(<tbody key={`${id} tbody`}>{rows}</tbody>);
 		}
-		table.push(<tbody key={`${id} tbody`}>{rows}</tbody>);
 	} else if (id === 4) {
 		// 탈리스만 탭
 		if (info === null || info === undefined) {
