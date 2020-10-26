@@ -12,10 +12,12 @@ const CharDetail = ({ match, history }) => {
 	const [info, setInfo] = useState({});
 	const [equipment, setEquipment] = useState({});
 	const [avatar, setAvatar] = useState([]);
-	const [creature, setCreature] = useState([]);
+	const [creature, setCreature] = useState(undefined);
 	const [buffEquipment, setBuffEquipment] = useState({});
 	const [buffAvatar, setBuffAvatar] = useState({});
 	const [buffCreature, setBuffCreature] = useState({});
+	const [flag, setFlag] = useState({});
+	const [talisman, setTalisman] = useState({});
 	const gotData = useRef(false);
 	const [tab, setTab] = useState(1);
 
@@ -73,7 +75,19 @@ const CharDetail = ({ match, history }) => {
 				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/skill/buff/equip/equipment?apikey=${API_KEY}`
 			)
 			.then(response => {
-				setBuffEquipment(response.data.skill.buff);
+				if (response.data.skill.buff.equipment !== null) {
+					let equipments = {};
+					for (let i = 0; i < response.data.skill.buff.equipment.length; i++) {
+						let e = response.data.skill.buff.equipment[i];
+						Object.assign(equipments, {
+							[e.slotId]: e,
+							skillInfo: response.data.skill.buff.skillInfo,
+						});
+					}
+					setBuffEquipment(equipments);
+				} else {
+					setBuffEquipment({});
+				}
 			});
 
 		// 버프 강화 아바타 조회
@@ -92,6 +106,24 @@ const CharDetail = ({ match, history }) => {
 			)
 			.then(response => {
 				setBuffCreature(response.data.skill.buff);
+			});
+
+		// 장착 탈리스만 조회
+		axios
+			.get(
+				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/talisman?apikey=${API_KEY}`
+			)
+			.then(response => {
+				setTalisman(response.data.talismans);
+			});
+
+		// 장착 휘장 조회
+		axios
+			.get(
+				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/flag?apikey=${API_KEY}`
+			)
+			.then(response => {
+				setFlag(response.data.flag);
 			});
 
 		gotData.current = true;
@@ -153,19 +185,24 @@ const CharDetail = ({ match, history }) => {
 						</div>
 						<div className="table">
 							{/* 내용 표시 (테이블 형태) */}
-							{equipment.WEAPON !== undefined && (
-								<Tables
-									id={tab}
-									history={history}
-									info={
-										tab === 1
-											? Object.assign(equipment, {"CREATURE": creature})
-											: tab === 2
-											? avatar
-											: Object.assign(buffEquipment, buffAvatar, buffCreature)
-									}
-								/>
-							)}
+							<Tables
+								id={tab}
+								history={history}
+								info={
+									tab === 1
+										? Object.assign(equipment, { CREATURE: creature })
+										: tab === 2
+										? avatar
+										: tab === 3
+										? Object.assign(buffEquipment, buffAvatar, {
+												CREATURE:
+													buffCreature.creature !== null ? buffCreature.creature[0] : undefined,
+										  })
+										: tab === 4
+										? talisman
+										: flag
+								}
+							/>
 						</div>
 					</div>
 				</div>

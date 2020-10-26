@@ -34,7 +34,6 @@ const SearchItem = () => {
 					}
 				});
 		} catch (e) {
-			console.log(e);
 		}
 	};
 

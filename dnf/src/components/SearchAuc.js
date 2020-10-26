@@ -41,7 +41,6 @@ const SearchAuc = ({ list }) => {
 				}
 			});
 		} catch (e) {
-			console.log(e);
 		}
 	};
 

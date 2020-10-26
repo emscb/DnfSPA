@@ -87,23 +87,4 @@ const Emblem = ({ info, id }) => {
 	}
 };
 
-const AvatarEmblem = ({ info, id }) => {
-	let e = info;
-	if (e.avatar[id].emblems === []) {
-		return <td />;
-	} else if (e.avatar[id].emblems === undefined) {
-		return <td />;
-	} else {
-		let rows = [];
-		for (let m = 0; m < e.avatar[id].emblems.length; m++) {
-			rows.push(
-				<div key={`${id} ${m}`} className={e.avatar[id].emblems[m].itemRarity}>
-					{e.avatar[id].emblems[m].itemName}
-				</div>
-			);
-		}
-		return <>{rows}</>;
-	}
-};
-
-export { Reinforce, Enchant, Emblem, AvatarEmblem };
+export { Reinforce, Enchant, Emblem };

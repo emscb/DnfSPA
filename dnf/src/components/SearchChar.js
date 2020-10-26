@@ -30,7 +30,6 @@ const SearchChar = ({ history }) => {
 					}
 				});
 		} catch (e) {
-			console.log(e);
 		}
 	};
 
