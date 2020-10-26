@@ -16,6 +16,7 @@ const CharDetail = ({ match, history }) => {
 	const [buffEquipment, setBuffEquipment] = useState({});
 	const [buffAvatar, setBuffAvatar] = useState({});
 	const [buffCreature, setBuffCreature] = useState({});
+	const [flag, setFlag] = useState({});
 	const [talisman, setTalisman] = useState({});
 	const gotData = useRef(false);
 	const [tab, setTab] = useState(1);
@@ -113,8 +114,16 @@ const CharDetail = ({ match, history }) => {
 				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/talisman?apikey=${API_KEY}`
 			)
 			.then(response => {
-				console.log(response.data.talismans);
 				setTalisman(response.data.talismans);
+			});
+
+		// 장착 휘장 조회
+		axios
+			.get(
+				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/flag?apikey=${API_KEY}`
+			)
+			.then(response => {
+				setFlag(response.data.flag);
 			});
 
 		gotData.current = true;

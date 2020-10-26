@@ -72,11 +72,13 @@ tr#setInfo td {
 	padding: 1rem 0;
 }
 
-tr.talisman td:nth-child(2) {
+tr.talisman td:nth-child(2),
+tr.flag td:nth-child(3) {
 	padding: 0.5rem 0;
 }
 
-td > div.talisman {
+td > div.talisman,
+td > div.flag {
 	font-size: 1rem;
 	font-weight: bold;
 }

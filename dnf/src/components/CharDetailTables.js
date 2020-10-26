@@ -235,6 +235,37 @@ const Tables = ({ id, info, history }) => {
 		});
 
 		table.push(<tbody key={`${id} tbody`}>{rows}</tbody>);
+	} else if (id === 5) {
+		// 휘장 탭
+		if (info === null || info === undefined) {
+			return (
+				<>
+					<table></table>
+				</>
+			);
+		}
+		let flag = info;
+		let rows = [];
+		rows.push(
+			<tr className="flag" key="flag">
+				<td>
+					<img src={`https://img-api.neople.co.kr/df/items/${flag.itemId}`} alt={flag.itemName} />
+				</td>
+				<td>
+					<div className="flag">{flag.itemName}</div>
+					<div>{flag.itemAbility}</div>
+				</td>
+				<td>
+					{flag.gems.map(gem => (
+						<div className={`gem ${gem.itemRarity}`} key={`gem${gem.slotNo}`}>
+							{gem.itemName}
+						</div>
+					))}
+				</td>
+			</tr>
+		);
+
+		table.push(<tbody key={`${id} tbody`}>{rows}</tbody>);
 	}
 
 	return (
