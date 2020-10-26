@@ -16,6 +16,7 @@ const CharDetail = ({ match, history }) => {
 	const [buffEquipment, setBuffEquipment] = useState({});
 	const [buffAvatar, setBuffAvatar] = useState({});
 	const [buffCreature, setBuffCreature] = useState({});
+	const [talisman, setTalisman] = useState({});
 	const gotData = useRef(false);
 	const [tab, setTab] = useState(1);
 
@@ -106,6 +107,16 @@ const CharDetail = ({ match, history }) => {
 				setBuffCreature(response.data.skill.buff);
 			});
 
+		// 장착 탈리스만 조회
+		axios
+			.get(
+				`https://api.neople.co.kr/df/servers/${server}/characters/${id}/equip/talisman?apikey=${API_KEY}`
+			)
+			.then(response => {
+				console.log(response.data.talismans);
+				setTalisman(response.data.talismans);
+			});
+
 		gotData.current = true;
 	}
 
@@ -174,10 +185,14 @@ const CharDetail = ({ match, history }) => {
 											? Object.assign(equipment, { CREATURE: creature })
 											: tab === 2
 											? avatar
-											: Object.assign(buffEquipment, buffAvatar, {
+											: tab === 3
+											? Object.assign(buffEquipment, buffAvatar, {
 													CREATURE:
 														buffCreature.creature !== null ? buffCreature.creature[0] : undefined,
 											  })
+											: tab === 4
+											? talisman
+											: flag
 									}
 								/>
 							)}

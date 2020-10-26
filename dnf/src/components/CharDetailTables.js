@@ -201,6 +201,38 @@ const Tables = ({ id, info, history }) => {
 			}
 		}
 		table.push(<tbody key={`${id} tbody`}>{rows}</tbody>);
+	} else if (id === 4) {
+		// 탈리스만 탭
+		if (info === null || info === undefined) {
+			return (
+				<>
+					<table></table>
+				</>
+			);
+		}
+		let talismans = info;
+		let rows = [];
+		talismans.map(talisman => {
+			rows.push(
+				<tr className="talisman" key={`${talisman.talisman.itemName}`}>
+					<td>
+						<img
+							src={`https://img-api.neople.co.kr/df/items/${talisman.talisman.itemId}`}
+							alt={talisman.talisman.itemName}
+						/>
+					</td>
+					<td>
+						<div className="talisman">{talisman.talisman.itemName}</div>
+						{talisman.runes.map(rune => (
+							<div key={`${rune.itemName}`}>{rune.itemName}</div>
+						))}
+					</td>
+				</tr>
+			);
+			return <></>;
+		});
+
+		table.push(<tbody key={`${id} tbody`}>{rows}</tbody>);
 	}
 
 	return (

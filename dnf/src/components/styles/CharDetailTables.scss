@@ -71,3 +71,12 @@ th.image {
 tr#setInfo td {
 	padding: 1rem 0;
 }
+
+tr.talisman td:nth-child(2) {
+	padding: 0.5rem 0;
+}
+
+td > div.talisman {
+	font-size: 1rem;
+	font-weight: bold;
+}
