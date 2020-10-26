@@ -252,20 +252,38 @@ const Tables = ({ id, info, history }) => {
 					<img src={`https://img-api.neople.co.kr/df/items/${flag.itemId}`} alt={flag.itemName} />
 				</td>
 				<td>
-					<div className="flag">{flag.itemName}</div>
+					<div className="flag">
+						{flag.reinforce === 0 ? `` : `+${flag.reinforce} `}
+						{flag.itemName}
+					</div>
 					<div>{flag.itemAbility}</div>
 				</td>
 				<td>
-					{flag.gems.map(gem => (
-						<div className={`gem ${gem.itemRarity}`} key={`gem${gem.slotNo}`}>
-							{gem.itemName}
-						</div>
-					))}
+					{flag.gems.length === 0 ? (
+						<div>젬 없음</div>
+					) : (
+						flag.gems.map(gem => (
+							<div className={`gem ${gem.itemRarity}`} key={`gem${gem.slotNo}`}>
+								{gem.itemName}
+							</div>
+						))
+					)}
 				</td>
 			</tr>
 		);
 
-		table.push(<tbody key={`${id} tbody`}>{rows}</tbody>);
+		return (
+			<>
+				<table>
+					<colgroup>
+						<col span="1" style={{ width: "10%" }}></col>
+						<col span="1" style={{ width: "45%" }}></col>
+						<col span="1" style={{ width: "45%" }}></col>
+					</colgroup>
+					<tbody key={`${id} tbody`}>{rows}</tbody>
+				</table>
+			</>
+		);
 	}
 
 	return (
