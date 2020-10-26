@@ -39,7 +39,17 @@ const Tables = ({ id, info, history }) => {
 
 		let rows = [];
 		itemOrder.map(position => {
-			equipments[position].itemId !== undefined &&
+			if (equipments[position] === undefined || equipments[position] === null) {
+				// 장착 장비가 없음
+				rows.push(
+					<tr key={`${position}`}>
+						<td></td>
+						<td>장착 장비 없음</td>
+						<td></td>
+						<td></td>
+					</tr>
+				);
+			} else {
 				rows.push(
 					<tr key={`${position}`}>
 						<td>
@@ -62,26 +72,37 @@ const Tables = ({ id, info, history }) => {
 						<Enchant info={equipments[position]} />
 					</tr>
 				);
+			}
 			return 0;
 		});
 
-		table.push(
-			<tbody key="equipments">
-				{rows}
-				<tr id="setInfo">
-					<td colSpan="4">
-						<div>{`<세트 아이템 정보>`}</div>
-						{setInfo.map(s => (
-							<div key={s.setItemName}>
-								{s.setItemName} {s.activeSetNo}셋
-							</div>
-						))}
-					</td>
-				</tr>
-			</tbody>
-		);
+		setInfo !== undefined &&
+			table.push(
+				<tbody key="equipments">
+					{rows}
+					{setInfo.length !== 0 && (
+						<tr id="setInfo">
+							<td colSpan="4">
+								<div>{`<세트 아이템 정보>`}</div>
+								{setInfo.map(s => (
+									<div key={s.setItemName}>
+										{s.setItemName} {s.activeSetNo}셋
+									</div>
+								))}
+							</td>
+						</tr>
+					)}
+				</tbody>
+			);
 	} else if (id === 2) {
 		// 아바타 탭
+		if (info.length === 0) {
+			return (
+				<>
+					<table></table>
+				</>
+			);
+		}
 		let avatars = info;
 		table.push(
 			<thead key={id}>
