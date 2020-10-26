@@ -39,28 +39,29 @@ const Tables = ({ id, info, history }) => {
 
 		let rows = [];
 		itemOrder.map(position => {
-			equipments[position].itemId !== undefined && rows.push(
-				<tr key={`${position}`}>
-					<td>
-						<img
-							src={`https://img-api.neople.co.kr/df/items/${equipments[position].itemId}`}
-							alt={equipments[position].itemName}
-							style={{ cursor: "pointer" }}
-							onClick={() => {
-								history.push(`/searchItem/${equipments[position].itemId}`);
-							}}
-						/>
-					</td>
-					<td className={equipments[position].itemRarity}>
-						<div>{equipments[position].itemName}</div>
-						{equipments[position].upgradeInfo && (
-							<div className="sirocoUpgrade">{equipments[position].upgradeInfo.itemName}</div>
-						)}
-					</td>
-					<Reinforce info={equipments[position]} />
-					<Enchant info={equipments[position]} />
-				</tr>
-			);
+			equipments[position].itemId !== undefined &&
+				rows.push(
+					<tr key={`${position}`}>
+						<td>
+							<img
+								src={`https://img-api.neople.co.kr/df/items/${equipments[position].itemId}`}
+								alt={equipments[position].itemName}
+								style={{ cursor: "pointer" }}
+								onClick={() => {
+									history.push(`/searchItem/${equipments[position].itemId}`);
+								}}
+							/>
+						</td>
+						<td className={equipments[position].itemRarity}>
+							<div>{equipments[position].itemName}</div>
+							{equipments[position].upgradeInfo && (
+								<div className="sirocoUpgrade">{equipments[position].upgradeInfo.itemName}</div>
+							)}
+						</td>
+						<Reinforce info={equipments[position]} />
+						<Enchant info={equipments[position]} />
+					</tr>
+				);
 			return 0;
 		});
 
@@ -147,28 +148,29 @@ const Tables = ({ id, info, history }) => {
 
 		let rows = [];
 		itemOrder.map(position => {
-			equipments[position] !== undefined && rows.push(
-				<tr key={`${position}`}>
-					<td>
-						<img
-							src={`https://img-api.neople.co.kr/df/items/${equipments[position].itemId}`}
-							alt={equipments[position].itemName}
-							style={{ cursor: "pointer" }}
-							onClick={() => {
-								history.push(`/searchItem/${equipments[position].itemId}`);
-							}}
-						/>
-					</td>
-					<td className={equipments[position].itemRarity}>
-						<div>{equipments[position].itemName}</div>
-						{equipments[position].upgradeInfo && (
-							<div className="sirocoUpgrade">{equipments[position].upgradeInfo.itemName}</div>
-						)}
-					</td>
-					<Reinforce info={equipments[position]} />
-					<Enchant info={equipments[position]} />
-				</tr>
-			);
+			equipments[position] !== undefined &&
+				rows.push(
+					<tr key={`${position}`}>
+						<td>
+							<img
+								src={`https://img-api.neople.co.kr/df/items/${equipments[position].itemId}`}
+								alt={equipments[position].itemName}
+								style={{ cursor: "pointer" }}
+								onClick={() => {
+									history.push(`/searchItem/${equipments[position].itemId}`);
+								}}
+							/>
+						</td>
+						<td className={equipments[position].itemRarity}>
+							<div>{equipments[position].itemName}</div>
+							{equipments[position].upgradeInfo && (
+								<div className="sirocoUpgrade">{equipments[position].upgradeInfo.itemName}</div>
+							)}
+						</td>
+						<Reinforce info={equipments[position]} />
+						<Enchant info={equipments[position]} />
+					</tr>
+				);
 			return 0;
 		});
 
