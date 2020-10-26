@@ -12,7 +12,7 @@ const CharDetail = ({ match, history }) => {
 	const [info, setInfo] = useState({});
 	const [equipment, setEquipment] = useState({});
 	const [avatar, setAvatar] = useState([]);
-	const [creature, setCreature] = useState([]);
+	const [creature, setCreature] = useState(undefined);
 	const [buffEquipment, setBuffEquipment] = useState({});
 	const [buffAvatar, setBuffAvatar] = useState({});
 	const [buffCreature, setBuffCreature] = useState({});
@@ -185,26 +185,24 @@ const CharDetail = ({ match, history }) => {
 						</div>
 						<div className="table">
 							{/* 내용 표시 (테이블 형태) */}
-							{equipment.WEAPON !== undefined && (
-								<Tables
-									id={tab}
-									history={history}
-									info={
-										tab === 1
-											? Object.assign(equipment, { CREATURE: creature })
-											: tab === 2
-											? avatar
-											: tab === 3
-											? Object.assign(buffEquipment, buffAvatar, {
-													CREATURE:
-														buffCreature.creature !== null ? buffCreature.creature[0] : undefined,
-											  })
-											: tab === 4
-											? talisman
-											: flag
-									}
-								/>
-							)}
+							<Tables
+								id={tab}
+								history={history}
+								info={
+									tab === 1
+										? Object.assign(equipment, { CREATURE: creature })
+										: tab === 2
+										? avatar
+										: tab === 3
+										? Object.assign(buffEquipment, buffAvatar, {
+												CREATURE:
+													buffCreature.creature !== null ? buffCreature.creature[0] : undefined,
+										  })
+										: tab === 4
+										? talisman
+										: flag
+								}
+							/>
 						</div>
 					</div>
 				</div>
